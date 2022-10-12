@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const NewWordAddition = () => {
+export const NewWordAddition = (props) => {
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state.vocabulary);
+
   let navigate = useNavigate();
   let location = useLocation();
 
   const [inputValue, setInputValue] = useState('');
   const [translateValue, setTranslateValue] = useState('');
 
-  const handleChange = (setElemFunction, e) => setElemFunction(e.target.value);
+  // const handleChange = (setElemFunction, e) => setElemFunction(e.target.value);
 
   const newWordAdditionHandler = () => {
     if (!inputValue.trim() || !translateValue.trim())
       return alert('please, inputs a value...');
+    const obj = { name: inputValue.trim(), translate: translateValue.trim() };
 
-    alert(
-      `new word [${inputValue.trim()} - ${translateValue.trim()}] was added.`
-    );
-
-    // your code to add a word...
+    if (!store.find((item) => item.name === obj.name)) {
+      dispatch({ type: 'addNewWord', payload: obj });
+      alert('word ' + obj.name + ' : ' + obj.translate + ' has been added.');
+      setInputValue('');
+      setTranslateValue('');
+    } else alert('this word has been added already');
   };
 
   return (
@@ -34,7 +40,7 @@ export const NewWordAddition = () => {
           id='word'
           className='word-input word'
           type='text'
-          onChange={(e) => handleChange(setInputValue, e)}
+          onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
         <label htmlFor='word'>type a word</label>
@@ -44,7 +50,7 @@ export const NewWordAddition = () => {
           id='translate'
           className='word-input translate'
           type='text'
-          onChange={(e) => handleChange(setTranslateValue, e)}
+          onChange={(e) => setTranslateValue(e.target.value)}
           value={translateValue}
         />
         <label htmlFor='translate'>type a translation</label>
