@@ -9,7 +9,6 @@ export const CreateTestingArray = (props) => {
 
   const dispatch = useDispatch();
 
-  const testedName = state.activeWordTest;
   // store.subscribe(() => console.log(state.activeWordTest));
 
   const testingArray = shuffleAndCut([...state.vocabulary]);
@@ -28,9 +27,14 @@ export const CreateTestingArray = (props) => {
         });
 
   changeTest();
+
   console.log(state);
 
-  return testedName ? (
+  const testedName = () => store.getState().activeWordTest;
+
+  console.log('testedName : ' + testedName().name);
+
+  return testedName() ? (
     <Testinteractive
       changeToNextWord={changeTest}
       store={store}
