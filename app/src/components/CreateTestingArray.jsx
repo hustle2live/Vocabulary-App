@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useLocation, useNavigate } from 'react-router-dom';
 import { Testinteractive } from './TestInteractive';
 import { TestResult } from './TestResult';
 
@@ -8,11 +7,7 @@ export const CreateTestingArray = () => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  // let navigate = useNavigate();
-  // let location = useLocation();
-
   const count = store.count;
-  // const scorePercentage = (count / 10) * 100;
 
   const changeTest = () =>
     dispatch({
@@ -48,6 +43,10 @@ export const CreateTestingArray = () => {
       writeCurrentAnswerStat={writeCurrentAnswerStat}
     />
   ) : (
-    <TestResult count={count} statsArray={statsArray} />
+    <TestResult
+      count={count}
+      statsArray={statsArray}
+      statistics={store.stats}
+    />
   );
 };

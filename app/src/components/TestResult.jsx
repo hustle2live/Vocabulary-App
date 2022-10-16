@@ -29,6 +29,47 @@ export const TestResult = (props) => {
       >
         Close
       </button>
+      <p
+        className='stats-arrow__show-hide'
+        onClick={(e) => e.currentTarget.nextSibling.classList.toggle('hidden')}
+      >
+        Show statistics{' '}
+        <span className='material-symbols-outlined'>
+          keyboard_double_arrow_right
+        </span>
+      </p>
+      <div className='test-result__history'>
+        Statistics of your's last tests...
+        {props.statistics.map(({ result, tests }, index) => {
+          if (result)
+            return (
+              <div key={index}>
+                <hr />
+
+                <p>{result}</p>
+                <ul>
+                  {tests.map((obj, index) => {
+                    if (obj)
+                      return (
+                        <li key={index}>
+                          {index + 1} | {Object.keys(obj)[0]} :{' '}
+                          {Object.values(obj)[0] === 'right' ? (
+                            <span className='material-symbols-outlined green'>
+                              done
+                            </span>
+                          ) : (
+                            <span className='material-symbols-outlined red'>
+                              close
+                            </span>
+                          )}
+                        </li>
+                      );
+                  })}
+                </ul>
+              </div>
+            );
+        })}
+      </div>
     </div>
   );
 };
