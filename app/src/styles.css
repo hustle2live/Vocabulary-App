@@ -194,17 +194,20 @@ input::placeholder {
 }
 
 .test-container-div,
-.testUlList {
+.testUlList,
+.test-result {
   display: flex;
   align-items: center;
 }
-
+.test-result,
 .test-container-div {
   flex-direction: column;
 }
 
 .testUlList {
-  height: 140px;
+  flex-wrap: wrap;
+  height: 50px;
+  /* max-height: 140px; */
 }
 
 .testLiElement:nth-child(3) {
@@ -248,6 +251,9 @@ input::placeholder {
   border-radius: 15px;
   border: 2px solid green;
   width: fit-content;
+}
+
+.testLiElement {
   margin: 15px;
 }
 
@@ -255,4 +261,9 @@ input::placeholder {
   background-color: black;
   color: #fff;
   border-color: greenyellow;
+}
+
+.test-result {
+  height: 100vh;
+  justify-content: center;
 }

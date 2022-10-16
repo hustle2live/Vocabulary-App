@@ -1,50 +1,53 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { shuffleAndCut, Testinteractive } from './TestInteractive';
+// import { useLocation, useNavigate } from 'react-router-dom';
+import { Testinteractive } from './TestInteractive';
+import { TestResult } from './TestResult';
 
-export const CreateTestingArray = (props) => {
-  const store = props.store;
-  const state = store.getState();
-  // const state = useSelector((state) => state);
-
+export const CreateTestingArray = () => {
+  const store = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  // store.subscribe(() => console.log(state.activeWordTest));
+  // let navigate = useNavigate();
+  // let location = useLocation();
 
-  const testingArray = shuffleAndCut([...state.vocabulary]);
-
-  const count = state.count;
-  const scorePercentage = (count / 10) * 100;
+  const count = store.count;
+  // const scorePercentage = (count / 10) * 100;
 
   const changeTest = () =>
-    testingArray
-      ? dispatch({
-          type: 'setActiveTestWord',
-          payload: testingArray.shift()
-        })
-      : dispatch({
-          type: 'resetActiveWord'
-        });
+    dispatch({
+      type: 'changeToNextTest'
+    });
 
-  changeTest();
+  const statsArray = [];
 
-  console.log(state);
+  const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
+    const wordName = testedElement.name;
+    const test = {};
 
-  const testedName = () => store.getState().activeWordTest;
+    if (selectedTranslate === testedElement.translate) {
+      dispatch({
+        type: 'countInc'
+      });
+      test[wordName] = 'right';
+    } else test[wordName] = 'wrong';
 
-  console.log('testedName : ' + testedName().name);
+    dispatch({
+      type: 'saveCurrentTestStat',
+      payload: test
+    });
+  };
 
-  return testedName() ? (
+  const testedElem = store.activeWordTest;
+
+  console.log(store.stats);
+
+  return testedElem ? (
     <Testinteractive
       changeToNextWord={changeTest}
-      store={store}
-      testedElem={testedName}
-      vocabulary={state.vocabulary}
-      count={state.count}
+      writeCurrentAnswerStat={writeCurrentAnswerStat}
     />
   ) : (
-    <div>
-      <p>there is {scorePercentage.toFixed(2)} % correct answers</p>
-    </div>
+    <TestResult count={count} statsArray={statsArray} />
   );
 };

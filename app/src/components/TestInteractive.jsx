@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const shuffleAndCut = (arr, num = 10) => {
   let currentIndex = arr.length,
@@ -27,42 +27,29 @@ const getRandomAnswers = (arr, testedElement) => {
 };
 
 export const Testinteractive = (props) => {
-  const dispatch = useDispatch();
-  const store = props.store;
-  const vocabulary = props.vocabulary;
-  const count = props.count;
+  const store = useSelector((state) => state);
+  const vocabulary = store.vocabulary;
 
-  const testedElement = props.testedElem;
-  // const testedElement = () => store.getState().activeWordTest;
+  const testedElement = store.activeWordTest;
 
-  store.subscribe(() => console.log(testedElement()));
-
-  const isCorrectAnswer = (selectedTranslate, testedElement) => {
-    if (selectedTranslate === testedElement.translate) {
-      dispatch({
-        type: 'countInc'
-      });
-      return 'Awesome, You are WRIGHT !';
-    }
-    return "You're WRONG ...";
-  };
-
-  const testedAnswers = getRandomAnswers(vocabulary, testedElement());
+  const testedAnswers = getRandomAnswers(vocabulary, testedElement);
 
   return (
     <div>
       <h1>Hello in Your's OWN DICTIONARY</h1>
       <p>Let's Do Some Exercise Tasks</p>
       <div className='test-container-div'>
-        <p className='tested-word'>{testedElement().name}</p>
+        <p className='tested-word'>{testedElement.name}</p>
         <ul className='testUlList'>
           {testedAnswers.map((item) => (
             <li
               className='testLiElement'
               key={item}
               onClick={(e) => {
-                isCorrectAnswer(e.currentTarget.textContent, testedElement());
-                console.log(count);
+                props.writeCurrentAnswerStat(
+                  e.currentTarget.textContent,
+                  testedElement
+                );
                 props.changeToNextWord();
               }}
             >

@@ -1,9 +1,12 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Main = () => {
-  const store = useSelector((state) => state.vocabulary);
+  const store = useSelector((state) => state);
+  const vocabulary = store.vocabulary;
+
+  const dispatch = useDispatch();
 
   let navigate = useNavigate();
   let location = useLocation();
@@ -14,7 +17,15 @@ export const Main = () => {
         <button className='menu-btn'>DICTIONARY</button> |{' '}
         <button
           className='menu-btn'
-          onClick={() => navigate('/test-page' + location.search)}
+          onClick={() => {
+            dispatch({
+              type: 'startNewTest'
+            });
+            dispatch({
+              type: 'changeToNextTest'
+            });
+            navigate('/test-page' + location.search);
+          }}
         >
           GO TO TEST
         </button>
@@ -28,7 +39,7 @@ export const Main = () => {
       </header>
       <div className='main-container-content'>
         <ul className='wordList'>
-          {store.map(({ name, translate }, index) => (
+          {vocabulary.map(({ name, translate }, index) => (
             <li className='wordListElement' key={index}>
               <div className='description'>
                 <span className='circle'></span>
