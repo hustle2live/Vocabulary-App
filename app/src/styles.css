@@ -47,12 +47,10 @@ ul li::marker {
   justify-content: space-between;
   height: 34px;
   align-items: center;
-  /* background: #f9ff; */
   padding-bottom: 5px;
 }
 
 .menu-btn {
-  /* font-size: 14px; */
   padding: 2px 4px;
   display: block;
   margin: auto 4px;
@@ -116,9 +114,6 @@ input {
   display: grid;
   grid-template-columns: 1fr;
 }
-
-/* .word-addition-main {
-} */
 
 .word-addition-main {
   grid-template-rows: 1fr 2fr 2fr 1.4fr;
@@ -215,7 +210,6 @@ input::placeholder {
 .testUlList {
   flex-wrap: wrap;
   height: 50px;
-  /* max-height: 140px; */
 }
 
 .testLiElement:nth-child(3) {
@@ -294,6 +288,7 @@ input::placeholder {
 .stats-arrow__show-hide {
   padding: 5px;
 }
+
 .stats-arrow__show-hide span {
   position: absolute;
 }
@@ -302,6 +297,5 @@ input::placeholder {
 }
 
 .hidden {
-  /* display: none; */
   visibility: hidden;
 }
