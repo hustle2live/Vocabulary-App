@@ -40,35 +40,32 @@ export const TestResult = (props) => {
       </p>
       <div className='test-result__history'>
         Statistics of your's last tests...
-        {props.statistics.map(({ result, tests }, index) => {
-          if (result)
-            return (
-              <div key={index}>
-                <hr />
-
-                <p>{result}</p>
-                <ul>
-                  {tests.map((obj, index) => {
-                    if (obj)
-                      return (
-                        <li key={index}>
-                          {index + 1} | {Object.keys(obj)[0]} :{' '}
-                          {Object.values(obj)[0] === 'right' ? (
-                            <span className='material-symbols-outlined green'>
-                              done
-                            </span>
-                          ) : (
-                            <span className='material-symbols-outlined red'>
-                              close
-                            </span>
-                          )}
-                        </li>
-                      );
-                  })}
-                </ul>
-              </div>
-            );
-        })}
+        {props.statistics.map(({ result, tests }, index) =>
+          result ? (
+            <div key={index}>
+              <hr />
+              <p>{result}</p>
+              <ul>
+                {tests.map((obj, index) =>
+                  obj ? (
+                    <li key={index}>
+                      {index + 1} | {Object.keys(obj)[0]} :{' '}
+                      {Object.values(obj)[0] === 'right' ? (
+                        <span className='material-symbols-outlined green'>
+                          done
+                        </span>
+                      ) : (
+                        <span className='material-symbols-outlined red'>
+                          close
+                        </span>
+                      )}
+                    </li>
+                  ) : null
+                )}
+              </ul>
+            </div>
+          ) : null
+        )}
       </div>
     </div>
   );

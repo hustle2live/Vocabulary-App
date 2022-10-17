@@ -12,8 +12,6 @@ export const NewWordAddition = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [translateValue, setTranslateValue] = useState('');
 
-  // const handleChange = (setElemFunction, e) => setElemFunction(e.target.value);
-
   const newWordAdditionHandler = () => {
     if (!inputValue.trim() || !translateValue.trim())
       return alert('please, inputs a value...');
