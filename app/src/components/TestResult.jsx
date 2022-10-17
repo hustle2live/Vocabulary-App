@@ -38,7 +38,7 @@ export const TestResult = (props) => {
           keyboard_double_arrow_right
         </span>
       </p>
-      <div className='test-result__history'>
+      <div className='test-result__history hidden'>
         Statistics of your's last tests...
         {props.statistics.map(({ result, tests }, index) =>
           result ? (
@@ -60,11 +60,15 @@ export const TestResult = (props) => {
                         </span>
                       )}
                     </li>
-                  ) : null
+                  ) : (
+                    ''
+                  )
                 )}
               </ul>
             </div>
-          ) : null
+          ) : (
+            ''
+          )
         )}
       </div>
     </div>

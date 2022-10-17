@@ -10,8 +10,8 @@ import './styles.css';
 const App = () => (
   <Routes>
     <Route path='/' element={<Main />} />
-    <Route path='add-new-word' element={<NewWordAddition />} />
-    <Route path='test-page' element={<CreateTestingArray />} />
+    <Route path='/add-new-word' element={<NewWordAddition />} />
+    <Route path='/test-page' element={<CreateTestingArray />} />
   </Routes>
 );
 
