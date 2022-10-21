@@ -6,8 +6,8 @@ export const NewWordAddition = (props) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.vocabulary);
 
-  let navigate = useNavigate();
-  let location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [inputValue, setInputValue] = useState('');
   const [translateValue, setTranslateValue] = useState('');
