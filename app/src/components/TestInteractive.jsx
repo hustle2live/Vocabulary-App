@@ -34,30 +34,34 @@ export const Testinteractive = (props) => {
 
   const testedAnswers = getRandomAnswers(vocabulary, testedElement);
 
+  const testNumberCount = store.testingArray.length + 1;
+
   return (
-    <div>
-      <h1>Hello in Your's OWN DICTIONARY</h1>
-      <p>Let's Do Some Exercise Tasks</p>
-      <div className='test-container-div'>
-        <p className='tested-word'>{testedElement.name}</p>
-        <ul className='testUlList'>
-          {testedAnswers.map((item) => (
-            <li
-              className='testLiElement'
-              key={item}
-              onClick={(e) => {
-                props.writeCurrentAnswerStat(
-                  e.currentTarget.textContent,
-                  testedElement
-                );
-                props.changeToNextWord();
-              }}
-            >
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className='test-interactive'>
+      <h1 className='test-interactive__header'>Word learning test</h1>
+      <p className='test-interactive__description'>
+        choose the correct translation of the word
+        <span>Tests left ( {testNumberCount} / 10 ) </span>
+      </p>
+
+      <p className='test-interactive__tested-word'>{testedElement.name}</p>
+      <ul className='test-interactive__testUlList'>
+        {testedAnswers.map((item) => (
+          <li
+            className='test-interactive__testUlList_listElement'
+            key={item}
+            onClick={(e) => {
+              props.writeCurrentAnswerStat(
+                e.currentTarget.textContent,
+                testedElement
+              );
+              props.changeToNextWord();
+            }}
+          >
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

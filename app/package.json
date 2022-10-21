@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://hustle2live.github.io/Vocabulary-App/",
+  "homepage": "https://hustle2live.github.io/Vocabulary-App/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -44,6 +44,9 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.4.1"
+    "react-router-dom": "^6.4.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
+    "webpack": "^5.74.0"
   }
 }

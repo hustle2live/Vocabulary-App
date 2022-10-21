@@ -17,11 +17,14 @@ export const TestResult = (props) => {
     });
   };
 
+  console.log(props.statistics);
+  console.log(props.statsArray);
+
   return (
-    <div className='test-result'>
-      <p>there is {scorePercentage.toFixed(2)} % correct answers</p>
+    <div className='test-results'>
+      <p>There is {scorePercentage.toFixed(2)} % correct answers</p>
       <button
-        className='back-btn'
+        className='test-results__button_back'
         onClick={() => {
           saveStats();
           navigate('/' + location.search);
@@ -29,8 +32,9 @@ export const TestResult = (props) => {
       >
         Close
       </button>
+      <p>Previously passed tests</p>
       <p
-        className='stats-arrow__show-hide'
+        className='test-results__arrow_show-stats'
         onClick={(e) => e.currentTarget.nextSibling.classList.toggle('hidden')}
       >
         Show statistics{' '}
@@ -38,8 +42,7 @@ export const TestResult = (props) => {
           keyboard_double_arrow_right
         </span>
       </p>
-      <div className='test-result__history hidden'>
-        Statistics of your's last tests...
+      <div className='test-results__history hidden'>
         {props.statistics.map(({ result, tests }, index) =>
           result ? (
             <div key={index}>

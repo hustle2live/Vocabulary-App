@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import '../styles/style.scss';
+
 export const Main = () => {
   const store = useSelector((state) => state);
   const vocabulary = store.vocabulary;
@@ -13,10 +15,13 @@ export const Main = () => {
 
   return (
     <div className='main-container'>
-      <header className='main-container-header'>
-        <button className='menu-btn'>DICTIONARY</button> |{' '}
+      <header className='main-container__header'>
+        <button className='main-container__header__button'>
+          MY DICTIONARY
+        </button>{' '}
+        |{' '}
         <button
-          className='menu-btn'
+          className='main-container__header__button'
           onClick={() => {
             dispatch({
               type: 'startNewTest'
@@ -27,31 +32,36 @@ export const Main = () => {
             navigate('/test-page' + location.search);
           }}
         >
-          GO TO TEST
+          START TESTING
         </button>
         |{' '}
         <button
-          className='menu-btn'
+          className='main-container__header__button'
           onClick={() => navigate('/add-new-word' + location.search)}
         >
-          ADD NEW
+          ADD NEW WORD
         </button>
       </header>
-      <div className='main-container-content'>
-        <ul className='wordList'>
+      <div className='main-container__content'>
+        <ul className='main-container__content__wordList'>
           {vocabulary.map(({ name, translate }, index) => (
-            <li className='wordListElement' key={index}>
-              <div className='description'>
-                <span className='circle'></span>
+            <li
+              className='main-container__content__wordListElement'
+              key={index}
+            >
+              <div className='main-container__content__wordListElement_description'>
+                <span className='main-container__content__wordListElement_circle'></span>
               </div>
-              <p className='word-name'>{name}</p>
-              <p className='word-translate'>{translate}</p>
+              <p className='main-container__content__wordListElement_name'>
+                {name}
+              </p>
+              <p className='main-container__content__wordListElement_translate'>
+                {translate}
+              </p>
             </li>
           ))}
         </ul>
       </div>
-
-      <footer></footer>
     </div>
   );
 };

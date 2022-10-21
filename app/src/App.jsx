@@ -5,7 +5,7 @@ import { Main } from './components/Main';
 import { NewWordAddition } from './components/NewWordAddition';
 import { CreateTestingArray } from './components/CreateTestingArray';
 
-import './styles.css';
+import './styles/style.scss';
 
 const App = () => (
   <Routes>

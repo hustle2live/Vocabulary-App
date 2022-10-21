@@ -35,8 +35,6 @@ export const CreateTestingArray = () => {
 
   const testedElem = store.activeWordTest;
 
-  console.log(store.stats);
-
   return testedElem ? (
     <Testinteractive
       changeToNextWord={changeTest}

@@ -26,27 +26,25 @@ export const NewWordAddition = (props) => {
   };
 
   return (
-    <div className='word-addition-main'>
+    <div className='word-addition'>
       <button
-        className='back-btn'
+        className='word-addition__button_navigate-back'
         onClick={() => navigate('/' + location.search)}
       >
         <span>CLOSE </span>[X]
       </button>
-      <section className='input-section'>
+      <section className='word-addition__input-section'>
         <input
           id='word'
-          className='word-input word'
           type='text'
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
         <label htmlFor='word'>type a word</label>
       </section>
-      <section className='input-section'>
+      <section className='word-addition__input-section'>
         <input
           id='translate'
-          className='word-input translate'
           type='text'
           onChange={(e) => setTranslateValue(e.target.value)}
           value={translateValue}
@@ -55,7 +53,7 @@ export const NewWordAddition = (props) => {
       </section>
       <div>
         <button
-          className='clear-btn'
+          className='word-addition__button_clear'
           onClick={() => {
             setInputValue('');
             setTranslateValue('');
@@ -63,7 +61,10 @@ export const NewWordAddition = (props) => {
         >
           CLEAR
         </button>{' '}
-        <button className='additiin-btn' onClick={newWordAdditionHandler}>
+        <button
+          className='word-addition__button_add'
+          onClick={newWordAdditionHandler}
+        >
           ADD
         </button>
       </div>
