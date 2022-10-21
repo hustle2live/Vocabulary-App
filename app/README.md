@@ -8,12 +8,9 @@ In the project, you can:
 
 ### `launch the test`
 
-Launches the test interactive of learning words 
+Launches the test interactive of learning words on click - [running app](https://hustle2live.github.io/Vocabulary-App/) 
 
 
 ### `add a new word`
 
 Add a new word to your dictionary
-
-.\
-See the Demo of Online-Vocabulary by click - [running app](https://hustle2live.github.io/Vocabulary-App/) for more information.
