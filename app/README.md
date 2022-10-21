@@ -1,10 +1,9 @@
 # Hello, 
 
-This project is your pocket vocabulary and test-interactive-app that helps to learn the new words.
+This project is your pocket vocabulary and test-interactive-app that helps you to learn the new words.
 
-## Available Scripts
+## In the project, you can:
 
-In the project, you can:
 
 ### `launch the test`
 
