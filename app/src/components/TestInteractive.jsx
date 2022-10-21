@@ -1,67 +1,69 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ShowTestedWords } from './ShowTestedWords';
+import { ShowTestResults } from './ShowTestResults';
+import { shuffleAndCut } from './helpers';
 
-export const shuffleAndCut = (arr, num = 10) => {
-  let currentIndex = arr.length,
-    randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [arr[currentIndex], arr[randomIndex]] = [
-      arr[randomIndex],
-      arr[currentIndex]
-    ];
-  }
-  return arr.slice(0, num);
-};
-
-const getRandomAnswers = (arr, testedElement) => {
-  const randomAnswers = [testedElement.translate];
-  while (randomAnswers.length < 4) {
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    const randomObj = arr[randomIndex];
-    if (!randomAnswers.find((translate) => translate === randomObj.translate))
-      randomAnswers.push(randomObj.translate);
-  }
-  return shuffleAndCut(randomAnswers, 4);
-};
-
-export const Testinteractive = (props) => {
+export const TestInteractive = () => {
   const store = useSelector((state) => state);
-  const vocabulary = store.vocabulary;
+  const dispatch = useDispatch();
 
-  const testedElement = store.activeWordTest;
+  const count = store.count;
+  const scorePercentage = (count / 10) * 100;
 
-  const testedAnswers = getRandomAnswers(vocabulary, testedElement);
+  const testedElem = store.activeWordTest;
 
-  const testNumberCount = store.testingArray.length + 1;
+  const changeTest = () =>
+    dispatch({
+      type: 'changeToNextTest'
+    });
 
-  return (
-    <div className='test-interactive'>
-      <h1 className='test-interactive__header'>Word learning test</h1>
-      <p className='test-interactive__description'>
-        choose the correct translation of the word
-        <span>Tests left ( {testNumberCount} / 10 ) </span>
-      </p>
+  const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
+    const wordName = testedElement.name;
+    const test = {};
 
-      <p className='test-interactive__tested-word'>{testedElement.name}</p>
-      <ul className='test-interactive__testUlList'>
-        {testedAnswers.map((item) => (
-          <li
-            className='test-interactive__testUlList_listElement'
-            key={item}
-            onClick={(e) => {
-              props.writeCurrentAnswerStat(
-                e.currentTarget.textContent,
-                testedElement
-              );
-              props.changeToNextWord();
-            }}
-          >
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    if (selectedTranslate === testedElement.translate) {
+      dispatch({
+        type: 'countInc'
+      });
+      test[wordName] = 'right';
+    } else test[wordName] = 'wrong';
+
+    dispatch({
+      type: 'saveCurrentTestStat',
+      payload: test
+    });
+  };
+
+  const saveStats = () => {
+    dispatch({
+      type: 'saveStatsData',
+      payload: `${scorePercentage.toFixed(2)} % correct answers`
+    });
+  };
+
+  const getRandomAnswers = (arr, testedElement) => {
+    const randomAnswers = [testedElement.translate];
+    while (randomAnswers.length < 4) {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+      const randomObj = arr[randomIndex];
+      if (!randomAnswers.find((translate) => translate === randomObj.translate))
+        randomAnswers.push(randomObj.translate);
+    }
+    return shuffleAndCut(randomAnswers, 4);
+  };
+
+  return testedElem ? (
+    <ShowTestedWords
+      changeToNextWord={changeTest}
+      writeCurrentAnswerStat={writeCurrentAnswerStat}
+      getRandomAnswers={getRandomAnswers}
+    />
+  ) : (
+    <ShowTestResults
+      statistics={store.stats}
+      saveStats={saveStats}
+      score={scorePercentage}
+    />
   );
 };

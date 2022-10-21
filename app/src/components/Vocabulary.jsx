@@ -4,14 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import '../styles/style.scss';
 
-export const Main = () => {
+export const Vocabulary = () => {
   const store = useSelector((state) => state);
   const vocabulary = store.vocabulary;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  let navigate = useNavigate();
-  let location = useLocation();
+  const startNewTest = () => {
+    dispatch({
+      type: 'startNewTest'
+    });
+    dispatch({
+      type: 'changeToNextTest'
+    });
+    navigate('/test-page' + location.search);
+  };
+
+  const addNewWord = () => navigate('/add-new-word' + location.search);
 
   return (
     <div className='main-container'>
@@ -22,23 +33,12 @@ export const Main = () => {
         |{' '}
         <button
           className='main-container__header__button'
-          onClick={() => {
-            dispatch({
-              type: 'startNewTest'
-            });
-            dispatch({
-              type: 'changeToNextTest'
-            });
-            navigate('/test-page' + location.search);
-          }}
+          onClick={startNewTest}
         >
           START TESTING
         </button>
         |{' '}
-        <button
-          className='main-container__header__button'
-          onClick={() => navigate('/add-new-word' + location.search)}
-        >
+        <button className='main-container__header__button' onClick={addNewWord}>
           ADD NEW WORD
         </button>
       </header>

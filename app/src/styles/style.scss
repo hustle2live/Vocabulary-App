@@ -35,10 +35,6 @@ button {
 
 ul {
   list-style-type: none;
-
-  li::marker {
-    color: orange;
-  }
 }
 
 .main-container,
@@ -57,11 +53,13 @@ ul {
     height: 34px;
     align-items: center;
     padding: 5px;
+    background: rgba(216, 216, 216, 0.3);
 
     &__button {
       padding: 2px 4px;
       display: block;
       margin: auto 4px;
+      background: #fff;
     }
   }
 
@@ -72,8 +70,8 @@ ul {
 
     &__wordList {
       background: rgba(216, 216, 216, 0.3);
-      padding: 2px 0 20px 0;
-      margin: 0 auto 70px auto;
+      padding: 2px 0 120px 0;
+      margin: 0 auto;
     }
 
     &__wordListElement {
@@ -185,7 +183,6 @@ ul {
 
     label {
       background: #ffffff;
-      box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
       align-self: center;
       color: #60c1b6;
       width: 50%;
@@ -294,19 +291,29 @@ ul {
   }
 
   &__arrow_show-stats {
+    background: transparent;
+    border: none;
     margin-top: -15px;
-    padding: 5px;
+    padding: 10px;
+    position: relative;
 
     span {
       position: absolute;
+      top: 15%;
     }
 
-    &:hover {
+    &:hover,
+    &:active {
       color: yellowgreen;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
   }
 
   &__history {
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -323,4 +330,3 @@ ul {
     max-width: 500px;
   }
 }
-

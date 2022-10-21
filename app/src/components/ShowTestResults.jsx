@@ -1,24 +1,10 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-export const TestResult = (props) => {
+export const ShowTestResults = (props) => {
   let navigate = useNavigate();
   let location = useLocation();
-  const dispatch = useDispatch();
-
-  const count = props.count;
-  const scorePercentage = (count / 10) * 100;
-
-  const saveStats = () => {
-    dispatch({
-      type: 'saveStatsData',
-      payload: `${scorePercentage.toFixed(2)} % correct answers`
-    });
-  };
-
-  console.log(props.statistics);
-  console.log(props.statsArray);
+  const scorePercentage = props.score;
 
   return (
     <div className='test-results'>
@@ -26,14 +12,14 @@ export const TestResult = (props) => {
       <button
         className='test-results__button_back'
         onClick={() => {
-          saveStats();
+          props.saveStats();
           navigate('/' + location.search);
         }}
       >
         Close
       </button>
       <p>Previously passed tests</p>
-      <p
+      <button
         className='test-results__arrow_show-stats'
         onClick={(e) => e.currentTarget.nextSibling.classList.toggle('hidden')}
       >
@@ -41,11 +27,11 @@ export const TestResult = (props) => {
         <span className='material-symbols-outlined'>
           keyboard_double_arrow_right
         </span>
-      </p>
-      <div className='test-results__history hidden'>
+      </button>
+      <ul className='test-results__history hidden'>
         {props.statistics.map(({ result, tests }, index) =>
           result ? (
-            <div key={index}>
+            <li key={index}>
               <hr />
               <p>{result}</p>
               <ul>
@@ -68,12 +54,12 @@ export const TestResult = (props) => {
                   )
                 )}
               </ul>
-            </div>
+            </li>
           ) : (
             ''
           )
         )}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import { dictionary } from '../components/dictionary';
-import { shuffleAndCut } from '../components/TestInteractive';
+import { shuffleAndCut } from '../components/helpers';
 
 const initialState = {
   vocabulary: [...dictionary],
