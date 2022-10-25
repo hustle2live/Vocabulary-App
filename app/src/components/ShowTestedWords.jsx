@@ -21,7 +21,7 @@ export const ShowTestedWords = (props) => {
       <ul className='test-interactive__testUlList'>
         {testedAnswers.map((item) => (
           <li
-            className='test-interactive__testUlList_listElement'
+            className='test-interactive__testUlList_listElement show'
             key={item}
             onClick={(e) => {
               props.writeCurrentAnswerStat(

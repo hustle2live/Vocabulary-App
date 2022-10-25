@@ -8,7 +8,7 @@ const initialState = {
   count: 0,
   testingArray: [],
   statArrayCurrent: [],
-  stats: []
+  stats: ''
 };
 
 function countUpReducer(state, action) {

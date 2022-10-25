@@ -28,7 +28,6 @@ export const TestInteractive = () => {
       });
       test[wordName] = 'right';
     } else test[wordName] = 'wrong';
-
     dispatch({
       type: 'saveCurrentTestStat',
       payload: test
