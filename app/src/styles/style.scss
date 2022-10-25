@@ -241,14 +241,14 @@ ul {
     justify-content: center;
     flex-wrap: wrap;
 
-    li {
-      opacity: 0;
-    }
-
-    &_listElement.show {
+    &_listElement {
       margin: 15px;
-      opacity: 1;
-      transition: 1s all ease;
+      opacity: 0;
+
+      &.show {
+        opacity: 1;
+        transition: 1s all ease;
+      }
 
       span {
         cursor: pointer;
