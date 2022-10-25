@@ -8,6 +8,7 @@ export const ShowTestedWords = (props) => {
   const testedElement = store.activeWordTest;
   const testedAnswers = props.getRandomAnswers(vocabulary, testedElement);
   const testNumberCount = store.testingArray.length + 1;
+  const getRandomInt = (max) => Math.floor(Math.random() * max);
 
   return (
     <div className='test-interactive'>
@@ -23,6 +24,7 @@ export const ShowTestedWords = (props) => {
           <li
             className='test-interactive__testUlList_listElement show'
             key={item}
+            style={{ height: getRandomInt(100) + '%' }}
             onClick={(e) => {
               props.writeCurrentAnswerStat(
                 e.currentTarget.textContent,
