@@ -35,77 +35,10 @@ ul {
   list-style-type: none;
 }
 
-.main-container,
 .test-interactive,
 .test-results {
   height: 97vh;
   border-radius: 6px;
-}
-
-.main-container {
-  overflow-y: hidden;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    height: 34px;
-    align-items: center;
-    padding: 5px;
-    background: rgba(216, 216, 216, 0.3);
-
-    &__button {
-      padding: 2px 4px;
-      display: block;
-      margin: auto 4px;
-      background: #fff;
-    }
-  }
-
-  &__content {
-    height: 100%;
-    position: relative;
-    overflow-y: scroll;
-
-    &__wordList {
-      background: rgba(216, 216, 216, 0.3);
-      padding: 2px 0 120px 0;
-      margin: 0 auto;
-    }
-
-    &__wordListElement {
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      box-sizing: border-box;
-      background: #fff;
-      margin: 6px 5px 6px;
-      border-radius: 15px;
-      min-height: 65px;
-      padding: 14px;
-
-      &_name,
-      &_translate {
-        margin: 3px;
-      }
-
-      &_name {
-        font-weight: 500;
-        color: black;
-      }
-
-      &_translate {
-        font-weight: 500;
-        color: gray;
-      }
-
-      &_circle {
-        display: block;
-        content: '';
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: green;
-      }
-    }
-  }
 }
 
 .test-results,
