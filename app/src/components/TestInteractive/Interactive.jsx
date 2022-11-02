@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import styles from './Interactive.module.scss';
 
-export const ShowTestedWords = (props) => {
+export const Interactive = (props) => {
   const store = useSelector((state) => state);
   const vocabulary = store.vocabulary;
 
@@ -11,18 +12,18 @@ export const ShowTestedWords = (props) => {
   const getRandomInt = (max) => Math.floor(Math.random() * max);
 
   return (
-    <div className='test-interactive'>
-      <h1 className='test-interactive__header'>Word learning test</h1>
-      <p className='test-interactive__description'>
+    <div className={styles.wrapper}>
+      <h1 className={styles.header}>Word learning test</h1>
+      <p className={styles.description}>
         choose the correct translation of the word
         <span>Tests left ( {testNumberCount} / 10 ) </span>
       </p>
 
-      <p className='test-interactive__tested-word'>{testedElement.name}</p>
-      <ul className='test-interactive__testUlList'>
+      <p className={styles['tested-word']}>{testedElement.name}</p>
+      <ul className={styles.testUlList}>
         {testedAnswers.map((item) => (
           <li
-            className='test-interactive__testUlList_listElement show'
+            className={styles.listElement}
             key={item}
             style={{ height: getRandomInt(100) + '%' }}
             onClick={(e) => {

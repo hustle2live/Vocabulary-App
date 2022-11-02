@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ShowTestedWords } from './ShowTestedWords';
-import { ShowTestResults } from './ShowTestResults';
-import { shuffleAndCut } from './helpers';
+import { Interactive } from './Interactive';
+import { Results } from './Results';
+import { shuffleAndCut } from '../helpers';
 
 export const TestInteractive = () => {
   const store = useSelector((state) => state);
@@ -52,17 +52,21 @@ export const TestInteractive = () => {
     return shuffleAndCut(randomAnswers, 4);
   };
 
-  return testedElem ? (
-    <ShowTestedWords
-      changeToNextWord={changeTest}
-      writeCurrentAnswerStat={writeCurrentAnswerStat}
-      getRandomAnswers={getRandomAnswers}
-    />
-  ) : (
-    <ShowTestResults
-      statistics={store.stats}
-      saveStats={saveStats}
-      score={scorePercentage}
-    />
+  return (
+    <div>
+      {testedElem ? (
+        <Interactive
+          changeToNextWord={changeTest}
+          writeCurrentAnswerStat={writeCurrentAnswerStat}
+          getRandomAnswers={getRandomAnswers}
+        />
+      ) : (
+        <Results
+          statistics={store.stats}
+          saveStats={saveStats}
+          score={scorePercentage}
+        />
+      )}
+    </div>
   );
 };
