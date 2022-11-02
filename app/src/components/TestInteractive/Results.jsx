@@ -1,19 +1,20 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './Results.module.scss';
 
-export const ShowTestResults = (props) => {
+export const Results = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const scorePercentage = props.score;
 
   return (
-    <div className='test-results'>
+    <div className={styles.wrapper}>
       <p>
         There is {scorePercentage.toFixed(2)} % correct answers
-        <span className='add-text'>in this current test</span>
+        <span className={styles['add-text']}>in this current test</span>
       </p>
       <button
-        className='test-results__button_back'
+        className={styles.button_back}
         onClick={() => {
           props.saveStats();
           navigate('/' + location.search);
@@ -23,19 +24,19 @@ export const ShowTestResults = (props) => {
       </button>
       <p>Previously passed tests</p>
       <button
-        className='test-results__arrow_show-stats'
+        className={styles.arrow_showStats}
         onClick={(e) => {
-          e.currentTarget.nextSibling.classList.toggle('hidden');
+          e.currentTarget.nextSibling.classList.toggle(styles.hidden);
         }}
       >
         Show statistics{' '}
-        <span className='material-symbols-outlined'>
+        <span className={'material-symbols-outlined'}>
           keyboard_double_arrow_right
         </span>
       </button>
-      <ul className='test-results__history hidden'>
+      <ul className={`${styles.history} ${styles.hidden}`}>
         {!props.statistics ? (
-          <p className='message'>
+          <p className={styles.message}>
             You haven't passed any tests before current one, yet
           </p>
         ) : (
@@ -48,11 +49,15 @@ export const ShowTestResults = (props) => {
                   <li key={index}>
                     {index + 1} | {Object.keys(obj)[0]} :{' '}
                     {Object.values(obj)[0] === 'right' ? (
-                      <span className='material-symbols-outlined green'>
+                      <span
+                        className={`material-symbols-outlined ${styles.green}`}
+                      >
                         done
                       </span>
                     ) : (
-                      <span className='material-symbols-outlined red'>
+                      <span
+                        className={`material-symbols-outlined ${styles.red}`}
+                      >
                         close
                       </span>
                     )}
