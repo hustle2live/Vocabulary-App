@@ -9,9 +9,9 @@ export const TestInteractive = () => {
   const dispatch = useDispatch();
 
   const count = store.count;
-  const scorePercentage = (count / 10) * 100;
-
   const testedElem = store.activeWordTest;
+
+  const scorePercentage = (count / 10) * 100;
 
   const changeTest = () =>
     dispatch({

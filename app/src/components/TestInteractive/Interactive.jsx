@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { getRandomInt } from '../helpers';
+
 import styles from './Interactive.module.scss';
 
 export const Interactive = (props) => {
@@ -7,9 +9,8 @@ export const Interactive = (props) => {
   const vocabulary = store.vocabulary;
 
   const testedElement = store.activeWordTest;
-  const testedAnswers = props.getRandomAnswers(vocabulary, testedElement);
   const testNumberCount = store.testingArray.length + 1;
-  const getRandomInt = (max) => Math.floor(Math.random() * max);
+  const testedAnswers = props.getRandomAnswers(vocabulary, testedElement);
 
   return (
     <div className={styles.wrapper}>

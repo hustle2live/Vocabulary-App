@@ -15,7 +15,8 @@ export const AddWord = () => {
   const [translateValue, setTranslateValue] = useState('');
 
   const newWordAdditionHandler = () => {
-    if (!inputValue.trim() || !translateValue.trim()) return alert('please, inputs a value...');
+    if (!inputValue.trim() || !translateValue.trim())
+      return alert('please, inputs a value...');
     const obj = { name: inputValue.trim(), translate: translateValue.trim() };
 
     if (!store.find((item) => item.name === obj.name)) {
@@ -28,26 +29,29 @@ export const AddWord = () => {
 
   return (
     <div className={styles.wrapper}>
-      <button className={styles['navigate-back']} onClick={() => navigate('/' + location.search)}>
+      <button
+        className={styles['navigate-back']}
+        onClick={() => navigate('/' + location.search)}
+      >
         <span>CLOSE </span>[X]
       </button>
       <section className={styles['input-section']}>
         <input
-          id="word"
-          type="text"
+          id='word'
+          type='text'
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
-        <label htmlFor="word">type a word</label>
+        <label htmlFor='word'>type a word</label>
       </section>
       <section className={styles['input-section']}>
         <input
-          id="translate"
-          type="text"
+          id='translate'
+          type='text'
           onChange={(e) => setTranslateValue(e.target.value)}
           value={translateValue}
         />
-        <label htmlFor="translate">type a translation</label>
+        <label htmlFor='translate'>type a translation</label>
       </section>
       <div>
         <button

@@ -2,10 +2,12 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { shuffleAndCut } from '../helpers';
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
   const store = useSelector((state) => state);
+
   const vocabulary = store.vocabulary;
 
   const dispatch = useDispatch();
@@ -13,12 +15,25 @@ export const Vocabulary = () => {
   const location = useLocation();
 
   const startNewTest = () => {
-    dispatch({
-      type: 'startNewTest'
-    });
-    dispatch({
-      type: 'changeToNextTest'
-    });
+    const newTestingArray = shuffleAndCut([...vocabulary]);
+    console.log('newTestingArray');
+    console.log(newTestingArray);
+    console.log('__________________________________________');
+    console.log('store before smtn');
+    console.log(store);
+
+    dispatch({ type: 'startNewTest', payload: newTestingArray });
+
+    console.log('__________________________________________');
+    console.log('store after startNewTest dispatch');
+    console.log(store);
+
+    dispatch({ type: 'changeToNextTest' });
+
+    console.log('__________________________________________');
+    console.log('changeToNextTest');
+    console.log(store);
+
     navigate('/test-page' + location.search);
   };
 

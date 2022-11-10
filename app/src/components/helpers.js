@@ -11,3 +11,5 @@ export const shuffleAndCut = (arr, num = 10) => {
   }
   return arr.slice(0, num);
 };
+
+export const getRandomInt = (max) => Math.floor(Math.random() * max);
