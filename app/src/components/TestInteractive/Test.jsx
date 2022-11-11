@@ -1,21 +1,20 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ShowTestedWords } from './ShowTestedWords';
-import { ShowTestResults } from './ShowTestResults';
-import { shuffleAndCut } from './helpers';
+import { Interactive } from './Interactive';
+import { Results } from './Results';
+import { shuffleAndCut } from '../helpers';
 
 export const TestInteractive = () => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const count = store.count;
+  const count = store.testReducer.count;
+  const testedElem = store.testReducer.activeWordTest;
   const scorePercentage = (count / 10) * 100;
-
-  const testedElem = store.activeWordTest;
 
   const changeTest = () =>
     dispatch({
-      type: 'changeToNextTest'
+      type: 'CHANGE_TEST'
     });
 
   const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
@@ -24,20 +23,25 @@ export const TestInteractive = () => {
 
     if (selectedTranslate === testedElement.translate) {
       dispatch({
-        type: 'countInc'
+        type: 'COUNT_INC'
       });
       test[wordName] = 'right';
     } else test[wordName] = 'wrong';
+
     dispatch({
-      type: 'saveCurrentTestStat',
+      type: 'SAVE_CURRENT_TEST_STAT',
       payload: test
     });
   };
 
   const saveStats = () => {
     dispatch({
-      type: 'saveStatsData',
+      type: 'SAVE_STATS_DATA',
       payload: `${scorePercentage.toFixed(2)} % correct answers`
+    });
+
+    dispatch({
+      type: 'CLEAR_TEST_DATA'
     });
   };
 
@@ -52,17 +56,21 @@ export const TestInteractive = () => {
     return shuffleAndCut(randomAnswers, 4);
   };
 
-  return testedElem ? (
-    <ShowTestedWords
-      changeToNextWord={changeTest}
-      writeCurrentAnswerStat={writeCurrentAnswerStat}
-      getRandomAnswers={getRandomAnswers}
-    />
-  ) : (
-    <ShowTestResults
-      statistics={store.stats}
-      saveStats={saveStats}
-      score={scorePercentage}
-    />
+  return (
+    <div>
+      {testedElem ? (
+        <Interactive
+          changeToNextWord={changeTest}
+          writeCurrentAnswerStat={writeCurrentAnswerStat}
+          getRandomAnswers={getRandomAnswers}
+        />
+      ) : (
+        <Results
+          stats={store.statsReducer.stats}
+          saveStats={saveStats}
+          score={scorePercentage}
+        />
+      )}
+    </div>
   );
 };

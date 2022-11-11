@@ -1,59 +1,13 @@
-import { createStore } from 'redux';
-import { dictionary } from '../components/dictionary';
-import { shuffleAndCut } from '../components/helpers';
+import { createStore, combineReducers } from 'redux';
 
-const initialState = {
-  vocabulary: [...dictionary],
-  activeWordTest: '',
-  count: 0,
-  testingArray: [],
-  statArrayCurrent: [],
-  stats: ''
-};
+import { vocabularyReducer } from './reducers/vocabularyReducer';
+import { testReducer } from './reducers/testReducer';
+import { statsReducer } from './reducers/statsReducer';
 
-function countUpReducer(state, action) {
-  switch (action.type) {
-    case 'addNewWord':
-      return { ...state, vocabulary: [...state.vocabulary, action.payload] };
-    case 'countInc':
-      return { ...state, count: state.count + 1 };
-    case 'countReset':
-      return { ...state, count: 0 };
-    case 'setActiveTestWord':
-      return { ...state, activeWordTest: action.payload };
-    case 'resetActiveWord':
-      return { ...state, activeWordTest: null };
-    case 'startNewTest':
-      return {
-        ...state,
-        testingArray: shuffleAndCut([...state.vocabulary]),
-        count: 0,
-        statArrayCurrent: []
-      };
-    case 'changeToNextTest':
-      return {
-        ...state,
-        activeWordTest: state.testingArray ? state.testingArray.shift() : ''
-      };
-    case 'saveCurrentTestStat':
-      return {
-        ...state,
-        statArrayCurrent: [...state.statArrayCurrent, action.payload]
-      };
-    case 'saveStatsData':
-      return {
-        ...state,
-        stats: [
-          ...state.stats,
-          {
-            result: action.payload,
-            tests: state.statArrayCurrent
-          }
-        ]
-      };
-    default:
-      return state;
-  }
-}
+const rootReducer = combineReducers({
+  vocabularyReducer,
+  testReducer,
+  statsReducer
+});
 
-export const store = createStore(countUpReducer, initialState);
+export const store = createStore(rootReducer);
