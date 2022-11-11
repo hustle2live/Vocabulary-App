@@ -8,20 +8,16 @@ export const testReducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'CREATE_TESTING_ARRAY':
       return { ...state, testingArray: action.payload };
-    case 'CLEAR_TESTING_ARRAY':
-      return { ...state, testingArray: [] };
-    case 'setActiveTestWord':
-      return { ...state, activeWordTest: action.payload };
-    case 'resetActiveWord':
-      return { ...state, activeWordTest: null };
-    case 'changeToNextTest':
+    case 'CLEAR_TEST_DATA':
+      return { ...state, count: 0, activeWordTest: '', testingArray: [] };
+    case 'CHANGE_TEST':
       return {
         ...state,
         activeWordTest: state.testingArray ? state.testingArray.shift() : ''
       };
-    case 'countInc':
+    case 'COUNT_INC':
       return { ...state, count: state.count + 1 };
-    case 'countReset':
+    case 'COUNT_RESET':
       return { ...state, count: 0 };
     default:
       return state;

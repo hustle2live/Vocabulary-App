@@ -22,7 +22,7 @@ export const AddWord = () => {
     if (
       !store.vocabularyReducer.vocabulary.find((item) => item.name === obj.name)
     ) {
-      dispatch({ type: 'addNewWord', payload: obj });
+      dispatch({ type: 'ADD_WORD', payload: obj });
       alert('word ' + obj.name + ' : ' + obj.translate + ' has been added.');
       setInputValue('');
       setTranslateValue('');

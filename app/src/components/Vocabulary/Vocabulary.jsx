@@ -19,8 +19,11 @@ export const Vocabulary = () => {
 
   const startNewTest = () => {
     const newTestingArray = shuffleAndCut([...vocabulary]);
+
+    dispatch({ type: 'CLEAR_TEST_DATA' });
+    dispatch({ type: 'CLEAR_CURRENT_STAT' });
     dispatch({ type: 'CREATE_TESTING_ARRAY', payload: newTestingArray });
-    dispatch({ type: 'changeToNextTest' });
+    dispatch({ type: 'CHANGE_TEST' });
     navigate('/test-page' + location.search);
   };
 

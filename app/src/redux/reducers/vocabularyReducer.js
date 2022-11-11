@@ -6,12 +6,12 @@ const defaultState = {
 
 export const vocabularyReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case 'addNewWord':
+    case 'ADD_WORD':
       return {
         ...state,
         vocabulary: [...state.vocabulary, action.payload]
       };
-    case 'deletewWord':
+    case 'DELETE_WORD':
       return {
         ...state,
         vocabulary: state.vocabulary.filter((item) => item !== action.payload)

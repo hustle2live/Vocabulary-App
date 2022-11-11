@@ -15,7 +15,7 @@ export const TestInteractive = () => {
 
   const changeTest = () =>
     dispatch({
-      type: 'changeToNextTest'
+      type: 'CHANGE_TEST'
     });
 
   const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
@@ -24,21 +24,24 @@ export const TestInteractive = () => {
 
     if (selectedTranslate === testedElement.translate) {
       dispatch({
-        type: 'countInc'
+        type: 'COUNT_INC'
       });
       test[wordName] = 'right';
     } else test[wordName] = 'wrong';
 
     dispatch({
-      type: 'saveCurrentTestStat',
+      type: 'SAVE_CURRENT_TEST_STAT',
       payload: test
     });
   };
 
   const saveStats = () => {
     dispatch({
-      type: 'saveStatsData',
+      type: 'SAVE_STATS_DATA',
       payload: `${scorePercentage.toFixed(2)} % correct answers`
+    });
+    dispatch({
+      type: 'CLEAR_TEST_DATA'
     });
   };
 
