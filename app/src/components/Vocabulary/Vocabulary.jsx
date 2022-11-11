@@ -7,8 +7,11 @@ import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
   const store = useSelector((state) => state);
+  console.log(store);
 
-  const vocabulary = store.vocabulary;
+  const vocabulary = store.vocabularyReducer.vocabulary;
+
+  // const vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,35 +19,19 @@ export const Vocabulary = () => {
 
   const startNewTest = () => {
     const newTestingArray = shuffleAndCut([...vocabulary]);
-    console.log('newTestingArray');
-    console.log(newTestingArray);
-    console.log('__________________________________________');
-    console.log('store before smtn');
-    console.log(store);
-
-    dispatch({ type: 'startNewTest', payload: newTestingArray });
-
-    console.log('__________________________________________');
-    console.log('store after startNewTest dispatch');
-    console.log(store);
-
+    dispatch({ type: 'CREATE_TESTING_ARRAY', payload: newTestingArray });
     dispatch({ type: 'changeToNextTest' });
-
-    console.log('__________________________________________');
-    console.log('changeToNextTest');
-    console.log(store);
-
     navigate('/test-page' + location.search);
   };
 
-  const addNewWord = () => navigate('/add-new-word' + location.search);
+  const goToAddWord = () => navigate('/add-new-word' + location.search);
 
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
         <button>MY DICTIONARY</button> |{' '}
         <button onClick={startNewTest}>START TESTING</button>|{' '}
-        <button onClick={addNewWord}>ADD NEW WORD</button>
+        <button onClick={goToAddWord}>ADD NEW WORD</button>
       </header>
       <div className={styles.content}>
         <ul className={styles.wordList}>

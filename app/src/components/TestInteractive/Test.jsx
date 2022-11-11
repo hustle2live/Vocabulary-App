@@ -8,8 +8,8 @@ export const TestInteractive = () => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const count = store.count;
-  const testedElem = store.activeWordTest;
+  const count = store.testReducer.count;
+  const testedElem = store.testReducer.activeWordTest;
 
   const scorePercentage = (count / 10) * 100;
 
@@ -28,6 +28,7 @@ export const TestInteractive = () => {
       });
       test[wordName] = 'right';
     } else test[wordName] = 'wrong';
+
     dispatch({
       type: 'saveCurrentTestStat',
       payload: test
@@ -62,7 +63,7 @@ export const TestInteractive = () => {
         />
       ) : (
         <Results
-          statistics={store.stats}
+          stats={store.statsReducer.stats}
           saveStats={saveStats}
           score={scorePercentage}
         />

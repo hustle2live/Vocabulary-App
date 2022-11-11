@@ -1,9 +1,6 @@
 const defaultState = { statArrayCurrent: [], stats: '' };
 
-export const statsReducer = (
-  state = { statArrayCurrent: [], stats: '' },
-  action
-) => {
+export const statsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'saveCurrentTestStat':
       return {

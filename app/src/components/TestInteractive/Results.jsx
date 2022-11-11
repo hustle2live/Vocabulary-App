@@ -35,12 +35,12 @@ export const Results = (props) => {
         </span>
       </button>
       <ul className={`${styles.history} ${styles.hidden}`}>
-        {!props.statistics ? (
+        {!props.stats ? (
           <p className={styles.message}>
             You haven't passed any tests before current one, yet
           </p>
         ) : (
-          props.statistics.map(({ result, tests }, index) => (
+          props.stats.map(({ result, tests }, index) => (
             <li key={index}>
               <hr />
               <p>{result}</p>

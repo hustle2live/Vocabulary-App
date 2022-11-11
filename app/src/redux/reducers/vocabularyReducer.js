@@ -1,10 +1,10 @@
 import { dictionary } from '../../components/dictionary';
 
-// const defaultState = {
-//   vocabulary: [...dictionary]
-// };
+const defaultState = {
+  vocabulary: [...dictionary]
+};
 
-export const vocabularyReducer = (state = [...dictionary], action) => {
+export const vocabularyReducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'addNewWord':
       return {

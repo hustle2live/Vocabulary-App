@@ -6,10 +6,10 @@ import styles from './Interactive.module.scss';
 
 export const Interactive = (props) => {
   const store = useSelector((state) => state);
-  const vocabulary = store.vocabulary;
 
-  const testedElement = store.activeWordTest;
-  const testNumberCount = store.testingArray.length + 1;
+  const vocabulary = store.vocabularyReducer.vocabulary;
+  const testedElement = store.testReducer.activeWordTest;
+  const testNumberCount = store.testReducer.testingArray.length + 1;
   const testedAnswers = props.getRandomAnswers(vocabulary, testedElement);
 
   return (

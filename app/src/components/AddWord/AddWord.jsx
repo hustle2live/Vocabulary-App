@@ -6,7 +6,7 @@ import styles from './AddWord.module.scss';
 
 export const AddWord = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state) => state.vocabulary);
+  const store = useSelector((state) => state);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,7 +19,9 @@ export const AddWord = () => {
       return alert('please, inputs a value...');
     const obj = { name: inputValue.trim(), translate: translateValue.trim() };
 
-    if (!store.find((item) => item.name === obj.name)) {
+    if (
+      !store.vocabularyReducer.vocabulary.find((item) => item.name === obj.name)
+    ) {
       dispatch({ type: 'addNewWord', payload: obj });
       alert('word ' + obj.name + ' : ' + obj.translate + ' has been added.');
       setInputValue('');
