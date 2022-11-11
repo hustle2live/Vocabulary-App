@@ -10,7 +10,6 @@ export const TestInteractive = () => {
 
   const count = store.testReducer.count;
   const testedElem = store.testReducer.activeWordTest;
-
   const scorePercentage = (count / 10) * 100;
 
   const changeTest = () =>
@@ -40,6 +39,7 @@ export const TestInteractive = () => {
       type: 'SAVE_STATS_DATA',
       payload: `${scorePercentage.toFixed(2)} % correct answers`
     });
+
     dispatch({
       type: 'CLEAR_TEST_DATA'
     });

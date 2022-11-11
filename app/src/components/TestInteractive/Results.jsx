@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Results.module.scss';
 
 export const Results = (props) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const scorePercentage = props.score;
+  const navigate = useNavigate(),
+    location = useLocation(),
+    scorePercentage = props.score;
 
   return (
     <div className={styles.wrapper}>

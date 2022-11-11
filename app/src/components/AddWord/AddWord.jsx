@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './AddWord.module.scss';
 
 export const AddWord = () => {
-  const dispatch = useDispatch();
-  const store = useSelector((state) => state);
-
-  const navigate = useNavigate();
-  const location = useLocation();
+  const wordsStore = useSelector((state) => state.vocabularyReducer.vocabulary),
+    location = useLocation(),
+    dispatch = useDispatch(),
+    navigate = useNavigate();
 
   const [inputValue, setInputValue] = useState('');
   const [translateValue, setTranslateValue] = useState('');
@@ -19,9 +18,7 @@ export const AddWord = () => {
       return alert('please, inputs a value...');
     const obj = { name: inputValue.trim(), translate: translateValue.trim() };
 
-    if (
-      !store.vocabularyReducer.vocabulary.find((item) => item.name === obj.name)
-    ) {
+    if (!wordsStore.find((item) => item.name === obj.name)) {
       dispatch({ type: 'ADD_WORD', payload: obj });
       alert('word ' + obj.name + ' : ' + obj.translate + ' has been added.');
       setInputValue('');
