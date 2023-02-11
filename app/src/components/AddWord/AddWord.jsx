@@ -20,7 +20,7 @@ export const AddWord = () => {
 
     if (!wordsStore.find((item) => item.name === obj.name)) {
       dispatch({ type: 'ADD_WORD', payload: obj });
-      alert('word ' + obj.name + ' : ' + obj.translate + ' has been added.');
+      alert(`word [${obj.name}: ${obj.translate}] - has added succesfully`);
       setInputValue('');
       setTranslateValue('');
     } else alert('this word has been added already');

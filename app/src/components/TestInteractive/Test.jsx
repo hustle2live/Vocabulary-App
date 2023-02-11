@@ -18,8 +18,8 @@ export const TestInteractive = () => {
     });
 
   const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
-    const wordName = testedElement.name;
-    const test = {};
+    const wordName = testedElement.name,
+      test = {};
 
     if (selectedTranslate === testedElement.translate) {
       dispatch({

@@ -1,7 +1,9 @@
 import { dictionary } from '../../components/dictionary';
 
 const defaultState = {
-  vocabulary: [...dictionary]
+  vocabulary: localStorage.getItem('vocabulary')
+    ? JSON.parse(localStorage.getItem('vocabulary'))
+    : [...dictionary]
 };
 
 export const vocabularyReducer = (state = defaultState, action) => {
@@ -17,6 +19,7 @@ export const vocabularyReducer = (state = defaultState, action) => {
         vocabulary: state.vocabulary.filter((item) => item !== action.payload)
       };
     default:
+      console.log('default:', state);
       return state;
   }
 };

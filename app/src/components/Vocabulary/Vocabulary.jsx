@@ -11,6 +11,8 @@ export const Vocabulary = () => {
     location = useLocation(),
     vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
 
+  localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+
   const startNewTest = () => {
     const newTestingArray = shuffleAndCut([...vocabulary]);
     dispatchMultiply(dispatch, [
