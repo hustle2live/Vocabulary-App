@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { Vocabulary } from './components/Vocabulary/Vocabulary';
 import { AddWord } from './components/AddWord/AddWord';
-import { TestInteractive } from './components/TestInteractive';
+import { TestInteractive } from './components/TestInteractive/Test';
 
 import './styles/style.scss';
 
