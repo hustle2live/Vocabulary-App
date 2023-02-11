@@ -8,36 +8,40 @@ export const TestInteractive = () => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const count = store.count;
+  const count = store.testReducer.count;
+  const testedElem = store.testReducer.activeWordTest;
   const scorePercentage = (count / 10) * 100;
-
-  const testedElem = store.activeWordTest;
 
   const changeTest = () =>
     dispatch({
-      type: 'changeToNextTest'
+      type: 'CHANGE_TEST'
     });
 
   const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
-    const wordName = testedElement.name;
-    const test = {};
+    const wordName = testedElement.name,
+      test = {};
 
     if (selectedTranslate === testedElement.translate) {
       dispatch({
-        type: 'countInc'
+        type: 'COUNT_INC'
       });
       test[wordName] = 'right';
     } else test[wordName] = 'wrong';
+
     dispatch({
-      type: 'saveCurrentTestStat',
+      type: 'SAVE_CURRENT_TEST_STAT',
       payload: test
     });
   };
 
   const saveStats = () => {
     dispatch({
-      type: 'saveStatsData',
+      type: 'SAVE_STATS_DATA',
       payload: `${scorePercentage.toFixed(2)} % correct answers`
+    });
+
+    dispatch({
+      type: 'CLEAR_TEST_DATA'
     });
   };
 
@@ -62,7 +66,7 @@ export const TestInteractive = () => {
         />
       ) : (
         <Results
-          statistics={store.stats}
+          stats={store.statsReducer.stats}
           saveStats={saveStats}
           score={scorePercentage}
         />

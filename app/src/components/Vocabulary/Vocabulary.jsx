@@ -2,34 +2,36 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { shuffleAndCut, dispatchMultiply } from '../helpers';
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
-  const store = useSelector((state) => state);
-  const vocabulary = store.vocabulary;
+  const dispatch = useDispatch(),
+    navigate = useNavigate(),
+    location = useLocation(),
+    vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
 
   const startNewTest = () => {
-    dispatch({
-      type: 'startNewTest'
-    });
-    dispatch({
-      type: 'changeToNextTest'
-    });
+    const newTestingArray = shuffleAndCut([...vocabulary]);
+    dispatchMultiply(dispatch, [
+      { type: 'CLEAR_TEST_DATA' },
+      { type: 'CLEAR_CURRENT_STAT' },
+      { type: 'CREATE_TESTING_ARRAY', payload: newTestingArray },
+      { type: 'CHANGE_TEST' }
+    ]);
     navigate('/test-page' + location.search);
   };
 
-  const addNewWord = () => navigate('/add-new-word' + location.search);
+  const goToAddWordPage = () => navigate('/add-new-word' + location.search);
 
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
         <button>MY DICTIONARY</button> |{' '}
         <button onClick={startNewTest}>START TESTING</button>|{' '}
-        <button onClick={addNewWord}>ADD NEW WORD</button>
+        <button onClick={goToAddWordPage}>ADD NEW WORD</button>
       </header>
       <div className={styles.content}>
         <ul className={styles.wordList}>
