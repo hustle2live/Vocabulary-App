@@ -13,17 +13,42 @@ export const AddWord = () => {
   const [inputValue, setInputValue] = useState('');
   const [translateValue, setTranslateValue] = useState('');
 
-  const newWordAdditionHandler = () => {
-    if (!inputValue.trim() || !translateValue.trim())
-      return alert('please, inputs a value...');
-    const obj = { name: inputValue.trim(), translate: translateValue.trim() };
+  const clearForm = () => {
+    setInputValue('');
+    setTranslateValue('');
+  };
 
-    if (!wordsStore.find((item) => item.name === obj.name)) {
-      dispatch({ type: 'ADD_WORD', payload: obj });
-      alert(`word [${obj.name}: ${obj.translate}] - has added succesfully`);
-      setInputValue('');
-      setTranslateValue('');
-    } else alert('this word has been added already');
+  const inputHandler = (e) => {
+    const re = /^[a-z,.'-()\s]*$/i;
+    if (e.target.value === '' || re.test(e.target.value))
+      return setInputValue(e.target.value);
+  };
+
+  const translateHandler = (e) => {
+    const re = /^[а-яёЁЇїІіЄєҐґ,.'-()\s]*$/i;
+    if (e.target.value === '' || re.test(e.target.value))
+      return setTranslateValue(e.target.value);
+  };
+
+  const newWordAdditionHandler = () => {
+    const [name, translate] = [inputValue.trim(), translateValue.trim()];
+
+    const hasNewWordBeenInDictionary = () =>
+      wordsStore.find((item) => item.name.toLowerCase() === name.toLowerCase());
+
+    const newWordAddConfirmation = () => {
+      dispatch({ type: 'ADD_WORD', payload: { name, translate } });
+      alert(`word [${name} : ${translate}] - has added succesfully`);
+      clearForm();
+    };
+
+    if (name && translate) {
+      return hasNewWordBeenInDictionary()
+        ? alert(`word '${name}' has been already in Dictionary`)
+        : newWordAddConfirmation();
+    }
+
+    return alert('please, inputs a value...');
   };
 
   return (
@@ -38,8 +63,8 @@ export const AddWord = () => {
         <input
           id='word'
           type='text'
-          onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
+          onChange={(e) => inputHandler(e)}
         />
         <label htmlFor='word'>type a word</label>
       </section>
@@ -47,19 +72,13 @@ export const AddWord = () => {
         <input
           id='translate'
           type='text'
-          onChange={(e) => setTranslateValue(e.target.value)}
           value={translateValue}
+          onChange={(e) => translateHandler(e)}
         />
         <label htmlFor='translate'>type a translation</label>
       </section>
       <div>
-        <button
-          className={styles.button}
-          onClick={() => {
-            setInputValue('');
-            setTranslateValue('');
-          }}
-        >
+        <button className={styles.button} onClick={clearForm}>
           Clear
         </button>{' '}
         <button className={styles.button} onClick={newWordAdditionHandler}>

@@ -19,7 +19,6 @@ export const vocabularyReducer = (state = defaultState, action) => {
         vocabulary: state.vocabulary.filter((item) => item !== action.payload)
       };
     default:
-      console.log('default:', state);
       return state;
   }
 };
