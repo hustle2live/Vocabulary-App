@@ -38,6 +38,9 @@
   background: rgba(216, 216, 216, 0.3);
   padding: 2px 0 120px 0;
   margin: 0 auto;
+  height: fill-available;
+  height: -webkit-fill-available;
+  height: -moz-available;
 }
 
 .wordListElement {
