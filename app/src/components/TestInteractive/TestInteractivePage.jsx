@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getRandomInt } from '../helpers';
+import { getRandomInt } from '../../features/helpers';
 
-import styles from './Interactive.module.scss';
+import styles from './TestInteractivePage.module.scss';
 
-export const Interactive = (props) => {
+export const TestInteractivePage = (props) => {
   const store = useSelector((state) => state);
 
   const vocabulary = store.vocabularyReducer.vocabulary;

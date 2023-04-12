@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { shuffleAndCut, dispatchMultiply } from '../helpers';
+import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
+
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {

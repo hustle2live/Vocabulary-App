@@ -1,4 +1,4 @@
-import { dictionary } from '../../components/dictionary';
+import { dictionary } from '../../mockdata/dictionary';
 
 const defaultState = {
   vocabulary: localStorage.getItem('vocabulary')

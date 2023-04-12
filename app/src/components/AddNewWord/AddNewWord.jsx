@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './AddWord.module.scss';
+import styles from './AddNewWord.module.scss';
 
-export const AddWord = () => {
+export const AddNewWord = () => {
   const wordsStore = useSelector((state) => state.vocabularyReducer.vocabulary),
     location = useLocation(),
     dispatch = useDispatch(),
