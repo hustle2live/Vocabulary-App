@@ -1,15 +1,10 @@
-# Hello, 
+# Wellcome, 
 
-This project is your pocket vocabulary and test-interactive-app that helps you to learn the new words.
+### This project could be your personally pocket vocabulary.
+And helps to learn new words with `test-interactive-app` in this app
 
-## In the project, you can:
-
-
-### `launch the test`
-
-Launches the test interactive of learning words on click - [running app](https://hustle2live.github.io/Vocabulary-App/) 
+## 
 
 
-### `add a new word`
+### View DEMO clicking [Running App](https://hustle2live.github.io/Vocabulary-App/)
 
-Add a new word to your dictionary
