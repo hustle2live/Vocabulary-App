@@ -1,78 +1,54 @@
 .wrapper {
-  overflow-y: hidden;
-  height: 97vh;
-  border-radius: 6px;
-}
-
-.header {
-  display: flex;
-  height: 34px;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(216, 216, 216, 0.3);
-  padding: 5px;
-
-  button {
-    display: block;
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-    background: #fff;
-    padding: 2px 4px;
-    border: 1px solid #c1c1c175;
-    margin: auto 4px;
-
-    &:active {
-      background: transparent;
-      box-shadow: 0px 0px 8px 1px rgba(255, 102, 0, 0.64);
-    }
-  }
+   overflow-y: hidden;
+   height: 97vh;
+   border-radius: 6px;
 }
 
 .content {
-  height: 100%;
-  position: relative;
-  overflow-y: scroll;
+   height: 100%;
+   position: relative;
+   overflow-y: scroll;
 }
 
 .wordList {
-  background: rgba(216, 216, 216, 0.3);
-  padding: 2px 0 120px 0;
-  margin: 0 auto;
-  height: fit-content;
+   background: rgba(216, 216, 216, 0.3);
+   padding: 2px 0 120px 0;
+   margin: 0 auto;
+   height: fit-content;
 }
 
 .wordListElement {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  box-sizing: border-box;
-  background: #fff;
-  margin: 6px 5px 6px;
-  border-radius: 15px;
-  min-height: 65px;
-  padding: 14px;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   box-sizing: border-box;
+   background: #fff;
+   margin: 6px 5px 6px;
+   border-radius: 15px;
+   min-height: 65px;
+   padding: 14px;
 }
 
 .word-name,
 .word-translate {
-  margin: 3px;
+   margin: 3px;
 }
 
 .word-name {
-  font-weight: 500;
-  color: black;
+   font-weight: 500;
+   color: black;
 }
 
 .word-translate {
-  font-weight: 500;
-  color: gray;
+   font-weight: 500;
+   color: gray;
 }
 
 .word-description {
-  span {
-    display: block;
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: green;
-  }
+   span {
+      display: block;
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: green;
+   }
 }
