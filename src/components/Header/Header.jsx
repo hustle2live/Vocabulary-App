@@ -1,34 +1,29 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
 
 import styles from './Header.module.scss';
 
 export const Header = () => {
-   const dispatch = useDispatch(),
-      navigate = useNavigate(),
-      location = useLocation(),
-      vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
+   const navigate = useNavigate(),
+      location = useLocation();
 
-   const startNewTest = () => {
-      const newTestingArray = shuffleAndCut([...vocabulary]);
-      dispatchMultiply(dispatch, [
-         { type: 'CLEAR_TEST_DATA' },
-         { type: 'CLEAR_CURRENT_STAT' },
-         { type: 'CREATE_TESTING_ARRAY', payload: newTestingArray },
-         { type: 'CHANGE_TEST' }
-      ]);
-      navigate('/test-page' + location.search);
-   };
-
+   const goToMainPage = () => navigate('/' + location.search);
    const goToAddWordPage = () => navigate('/add-new-word' + location.search);
+   const goToTestPage = () => navigate('/test-page' + location.search);
 
    return (
-      <header className={styles.header}>
-         <button>MY DICTIONARY</button> | <button onClick={startNewTest}>START TESTING</button>|{' '}
-         <button onClick={goToAddWordPage}>ADD NEW WORD</button>
-      </header>
+      <nav className={styles.header}>
+         <li onClick={goToMainPage}>DICT</li>
+         <span>|</span>
+         <li onClick={goToTestPage}>TEST</li>
+         <span>|</span>
+         <li onClick={goToAddWordPage}>+WORD</li>
+         <span>|</span>
+         <li onClick={goToMainPage}>NOTE</li>
+         <span>|</span>
+         <li onClick={goToMainPage}>CALC</li>
+         <span>|</span>
+         <li onClick={goToMainPage}>LANG</li>
+      </nav>
    );
 };

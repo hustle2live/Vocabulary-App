@@ -1,3 +1,5 @@
+@use '../../variables' as global;
+
 .wrapper {
    overflow-y: hidden;
    height: 97vh;
@@ -34,12 +36,12 @@
 
 .word-name {
    font-weight: 500;
-   color: black;
+   color: global.$text-secondary;
 }
 
 .word-translate {
    font-weight: 500;
-   color: gray;
+   color: global.$text-secondary;
 }
 
 .word-description {
@@ -49,6 +51,6 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: green;
+      background: global.$menu-secondary;
    }
 }

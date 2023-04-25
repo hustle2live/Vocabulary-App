@@ -1,22 +1,36 @@
+@use '../../variables' as global;
+
 .header {
    display: flex;
    height: 34px;
    justify-content: space-between;
    align-items: center;
-   background: rgba(216, 216, 216, 0.3);
-   padding: 5px;
+   background: global.$menu-secondary;
+   padding: 0 5px;
+   color: global.$menu-text-secondary;
 
-   button {
-      display: block;
-      font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-      background: #fff;
-      padding: 2px 4px;
-      border: 1px solid #c1c1c175;
+   li {
+      padding: 0 4px;
+      padding: 4px 1.1em;
       margin: auto 4px;
+      font-size: 0.7em;
+      cursor: pointer;
+      border-bottom: 1px solid #c1c1c175;
+      list-style-type: none;
+
+      &:hover {
+         border-bottom: 0.5px solid global.$menu-text-secondary;
+      }
 
       &:active {
          background: transparent;
          box-shadow: 0px 0px 8px 1px rgba(255, 102, 0, 0.64);
+      }
+
+      &::marker {
+         padding: 0;
+         margin: 0;
+         // content: none;
       }
    }
 }

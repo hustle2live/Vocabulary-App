@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Header } from '../Header/Header';
-
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
@@ -12,7 +10,6 @@ export const Vocabulary = () => {
 
    return (
       <div className={styles.wrapper}>
-         <Header />
          <div className={styles.content}>
             <ul className={styles.wordList}>
                {vocabulary.map(({ name, translate }, index) => (
