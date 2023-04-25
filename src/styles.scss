@@ -23,6 +23,7 @@ ul {
 .main_wrapper {
    background: global.$bg-secondary;
    background: global.$bg-secondary-gradient;
+   position: relative;
 }
 
 @media screen and (min-width: 560px) {

@@ -10,16 +10,14 @@ import { Header } from './components/Header/Header';
 import './styles.scss';
 
 const App = () => (
-   <>
+  <div className='main_wrapper'>
       <Header />
-      <div className='main_wrapper'>
       <Routes>
          <Route path='/' element={<Vocabulary />} />
          <Route path='/add-new-word' element={<AddNewWord />} />
          <Route path='/test-page' element={<Test />} />
       </Routes>
       </div>
-   </>
 );
 
 export default App;

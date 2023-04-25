@@ -8,22 +8,21 @@ export const Header = () => {
       location = useLocation();
 
    const goToMainPage = () => navigate('/' + location.search);
-   const goToAddWordPage = () => navigate('/add-new-word' + location.search);
    const goToTestPage = () => navigate('/test-page' + location.search);
 
    return (
       <nav className={styles.header}>
+         <span>|</span>
          <li onClick={goToMainPage}>DICT</li>
          <span>|</span>
          <li onClick={goToTestPage}>TEST</li>
-         <span>|</span>
-         <li onClick={goToAddWordPage}>+WORD</li>
          <span>|</span>
          <li onClick={goToMainPage}>NOTE</li>
          <span>|</span>
          <li onClick={goToMainPage}>CALC</li>
          <span>|</span>
          <li onClick={goToMainPage}>LANG</li>
+         <span>|</span>
       </nav>
    );
 };
