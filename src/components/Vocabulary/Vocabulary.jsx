@@ -1,13 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AddWordButton } from './AddWordButton';
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
    const vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
+   const dispatch = useDispatch();
 
    localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+
+   console.log(vocabulary);
 
    const WordsUlList = () => (
       <ul className={styles.wordList}>
@@ -18,6 +21,20 @@ export const Vocabulary = () => {
                </div>
                <p className={styles['word-name']}>{name}</p>
                <p className={styles['word-translate']}>{translate}</p>
+               <button
+                  onClick={() =>
+                     window.confirm('do you realy wnt to delete word ?')
+                        ? dispatch({
+                             type: 'DELETE_WORD',
+                             payload: name
+                          })
+                        : null
+                  }
+                  className={styles.deleteButton}
+                  label='add new word'
+               >
+                  <span className='material-symbols-rounded'>delete</span>
+               </button>
             </li>
          ))}
       </ul>
