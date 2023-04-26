@@ -16,7 +16,7 @@ export const vocabularyReducer = (state = defaultState, action) => {
     case 'DELETE_WORD':
       return {
         ...state,
-        vocabulary: state.vocabulary.filter((item) => item !== action.payload)
+        vocabulary: state.vocabulary.filter((item) => item.name !== action.payload)
       };
     default:
       return state;

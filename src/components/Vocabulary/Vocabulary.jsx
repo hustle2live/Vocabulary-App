@@ -1,52 +1,51 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
-
+import { AddWordButton } from './AddWordButton';
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
-  const dispatch = useDispatch(),
-    navigate = useNavigate(),
-    location = useLocation(),
-    vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
+   const vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
+   const dispatch = useDispatch();
 
-  localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+   localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
 
-  const startNewTest = () => {
-    const newTestingArray = shuffleAndCut([...vocabulary]);
-    dispatchMultiply(dispatch, [
-      { type: 'CLEAR_TEST_DATA' },
-      { type: 'CLEAR_CURRENT_STAT' },
-      { type: 'CREATE_TESTING_ARRAY', payload: newTestingArray },
-      { type: 'CHANGE_TEST' }
-    ]);
-    navigate('/test-page' + location.search);
-  };
+   console.log(vocabulary);
 
-  const goToAddWordPage = () => navigate('/add-new-word' + location.search);
-
-  return (
-    <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <button>MY DICTIONARY</button> |{' '}
-        <button onClick={startNewTest}>START TESTING</button>|{' '}
-        <button onClick={goToAddWordPage}>ADD NEW WORD</button>
-      </header>
-      <div className={styles.content}>
-        <ul className={styles.wordList}>
-          {vocabulary.map(({ name, translate }, index) => (
+   const WordsUlList = () => (
+      <ul className={styles.wordList}>
+         {vocabulary.map(({ name, translate }, index) => (
             <li className={styles.wordListElement} key={index}>
-              <div className={styles['word-description']}>
-                <span></span>
-              </div>
-              <p className={styles['word-name']}>{name}</p>
-              <p className={styles['word-translate']}>{translate}</p>
+               <div className={styles['word-description']}>
+                  <span className='circle'></span>
+               </div>
+               <p className={styles['word-name']}>{name}</p>
+               <p className={styles['word-translate']}>{translate}</p>
+               <button
+                  onClick={() =>
+                     window.confirm('do you realy wnt to delete word ?')
+                        ? dispatch({
+                             type: 'DELETE_WORD',
+                             payload: name
+                          })
+                        : null
+                  }
+                  className={styles.deleteButton}
+                  label='add new word'
+               >
+                  <span className='material-symbols-rounded'>delete</span>
+               </button>
             </li>
-          ))}
-        </ul>
+         ))}
+      </ul>
+   );
+
+   return (
+      <div className={styles.wrapper}>
+         <div className={styles.content}>
+            <WordsUlList />
+            <AddWordButton />
+         </div>
       </div>
-    </div>
-  );
+   );
 };

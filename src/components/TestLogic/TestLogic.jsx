@@ -1,59 +1,76 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
 import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
 
-import { shuffleAndCut } from '../../features/helpers';
+import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
 
 export const TestLogic = () => {
-  const dispatch = useDispatch();
-  const testedElem = useSelector((state) => state.testReducer.activeWordTest);
+   const dispatch = useDispatch();
+   const state = useSelector((state) => state);
+   const testedElem = state.testReducer.activeWordTest;
+   const vocabulary = state.vocabularyReducer.vocabulary;
 
-  const changeTest = () =>
-    dispatch({
-      type: 'CHANGE_TEST'
-    });
+   const startingNewTest = () => {
+      const newTestingArray = shuffleAndCut([...vocabulary]);
+      dispatchMultiply(dispatch, [
+         { type: 'CLEAR_TEST_DATA' },
+         { type: 'CLEAR_CURRENT_STAT' },
+         { type: 'CREATE_TESTING_ARRAY', payload: newTestingArray },
+         { type: 'CHANGE_TEST' }
+      ]);
+   };
 
-  const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
-    const wordName = testedElement.name,
-      test = {};
+   useEffect(() => {
+      // Starting new test after page have load
+      startingNewTest();
+   }, []);
 
-    if (selectedTranslate === testedElement.translate) {
+   const changeTest = () =>
       dispatch({
-        type: 'COUNT_INC'
+         type: 'CHANGE_TEST'
       });
-      test[wordName] = 'right';
-    } else test[wordName] = 'wrong';
 
-    dispatch({
-      type: 'SAVE_CURRENT_TEST_STAT',
-      payload: test
-    });
-  };
+   const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
+      const wordName = testedElement.name,
+         test = {};
 
-  const getRandomAnswers = (arr, testedElement) => {
-    const randomAnswers = [testedElement.translate];
-    while (randomAnswers.length < 4) {
-      const randomIndex = Math.floor(Math.random() * arr.length);
-      const randomObj = arr[randomIndex];
-      if (!randomAnswers.find((translate) => translate === randomObj.translate))
-        randomAnswers.push(randomObj.translate);
-    }
-    return shuffleAndCut(randomAnswers, 4);
-  };
+      if (selectedTranslate === testedElement.translate) {
+         dispatch({
+            type: 'COUNT_INC'
+         });
+         test[wordName] = 'right';
+      } else test[wordName] = 'wrong';
 
-  return (
-    <div>
-      {testedElem ? (
-        <TestInteractivePage
-          changeToNextWord={changeTest}
-          writeCurrentAnswerStat={writeCurrentAnswerStat}
-          getRandomAnswers={getRandomAnswers}
-        />
-      ) : (
-        <ShowTestResults />
-      )}
-    </div>
-  );
+      dispatch({
+         type: 'SAVE_CURRENT_TEST_STAT',
+         payload: test
+      });
+   };
+
+   const getRandomAnswers = (arr, testedElement) => {
+      const randomAnswers = [testedElement.translate];
+      while (randomAnswers.length < 4) {
+         const randomIndex = Math.floor(Math.random() * arr.length);
+         const randomObj = arr[randomIndex];
+         if (!randomAnswers.find((translate) => translate === randomObj.translate))
+            randomAnswers.push(randomObj.translate);
+      }
+      return shuffleAndCut(randomAnswers, 4);
+   };
+
+   return (
+      <div>
+         {testedElem ? (
+            <TestInteractivePage
+               changeToNextWord={changeTest}
+               writeCurrentAnswerStat={writeCurrentAnswerStat}
+               getRandomAnswers={getRandomAnswers}
+            />
+         ) : (
+            <ShowTestResults />
+         )}
+      </div>
+   );
 };
