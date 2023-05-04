@@ -23,7 +23,7 @@ export const TestLogic = () => {
    };
 
    useEffect(() => {
-      // Starting new test after page have load
+      // Starting new test after mounting
       startingNewTest();
    }, []);
 
