@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
-import { store } from './redux/redux-store';
+import Store from './redux/store';
 import { Provider } from 'react-redux';
 
 import App from './App';
@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HashRouter>
-      <Provider store={store}>
+      <Provider store={Store}>
         <App />
       </Provider>
     </HashRouter>

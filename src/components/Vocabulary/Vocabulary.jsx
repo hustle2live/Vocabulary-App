@@ -5,6 +5,8 @@ import { AddWordButton } from './AddWordButton';
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
+   const state = useSelector((state) => state);
+   console.log(state);
    const vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
    const dispatch = useDispatch();
 
