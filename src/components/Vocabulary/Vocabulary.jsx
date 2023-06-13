@@ -4,6 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddWordButton } from './AddWordButton';
 import styles from './Vocabulary.module.scss';
 
+import {
+   addWord,
+   deleteWord,
+   markAchieved,
+   markPractice,
+   sortByName,
+   sortByStatus,
+   sortRandom
+} from '../../redux/reducers/vocabularyReducer';
+
 export const Vocabulary = () => {
    const state = useSelector((state) => state);
    console.log(state);
@@ -30,10 +40,8 @@ export const Vocabulary = () => {
 
    const markAsLearned = (index) => {
       console.log('MARK_ACHIEVED_WORD');
-      dispatch({
-         type: 'MARK_ACHIEVED_WORD',
-         payload: index
-      });
+      // MARK AS ACHIEVED ---------------
+      dispatch(markAchieved(index));
    };
 
    const WordsUlListEleent = () =>
@@ -45,14 +53,7 @@ export const Vocabulary = () => {
             <button
                className={styles.deleteButton}
                label='delete word from list'
-               onClick={() =>
-                  window.confirm('do you realy wnt to delete word ?')
-                     ? dispatch({
-                          type: 'DELETE_WORD',
-                          payload: name
-                       })
-                     : null
-               }
+               onClick={() => (window.confirm('do you realy wnt to delete word ?') ? dispatch(deleteWord(name)) : null)}
             >
                <span className='material-symbols-rounded'>delete</span>
             </button>

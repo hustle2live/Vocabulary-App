@@ -1,34 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const defaultState = { statArrayCurrent: [], stats: '' };
+const defaultState = { statArrayCurrent: [], allStats: [] };
 
 export const statsReducer = createSlice({
    name: 'stats',
    initialState: defaultState,
    reducers: {
-
-    saveCurrentStat: (state, action) => {
-         state.stats.statArrayCurrent = [...state.statArrayCurrent, action.payload];
+      saveCurrentStat: (state, action) => {
+         state.statArrayCurrent.push(action.payload);
       },
 
       clearCurrentStat: (state) => {
-         state.stats.statArrayCurrent = [];
+         state.statArrayCurrent = [];
       },
 
       writeStatsData: (state, action) => {
-         state.stats.allstats = [
-            ...state.stats.allstats,
+         state.allStats = [
+            ...state.allStats,
             {
                result: action.payload,
-               tests: state.stats.statArrayCurrent
+               tests: [...state.statArrayCurrent],
+               date: new Date()
             }
          ];
       }
    }
 });
 
-export const { saveCurrentStat, clearCurrentStat, writeStatsData } =
-   statsReducer.actions;
+export const { saveCurrentStat, clearCurrentStat, writeStatsData } = statsReducer.actions;
 
 export default statsReducer.reducer;
-

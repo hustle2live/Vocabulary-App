@@ -4,23 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Header.module.scss';
 
+import { sortByName, sortByStatus, sortRandom } from '../../redux/reducers/vocabularyReducer';
+
 export const Header = () => {
    const navigate = useNavigate(),
       location = useLocation();
    const dispatch = useDispatch();
 
-   const sortByName = 'SORT_BY_NAME';
-   const sortByStatus = 'SORT_BY_STATUS';
-   const sortShuffle = 'SHUFFLE';
-
    const goToMainPage = () => navigate('/' + location.search);
    const goToTestPage = () => navigate('/test-page' + location.search);
 
+   const sortingMethod = {
+      byName: sortByName(),
+      byStatus: sortByStatus(),
+      random: sortRandom()
+   };
+
    const handleSortChange = (e) => {
       e.preventDefault();
-      dispatch({
-         type: e.target.value
-      });
+      dispatch(sortingMethod[e.target.value]);
    };
 
    return (
@@ -45,15 +47,9 @@ export const Header = () => {
                <option className={styles.badge} value={'sort'}>
                   sort
                </option>
-               <option  value={sortByName}>
-                  sort_by_alpha
-               </option>
-               <option value={sortByStatus}>
-                  category
-               </option>
-               <option value={sortShuffle}>
-                  shuffle
-               </option>
+               <option value={'byName'}>sort_by_alpha</option>
+               <option value={'byStatus'}>category</option>
+               <option value={'random'}>shuffle</option>
             </select>
          </li>
          <span>|</span>
