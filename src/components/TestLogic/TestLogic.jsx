@@ -5,48 +5,38 @@ import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
 import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
 
 import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
+import { saveCurrentStat, clearCurrentStat } from '../../redux/reducers/statsReducer';
+import { createTestingArray, clearTestData, changeTest, countInc } from '../../redux/reducers/testReducer';
 
 export const TestLogic = () => {
    const dispatch = useDispatch();
-   const state = useSelector((state) => state);
-   const testedElem = state.testReducer.activeWordTest;
-   const vocabulary = state.vocabularyReducer.vocabulary;
+   const store = useSelector((state) => state);
+   const doesTestedElementExist = store.testReducer.activeWordTest;
+   const vocabulary = store.vocabularyReducer.vocabulary;
 
    const startingNewTest = () => {
       const newTestingArray = shuffleAndCut([...vocabulary]);
+
       dispatchMultiply(dispatch, [
-         { type: 'CLEAR_TEST_DATA' },
-         { type: 'CLEAR_CURRENT_STAT' },
-         { type: 'CREATE_TESTING_ARRAY', payload: newTestingArray },
-         { type: 'CHANGE_TEST' }
+         clearCurrentStat(),
+         clearTestData(),
+         createTestingArray(newTestingArray),
+         changeTest()
       ]);
    };
 
-   useEffect(() => {
-      // Starting new test after page have load
-      startingNewTest();
-   }, []);
-
-   const changeTest = () =>
-      dispatch({
-         type: 'CHANGE_TEST'
-      });
+   const changeCurrentTest = () => dispatch(changeTest());
 
    const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
-      const wordName = testedElement.name,
-         test = {};
+      const wordName = testedElement.name;
+      const test = { [wordName]: 'wrong' };
 
       if (selectedTranslate === testedElement.translate) {
-         dispatch({
-            type: 'COUNT_INC'
-         });
+         dispatch(countInc());
          test[wordName] = 'right';
-      } else test[wordName] = 'wrong';
+      }
 
-      dispatch({
-         type: 'SAVE_CURRENT_TEST_STAT',
-         payload: test
-      });
+      dispatch(saveCurrentStat(test));
    };
 
    const getRandomAnswers = (arr, testedElement) => {
@@ -60,11 +50,15 @@ export const TestLogic = () => {
       return shuffleAndCut(randomAnswers, 4);
    };
 
+   useEffect(() => {
+      startingNewTest(); // Starting new test after mounting component
+   }, []);
+
    return (
       <div>
-         {testedElem ? (
+         {doesTestedElementExist ? (
             <TestInteractivePage
-               changeToNextWord={changeTest}
+               changeToNextWord={changeCurrentTest}
                writeCurrentAnswerStat={writeCurrentAnswerStat}
                getRandomAnswers={getRandomAnswers}
             />

@@ -1,10 +1,10 @@
-export const saveStatsDispatcher = (dispatch, dataPayload) => {
-  dispatch({
-    type: 'SAVE_STATS_DATA',
-    payload: `${dataPayload} % correct answers`
-  });
+// export const saveStatsDispatcher = (dispatch, dataPayload) => {
+//   dispatch({
+//     type: 'SAVE_STATS_DATA',
+//     payload: `${dataPayload} % correct answers`
+//   });
 
-  dispatch({
-    type: 'CLEAR_TEST_DATA'
-  });
-};
+//   dispatch({
+//     type: 'CLEAR_TEST_DATA'
+//   });
+// };

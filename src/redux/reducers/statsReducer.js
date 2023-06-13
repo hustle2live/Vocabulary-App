@@ -1,29 +1,32 @@
-const defaultState = { statArrayCurrent: [], stats: '' };
+import { createSlice } from '@reduxjs/toolkit';
 
-export const statsReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case 'SAVE_CURRENT_TEST_STAT':
-      return {
-        ...state,
-        statArrayCurrent: [...state.statArrayCurrent, action.payload]
-      };
-    case 'CLEAR_CURRENT_STAT':
-      return {
-        ...state,
-        statArrayCurrent: []
-      };
-    case 'SAVE_STATS_DATA':
-      return {
-        ...state,
-        stats: [
-          ...state.stats,
-          {
-            result: action.payload,
-            tests: state.statArrayCurrent
-          }
-        ]
-      };
-    default:
-      return state;
-  }
-};
+const defaultState = { statArrayCurrent: [], allStats: [] };
+
+export const statsReducer = createSlice({
+   name: 'stats',
+   initialState: defaultState,
+   reducers: {
+      saveCurrentStat: (state, action) => {
+         state.statArrayCurrent.push(action.payload);
+      },
+
+      clearCurrentStat: (state) => {
+         state.statArrayCurrent = [];
+      },
+
+      writeStatsData: (state, action) => {
+         state.allStats = [
+            ...state.allStats,
+            {
+               result: action.payload,
+               tests: [...state.statArrayCurrent],
+               date: new Date()
+            }
+         ];
+      }
+   }
+});
+
+export const { saveCurrentStat, clearCurrentStat, writeStatsData } = statsReducer.actions;
+
+export default statsReducer.reducer;
