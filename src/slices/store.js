@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import vocabularyReducer from './reducers/vocabularyReducer';
-import testReducer from './reducers/testReducer';
-import statsReducer from './reducers/statsReducer';
+import vocabularyReducer from './vocabulary/vocabulary.slice';
+import testReducer from './interactive/testReducer';
+import statsReducer from './stats/statsReducer';
 
 
 export default configureStore({

@@ -10,9 +10,10 @@ const defaultState = {
 };
 
 const vocabularyReducer = createSlice({
-   name: 'vocabulary',
    initialState: defaultState,
-   reducers: {
+   name: 'vocabulary',
+   reducers: {},
+   extraКeducers: {
       addWord: (state, action) => {
          state.vocabulary = [...state.vocabulary, action.payload];
       },
@@ -51,4 +52,3 @@ export const { addWord, deleteWord, markAchieved, markPractice, sortByName, sort
    vocabularyReducer.actions;
 
 export default vocabularyReducer.reducer;
-
