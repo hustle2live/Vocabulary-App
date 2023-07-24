@@ -1,22 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AddWordButton } from './AddWordButton';
 import styles from './Vocabulary.module.scss';
 
-import {
-   addWord,
-   deleteWord,
-   markAchieved,
-   markPractice,
-   sortByName,
-   sortByStatus,
-   sortRandom
-} from '../../redux/reducers/vocabularyReducer';
+import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
 export const Vocabulary = () => {
-   const state = useSelector((state) => state);
-   console.log(state);
    const vocabulary = useSelector((state) => state.vocabularyReducer.vocabulary);
    const dispatch = useDispatch();
 
@@ -38,22 +28,44 @@ export const Vocabulary = () => {
       </div>
    );
 
-   const markAsLearned = (index) => {
-      console.log('MARK_ACHIEVED_WORD');
-      // MARK AS ACHIEVED ---------------
-      dispatch(markAchieved(index));
-   };
+   const markAsLearnedHandler = useCallback(
+      (id) => {
+         dispatch(vocabularyActionCreator.setAchievedWord(id));
+      },
+      [dispatch]
+   );
+
+   const markToPracticeHandler = useCallback(
+      (id) => {
+         dispatch(vocabularyActionCreator.setPracticeWord(id));
+      },
+      [dispatch]
+   );
+
+   const deleteWordHandler = useCallback(
+      (word) => {
+         dispatch(vocabularyActionCreator.deleteWord(word));
+      },
+      [dispatch]
+   );
 
    const WordsUlListEleent = () =>
       vocabulary.map(({ name, translate, status }, index) => (
-         <li className={styles.wordListElement} key={index} onDoubleClick={() => markAsLearned(index)}>
+         <li
+            className={styles.wordListElement}
+            key={index}
+            onDoubleClick={() => markAsLearnedHandler(index)}
+            onClick={() => markToPracticeHandler(index)}
+         >
             <CircleStatusElement status={status} />
             <p className={styles['word-name']}>{name}</p>
             <p className={styles['word-translate']}>{translate}</p>
             <button
                className={styles.deleteButton}
                label='delete word from list'
-               onClick={() => (window.confirm('do you realy wnt to delete word ?') ? dispatch(deleteWord(name)) : null)}
+               onClick={() =>
+                  window.confirm('do you realy wnt to delete word ?') ? () => deleteWordHandler(name) : null
+               }
             >
                <span className='material-symbols-rounded'>delete</span>
             </button>

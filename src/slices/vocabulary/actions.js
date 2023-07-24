@@ -4,8 +4,8 @@ import { ActionTypes } from './common.js';
 
 const addWord = createAsyncThunk(
     ActionTypes.ADD_WORD,
-    async (payload, {getState}) => {
-
+    async ({ name, translate }, {getState}) => {
+        if (name && translate) return { name, translate }
         return;
     }
 
@@ -21,6 +21,10 @@ const updateWord = createAsyncThunk(
 const deleteWord = createAsyncThunk(
     ActionTypes.DELETE_WORD,
     async (payload, {getState}) => {
+
+        const { vocabulary } = getState();
+        console.log(vocabulary);
+        if (payload && vocabulary.find((word) => word === payload)) return payload;
 
         return;
     }

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 
 import App from './App';
-import Store from './redux/store';
+import Store from './slices/store.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Header.module.scss';
 
-import { sortByName, sortByStatus, sortRandom } from '../../redux/reducers/vocabularyReducer';
+import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
+
+// import { sortByName, sortByStatus, sortRandom } from '../../redux/reducers/vocabularyReducer';
 
 export const Header = () => {
    const navigate = useNavigate(),
@@ -14,16 +16,21 @@ export const Header = () => {
    const goToMainPage = () => navigate('/' + location.search);
    const goToTestPage = () => navigate('/test-page' + location.search);
 
-   const sortingMethod = {
-      byName: sortByName(),
-      byStatus: sortByStatus(),
-      random: sortRandom()
+   const { sortByName, sortByStatus, sortRandom } = vocabularyActionCreator;
+
+   const sortingMethodHandler = (e) => {
+      // e.preventDefault();
+      console.log(e);
+      const sortOrder = e.target.value;
+      handleVocabularySort(sortOrder);
    };
 
-   const handleSortChange = (e) => {
-      e.preventDefault();
-      dispatch(sortingMethod[e.target.value]);
-   };
+   const handleVocabularySort = useCallback(
+      (sort) => {
+         dispatch(vocabularyActionCreator[sort]());
+      },
+      [dispatch]
+   );
 
    return (
       <nav className={styles.header}>
@@ -40,16 +47,16 @@ export const Header = () => {
          <li>
             <select
                name='sort'
-               onChange={(e) => handleSortChange(e)}
+               onChange={(e) => sortingMethodHandler(e)}
                className={`${styles.sortingSelector} ${'material-symbols-outlined'}`}
-               defaultValue={'sort'}
+               defaultValue={'default'}
             >
-               <option className={styles.badge} value={'sort'}>
+               <option className={styles.badge} value={'default'}>
                   sort
                </option>
-               <option value={'byName'}>sort_by_alpha</option>
-               <option value={'byStatus'}>category</option>
-               <option value={'random'}>shuffle</option>
+               <option value={sortByName}>sort_by_alpha</option>
+               <option value={sortByStatus}>category</option>
+               <option value={sortRandom}>shuffle</option>
             </select>
          </li>
          <span>|</span>

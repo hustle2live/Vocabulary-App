@@ -3,6 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dictionary } from '../../mockdata/dictionary';
 import { shuffleAndCut } from '../../features/helpers';
 
+import {
+   addWord,
+   deleteWord,
+   setAchievedWord,
+   setPracticeWord,
+   sortByName,
+   sortByStatus,
+   sortRandom,
+   updateWord
+} from './actions.js';
+
 const isLocalVocabulary = localStorage.getItem('vocabulary') || null;
 
 const defaultState = {
@@ -22,7 +33,7 @@ const vocabularyReducer = createSlice({
          state.vocabulary = state.vocabulary.filter((item) => item.name !== action.payload);
       });
 
-      builder.addCase(markAchieved.fulfilled, (state, action) => {
+      builder.addCase(setAchievedWord.fulfilled, (state, action) => {
          state.vocabulary = state.vocabulary.map((elem, index) => {
             if (index === action.payload) {
                elem.status = elem.status === 'achieved' ? 'new' : 'achieved';
@@ -31,7 +42,7 @@ const vocabularyReducer = createSlice({
          });
       });
 
-      builder.addCase(markPractice.fulfilled, (state, action) => {
+      builder.addCase(setPracticeWord.fulfilled, (state, action) => {
          state.vocabulary = state.vocabulary.map((elem, index) => {
             if (index === action.payload) {
                elem.status = elem.status === 'practice' ? 'new' : 'practice';
@@ -54,7 +65,4 @@ const vocabularyReducer = createSlice({
    }
 });
 
-export const { addWord, deleteWord, markAchieved, markPractice, sortByName, sortByStatus, sortRandom } =
-   vocabularyReducer.actions;
-
-export default vocabularyReducer.reducer;
+export const { actions, name, reducer } = vocabularyReducer;

@@ -5,8 +5,8 @@ import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
 import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
 
 import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
-import { saveCurrentStat, clearCurrentStat } from '../../redux/reducers/statsReducer';
-import { createTestingArray, clearTestData, changeTest, countInc } from '../../redux/reducers/testReducer';
+import { saveCurrentStat, clearCurrentStat } from '../../slices/stats/statsReducer.js';
+import { createTestingArray, clearTestData, changeTest, countInc } from '../../slices/interactive/testReducer.js';
 
 export const TestLogic = () => {
    const dispatch = useDispatch();
