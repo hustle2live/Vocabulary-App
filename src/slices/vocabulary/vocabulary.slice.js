@@ -10,8 +10,7 @@ import {
    setPracticeWord,
    sortByName,
    sortByStatus,
-   sortRandom,
-   updateWord
+   sortRandom
 } from './actions.js';
 
 const isLocalVocabulary = localStorage.getItem('vocabulary') || null;
