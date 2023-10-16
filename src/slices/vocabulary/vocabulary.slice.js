@@ -23,8 +23,10 @@ const vocabularyReducer = createSlice({
    initialState: defaultState,
    name: 'vocabulary',
    reducers: {},
-   extraКeducers: (builder) => {
+   extraReducers: (builder) => {
       builder.addCase(addWord.fulfilled, (state, action) => {
+         console.log(action.payload);
+         console.log(state);
          state.vocabulary = [...state.vocabulary, action.payload];
       });
 

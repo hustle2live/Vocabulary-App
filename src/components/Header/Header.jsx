@@ -20,7 +20,6 @@ export const Header = () => {
 
    // const { sortByName, sortByStatus, sortRandom } = vocabularyActionCreator;
 
-
    const { sortByName, sortByStatus, sortRandom, sortDefault } = {
       sortByName: 'sortByName',
       sortByStatus: 'sortByStatus',
@@ -35,7 +34,8 @@ export const Header = () => {
    const handleVocabularySort = useCallback(
       (sortOrder) => {
          console.log(sortOrder);
-         dispatch(vocabularyActionCreator[`${sortOrder}`]());
+         // dispatch(vocabularyActionCreator[sortOrder]());
+         dispatch(vocabularyActionCreator.sortRandom());
       },
       [dispatch]
    );

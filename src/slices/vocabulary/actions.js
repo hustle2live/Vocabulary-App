@@ -5,8 +5,11 @@ import { ActionTypes } from './common.js';
 const addWord = createAsyncThunk(
     ActionTypes.ADD_WORD,
     async ({ name, translate }, {getState}) => {
-        if (name && translate) return { name, translate }
-        return;
+        if (!name || !translate) return;
+
+        console.log('createAsyncThunk.ActionTypes.ADD_WORD');
+        console.log(name);
+        return { name, translate }
     }
 
 )
@@ -49,24 +52,27 @@ const setPracticeWord = createAsyncThunk(
 const sortByName = createAsyncThunk(
     ActionTypes.SORT_BY_NAME,
     async (payload, {getState}) => {
-
-        return;
+        if (!payload) return;
+        console.log('createAsyncThunk.ActionTypes.SORT_BY_NAME');
+        console.log(payload);
+        
     }
 
 )
 const sortByStatus = createAsyncThunk(
     ActionTypes.SORT_BY_STATUS,
     async (payload, {getState}) => {
+        if (!payload) return;
 
-        return;
+        return payload;
     }
 
 )
 const sortRandom = createAsyncThunk(
     ActionTypes.SORT_RANDOM,
     async (payload, {getState}) => {
-
-        return;
+        if (!payload) return;
+        return payload;
     }
 
 )
