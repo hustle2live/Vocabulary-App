@@ -1,18 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
-
-// import { addWord } from '../../redux/reducers/vocabularyReducer';
 
 import styles from './AddNewWord.module.scss';
 
 export const AddNewWord = () => {
-   const wordsStore = useSelector((state) => state.vocabularyReducer.vocabulary),
-      location = useLocation(),
-      dispatch = useDispatch(),
-      navigate = useNavigate();
+   const location = useLocation();
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
 
    const [inputValue, setInputValue] = useState('');
    const [translateValue, setTranslateValue] = useState('');
@@ -42,18 +39,11 @@ export const AddNewWord = () => {
    );
 
    const newWordAdditionHandler = () => {
-      const [name, translate] = [inputValue.trim(), translateValue.trim()];
-
-      const hasNewWordBeenInDictionary = () =>
-         wordsStore.find((item) => item.name.toLowerCase() === name.toLowerCase());
-
-      if (name && translate) {
-         return hasNewWordBeenInDictionary()
-            ? alert(`word '${name}' has been already in Dictionary`)
-            : newWordAddConfirmation({ name, translate });
-      }
-
-      return alert('please, inputs a value...');
+      const translation = {
+         name: inputValue,
+         translate: translateValue
+      };
+      return newWordAddConfirmation(translation);
    };
 
    return (

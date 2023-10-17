@@ -2,88 +2,91 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ActionTypes } from './common.js';
 
-const addWord = createAsyncThunk(
-    ActionTypes.ADD_WORD,
-    async ({ name, translate }, {getState}) => {
-        if (!name || !translate) return;
+const addWord = createAsyncThunk(ActionTypes.ADD_WORD, async (payload, { getState, rejectWithValue }) => {
+   const {
+      vocabularyReducer: { vocabulary }
+   } = getState();
 
-        console.log('createAsyncThunk.ActionTypes.ADD_WORD');
-        console.log(name);
-        return { name, translate }
-    }
+   const name = payload.name.trim().toLowerCase();
+   const translate = payload.translate.trim().toLowerCase();
 
-)
-const updateWord = createAsyncThunk(
-    ActionTypes.UPDATE_WORD,
-    async (payload, {getState}) => {
+   const doesWordExist = (newWordName, itemKeyName) =>
+      !!vocabulary.find((item) => item[itemKeyName] && item[itemKeyName].toLowerCase() === newWordName);
 
-        return;
-    }
+   try {
+      let isError = '';
 
-)
-const deleteWord = createAsyncThunk(
-    ActionTypes.DELETE_WORD,
-    async (payload, {getState}) => {
+      switch (true) {
+         case !name || !translate:
+            isError = 'Error. Type in input name and translate';
+            break;
+         case name.length < 3 || translate.length < 3:
+            isError = 'Error. Word name and translation must be at least 3 charackters long';
+            break;
+         case doesWordExist(name, 'name'):
+            isError = 'This Word has been already exits in a dictionary';
+            break;
+         case doesWordExist(translate, 'translate'):
+            isError = 'This Translate has been already defined to a dictionary';
+            break;
+         default:
+            return {
+               translation: {
+                  name,
+                  translate,
+                  status: 'new',
+                  createdAt: '',
+                  updatedAt: ''
+               }
+            };
+      }
 
-        const { vocabulary } = getState();
-        console.log(vocabulary);
-        if (payload && vocabulary.find((word) => word === payload)) return payload;
+      if (isError) {
+         throw new Error(isError);
+      }
+   } catch (error) {
+      console.log(error.message);
+      return rejectWithValue(error.message);
+   }
 
-        return;
-    }
+   return { translation: null };
+});
 
-)
-const setAchievedWord = createAsyncThunk(
-    ActionTypes.SET_ACHIEVED_WORD,
-    async (payload, {getState}) => {
+const updateWord = createAsyncThunk(ActionTypes.UPDATE_WORD, async (payload, { getState }) => {
+   return;
+});
 
-        return;
-    }
+const deleteWord = createAsyncThunk(ActionTypes.DELETE_WORD, async (payload, { getState }) => {
+   const { vocabulary } = getState();
+   console.log(vocabulary);
+   if (payload && vocabulary.find((word) => word === payload)) return payload;
 
-)
-const setPracticeWord = createAsyncThunk(
-    ActionTypes.SET_PRACTICE_WORD,
-    async (payload, {getState}) => {
+   return;
+});
 
-        return;
-    }
+const setAchievedWord = createAsyncThunk(ActionTypes.SET_ACHIEVED_WORD, async (payload, { getState }) => {
+   return;
+});
 
-)
-const sortByName = createAsyncThunk(
-    ActionTypes.SORT_BY_NAME,
-    async (payload, {getState}) => {
-        if (!payload) return;
-        console.log('createAsyncThunk.ActionTypes.SORT_BY_NAME');
-        console.log(payload);
-        
-    }
+const setPracticeWord = createAsyncThunk(ActionTypes.SET_PRACTICE_WORD, async (payload, { getState }) => {
+   return;
+});
 
-)
-const sortByStatus = createAsyncThunk(
-    ActionTypes.SORT_BY_STATUS,
-    async (payload, {getState}) => {
-        if (!payload) return;
+const sortByName = createAsyncThunk(ActionTypes.SORT_BY_NAME, async (payload, { getState }) => {
+   if (!payload) return;
+   console.log('createAsyncThunk.ActionTypes.SORT_BY_NAME');
+   console.log(payload);
+});
 
-        return payload;
-    }
+const sortByStatus = createAsyncThunk(ActionTypes.SORT_BY_STATUS, async (payload, { getState }) => {
+   if (!payload) return;
 
-)
-const sortRandom = createAsyncThunk(
-    ActionTypes.SORT_RANDOM,
-    async (payload, {getState}) => {
-        if (!payload) return;
-        return payload;
-    }
+   return payload;
+});
 
-)
+const sortRandom = createAsyncThunk(ActionTypes.SORT_RANDOM, async (payload, { getState }) => {
+   if (!payload) return;
+   return payload;
+});
 
-export {
-    addWord,
-    updateWord,
-    deleteWord,
-    setAchievedWord,
-    setPracticeWord,
-    sortByName,
-    sortByStatus,
-    sortRandom
-}
+export { addWord, updateWord, deleteWord, setAchievedWord, setPracticeWord, sortByName, sortByStatus, sortRandom };

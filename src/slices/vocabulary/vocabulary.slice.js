@@ -25,9 +25,12 @@ const vocabularyReducer = createSlice({
    reducers: {},
    extraReducers: (builder) => {
       builder.addCase(addWord.fulfilled, (state, action) => {
+         console.log('createSlice');
          console.log(action.payload);
-         console.log(state);
          state.vocabulary = [...state.vocabulary, action.payload];
+      });
+      builder.addCase(addWord.rejected, (state, action) => {
+         console.log('error occurred');
       });
 
       builder.addCase(deleteWord.fulfilled, (state, action) => {
