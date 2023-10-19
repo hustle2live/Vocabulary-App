@@ -29,4 +29,4 @@ export const statsReducer = createSlice({
 
 export const { saveCurrentStat, clearCurrentStat, writeStatsData } = statsReducer.actions;
 
-export default statsReducer.reducer;
+export const { actions, name, reducer } = statsReducer;

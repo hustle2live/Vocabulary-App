@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { writeStatsData } from '../../redux/reducers/statsReducer';
+import { writeStatsData } from '../../slices/stats/statsReducer';
 
 import styles from './ShowTestResults.module.scss';
 

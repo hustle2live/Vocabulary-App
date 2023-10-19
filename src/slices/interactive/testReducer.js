@@ -30,4 +30,4 @@ const testReducer = createSlice({
 
 export const { createTestingArray, clearTestData, changeTest, countInc, countReset } = testReducer.actions;
 
-export default testReducer.reducer;
+export const { actions, name, reducer } = testReducer;
