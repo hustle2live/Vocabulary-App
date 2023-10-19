@@ -1,12 +1,12 @@
 import {
    addWord,
-   updateWord,
    deleteWord,
    setAchievedWord,
    setPracticeWord,
    sortByName,
    sortByStatus,
-   sortRandom
+   sortRandom,
+   updateWord,
 } from './actions.js';
 
 import { actions } from './vocabulary.slice.js';
@@ -20,7 +20,7 @@ const allActions = {
    setPracticeWord,
    sortByName,
    sortByStatus,
-   sortRandom
+   sortRandom,
 };
 
 export { allActions as actions };

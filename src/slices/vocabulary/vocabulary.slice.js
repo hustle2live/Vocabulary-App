@@ -10,13 +10,15 @@ import {
    setPracticeWord,
    sortByName,
    sortByStatus,
-   sortRandom
+   sortRandom,
 } from './actions.js';
 
 const isLocalVocabulary = localStorage.getItem('vocabulary') || null;
 
 const defaultState = {
-   vocabulary: isLocalVocabulary ? JSON.parse(isLocalVocabulary) : [...dictionary]
+   vocabulary: isLocalVocabulary
+      ? JSON.parse(isLocalVocabulary)
+      : [...dictionary],
 };
 
 const vocabularyReducer = createSlice({
@@ -25,8 +27,6 @@ const vocabularyReducer = createSlice({
    reducers: {},
    extraReducers: (builder) => {
       builder.addCase(addWord.fulfilled, (state, action) => {
-         console.log('createSlice');
-         console.log(action.payload);
          state.vocabulary = [...state.vocabulary, action.payload];
       });
       builder.addCase(addWord.rejected, (state, action) => {
@@ -34,7 +34,9 @@ const vocabularyReducer = createSlice({
       });
 
       builder.addCase(deleteWord.fulfilled, (state, action) => {
-         state.vocabulary = state.vocabulary.filter((item) => item.name !== action.payload);
+         state.vocabulary = state.vocabulary.filter(
+            (item) => item.name !== action.payload,
+         );
       });
 
       builder.addCase(setAchievedWord.fulfilled, (state, action) => {
@@ -56,17 +58,24 @@ const vocabularyReducer = createSlice({
       });
 
       builder.addCase(sortByName.fulfilled, (state) => {
-         state.vocabulary = [...state.vocabulary].sort((a, b) => (a.name < b.name ? -1 : 0));
+         state.vocabulary = [...state.vocabulary].sort((a, b) =>
+            a.name < b.name ? -1 : 0,
+         );
       });
 
       builder.addCase(sortByStatus.fulfilled, (state) => {
-         state.vocabulary = [...state.vocabulary].sort((a, b) => (a.status < b.status ? -1 : 0));
+         state.vocabulary = [...state.vocabulary].sort((a, b) =>
+            a.status < b.status ? -1 : 0,
+         );
       });
 
       builder.addCase(sortRandom.fulfilled, (state) => {
-         state.vocabulary = shuffleAndCut([...state.vocabulary], state.vocabulary.length);
+         state.vocabulary = shuffleAndCut(
+            [...state.vocabulary],
+            state.vocabulary.length,
+         );
       });
-   }
+   },
 });
 
 export const { actions, name, reducer } = vocabularyReducer;

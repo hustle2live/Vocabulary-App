@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
@@ -21,12 +21,14 @@ export const AddNewWord = () => {
 
    const inputHandler = (e) => {
       const re = /^[a-z,.'-()\s]*$/i;
-      if (e.target.value === '' || re.test(e.target.value)) return setInputValue(e.target.value);
+      if (e.target.value === '' || re.test(e.target.value))
+         return setInputValue(e.target.value);
    };
 
    const translateHandler = (e) => {
       const re = /^[а-яёЁЇїІіЄєҐґ,.'-()\s]*$/i;
-      if (e.target.value === '' || re.test(e.target.value)) return setTranslateValue(e.target.value);
+      if (e.target.value === '' || re.test(e.target.value))
+         return setTranslateValue(e.target.value);
    };
 
    const newWordAddConfirmation = useCallback(
@@ -35,29 +37,42 @@ export const AddNewWord = () => {
          alert(`word [${name} : ${translate}] - has added succesfully`);
          clearForm();
       },
-      [dispatch]
+      [dispatch],
    );
 
    const newWordAdditionHandler = () => {
       const translation = {
          name: inputValue,
-         translate: translateValue
+         translate: translateValue,
       };
       return newWordAddConfirmation(translation);
    };
 
    return (
       <div className={styles.wrapper}>
-         <button className={styles['navigate-back']} onClick={() => navigate('/' + location.search)}>
+         <button
+            className={styles['navigate-back']}
+            onClick={() => navigate('/' + location.search)}
+         >
             <span>CLOSE </span>[X]
          </button>
          <section className={styles['input-section']}>
-            <input id='word' type='text' value={inputValue} onChange={(e) => inputHandler(e)} />
-            <label htmlFor='word'>type a word</label>
+            <input
+               id="word"
+               type="text"
+               value={inputValue}
+               onChange={(e) => inputHandler(e)}
+            />
+            <label htmlFor="word">type a word</label>
          </section>
          <section className={styles['input-section']}>
-            <input id='translate' type='text' value={translateValue} onChange={(e) => translateHandler(e)} />
-            <label htmlFor='translate'>type a translation</label>
+            <input
+               id="translate"
+               type="text"
+               value={translateValue}
+               onChange={(e) => translateHandler(e)}
+            />
+            <label htmlFor="translate">type a translation</label>
          </section>
          <div>
             <button className={styles.button} onClick={clearForm}>
