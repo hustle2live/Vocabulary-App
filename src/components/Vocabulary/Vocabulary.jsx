@@ -14,7 +14,7 @@ export const Vocabulary = () => {
 
    localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
 
-   const CircleStatusElement = ({ status }) => {
+   const RatingStatus = ({ status }) => {
       const elemStatusStyles = {
          practice: styles.circle_practice,
          achieved: styles.circle_achieved,
@@ -57,7 +57,7 @@ export const Vocabulary = () => {
             onDoubleClick={() => markAsLearnedHandler(index)}
             onClick={() => markToPracticeHandler(index)}
          >
-            <CircleStatusElement status={status} />
+            <RatingStatus status={status} />
             <p className={styles['word-name']}>{name}</p>
             <p className={styles['word-translate']}>{translate}</p>
             <button
