@@ -5,9 +5,8 @@ import { shuffleAndCut } from '../../features/helpers';
 
 import {
    addWord,
+   changeStatusWord,
    deleteWord,
-   setAchievedWord,
-   setPracticeWord,
    sortByName,
    sortByStatus,
    sortRandom,
@@ -41,21 +40,12 @@ const vocabularyReducer = createSlice({
       });
 
       // set to ahieved
-      builder.addCase(setAchievedWord.fulfilled, (state, action) => {
+      builder.addCase(changeStatusWord.fulfilled, (state, action) => {
          const { vocabulary } = action.payload;
          state.vocabulary = [...vocabulary];
       });
-      builder.addCase(setAchievedWord.rejected, (state, { vocabulary }) => {
+      builder.addCase(changeStatusWord.rejected, (state, { vocabulary }) => {
          console.log('an error occurred - while changing element MarkStatus');
-      });
-
-      builder.addCase(setPracticeWord.fulfilled, (state, action) => {
-         state.vocabulary = state.vocabulary.map((elem, index) => {
-            if (index === action.payload) {
-               elem.status = elem.status === 'practice' ? 'new' : 'practice';
-            }
-            return elem;
-         });
       });
 
       builder.addCase(sortByName.fulfilled, (state) => {

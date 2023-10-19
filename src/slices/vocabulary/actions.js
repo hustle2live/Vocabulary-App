@@ -79,8 +79,8 @@ const deleteWord = createAsyncThunk(
    },
 );
 
-const setAchievedWord = createAsyncThunk(
-   ActionTypes.SET_ACHIEVED_WORD,
+const changeStatusWord = createAsyncThunk(
+   ActionTypes.CHANGE_STATUS_WORD,
    async (payload, { getState, rejectWithValue }) => {
       const {
          vocabularyReducer: { vocabulary },
@@ -157,11 +157,11 @@ const sortRandom = createAsyncThunk(
 
 export {
    addWord,
-   updateWord,
+   changeStatusWord,
    deleteWord,
-   setAchievedWord,
    setPracticeWord,
    sortByName,
    sortByStatus,
    sortRandom,
+   updateWord,
 };

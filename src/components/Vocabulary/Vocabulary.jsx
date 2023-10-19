@@ -30,14 +30,7 @@ export const Vocabulary = () => {
 
    const markAsLearnedHandler = useCallback(
       (id) => {
-         dispatch(vocabularyActionCreator.setAchievedWord(id));
-      },
-      [dispatch],
-   );
-
-   const markToPracticeHandler = useCallback(
-      (id) => {
-         dispatch(vocabularyActionCreator.setPracticeWord(id));
+         dispatch(vocabularyActionCreator.changeStatusWord(id));
       },
       [dispatch],
    );
@@ -55,7 +48,6 @@ export const Vocabulary = () => {
             className={styles.wordListElement}
             key={index}
             onDoubleClick={() => markAsLearnedHandler(index)}
-            // onClick={() => markToPracticeHandler(index)}
          >
             <RatingStatus status={status} />
             <p className={styles['word-name']}>{name}</p>
