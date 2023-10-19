@@ -26,6 +26,7 @@ const vocabularyReducer = createSlice({
    name: 'vocabulary',
    reducers: {},
    extraReducers: (builder) => {
+      // add new word
       builder.addCase(addWord.fulfilled, (state, action) => {
          state.vocabulary = [...state.vocabulary, action.payload];
       });
@@ -39,13 +40,13 @@ const vocabularyReducer = createSlice({
          );
       });
 
+      // set to ahieved
       builder.addCase(setAchievedWord.fulfilled, (state, action) => {
-         state.vocabulary = state.vocabulary.map((elem, index) => {
-            if (index === action.payload) {
-               elem.status = elem.status === 'achieved' ? 'new' : 'achieved';
-            }
-            return elem;
-         });
+         const { vocabulary } = action.payload;
+         state.vocabulary = [...vocabulary];
+      });
+      builder.addCase(setAchievedWord.rejected, (state, { vocabulary }) => {
+         console.log('an error occurred - while changing element MarkStatus');
       });
 
       builder.addCase(setPracticeWord.fulfilled, (state, action) => {

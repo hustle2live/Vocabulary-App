@@ -55,7 +55,7 @@ export const Vocabulary = () => {
             className={styles.wordListElement}
             key={index}
             onDoubleClick={() => markAsLearnedHandler(index)}
-            onClick={() => markToPracticeHandler(index)}
+            // onClick={() => markToPracticeHandler(index)}
          >
             <RatingStatus status={status} />
             <p className={styles['word-name']}>{name}</p>
