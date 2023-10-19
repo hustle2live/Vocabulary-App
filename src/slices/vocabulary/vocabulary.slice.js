@@ -27,10 +27,12 @@ const vocabularyReducer = createSlice({
    extraReducers: (builder) => {
       // add new word
       builder.addCase(addWord.fulfilled, (state, action) => {
-         state.vocabulary = [...state.vocabulary, action.payload];
+         const { translation } = action.payload;
+         state.vocabulary = [...state.vocabulary, translation];
       });
       builder.addCase(addWord.rejected, (state, action) => {
-         console.log('error occurred');
+         console.log('error occurred - while adding new word');
+         console.log(action.payload);
       });
 
       builder.addCase(deleteWord.fulfilled, (state, action) => {

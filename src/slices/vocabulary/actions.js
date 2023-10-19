@@ -24,7 +24,7 @@ const addWord = createAsyncThunk(
 
          switch (true) {
             case !name || !translate:
-               isError = 'Error. Type in input name and translate';
+               isError = 'Error. Type in input name and translation';
                break;
             case name.length < 3 || translate.length < 3:
                isError =
@@ -55,8 +55,6 @@ const addWord = createAsyncThunk(
       } catch (error) {
          return rejectWithValue(error.message);
       }
-
-      return { translation: null };
    },
 );
 
@@ -71,7 +69,7 @@ const deleteWord = createAsyncThunk(
    ActionTypes.DELETE_WORD,
    async (payload, { getState }) => {
       const { vocabulary } = getState();
-      console.log(vocabulary);
+      // console.log(vocabulary);
       if (payload && vocabulary.find((word) => word === payload))
          return payload;
 
@@ -121,14 +119,6 @@ const changeStatusWord = createAsyncThunk(
    },
 );
 
-const setPracticeWord = createAsyncThunk(
-   ActionTypes.SET_PRACTICE_WORD,
-   async (payload, { getState }) => {
-      console.log(payload);
-      return;
-   },
-);
-
 const sortByName = createAsyncThunk(
    ActionTypes.SORT_BY_NAME,
    async (payload, { getState }) => {
@@ -159,7 +149,6 @@ export {
    addWord,
    changeStatusWord,
    deleteWord,
-   setPracticeWord,
    sortByName,
    sortByStatus,
    sortRandom,
