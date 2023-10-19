@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import styles from './Header.module.scss';
-
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
+
+import styles from './Header.module.scss';
 
 // import { sortByName, sortByStatus, sortRandom } from '../../redux/reducers/vocabularyReducer';
 
@@ -24,7 +24,7 @@ export const Header = () => {
       sortByName: 'sortByName',
       sortByStatus: 'sortByStatus',
       sortRandom: 'sortRandom',
-      sortDefault: ''
+      sortDefault: '',
    };
 
    const sortingMethodHandler = (value) => {
@@ -33,11 +33,11 @@ export const Header = () => {
 
    const handleVocabularySort = useCallback(
       (sortOrder) => {
-         console.log(sortOrder);
+         // console.log(sortOrder);
          // dispatch(vocabularyActionCreator[sortOrder]());
          dispatch(vocabularyActionCreator.sortRandom());
       },
-      [dispatch]
+      [dispatch],
    );
 
    return (
@@ -54,10 +54,12 @@ export const Header = () => {
          <li>LANG</li>
          <li>
             <select
-               name='sort'
+               name="sort"
                onChange={(e) => sortingMethodHandler(e.target.value)}
                // onChange={(e) => setSort(e.target.value)}
-               className={`${styles.sortingSelector} ${'material-symbols-outlined'}`}
+               className={`${
+                  styles.sortingSelector
+               } ${'material-symbols-outlined'}`}
                // defaultValue={'default'}
             >
                <option className={styles.badge} value={sortDefault}>
