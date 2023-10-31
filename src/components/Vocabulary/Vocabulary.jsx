@@ -57,7 +57,7 @@ export const Vocabulary = () => {
                label="delete word from list"
                onClick={() =>
                   window.confirm('do you realy wnt to delete word ?')
-                     ? () => deleteWordHandler(name)
+                     ? deleteWordHandler(name)
                      : null
                }
             >

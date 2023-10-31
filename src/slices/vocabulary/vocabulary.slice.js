@@ -1,16 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { dictionary } from '../../mockdata/dictionary';
-import { shuffleAndCut } from '../../features/helpers';
 
-import {
-   addWord,
-   changeStatusWord,
-   deleteWord,
-   sortByName,
-   sortByStatus,
-   sortRandom,
-} from './actions.js';
+import { addWord, changeStatusWord, deleteWord, sortBy } from './actions.js';
 
 const isLocalVocabulary = localStorage.getItem('vocabulary') || null;
 
@@ -32,13 +24,16 @@ const vocabularyReducer = createSlice({
       });
       builder.addCase(addWord.rejected, (state, action) => {
          console.log('error occurred - while adding new word');
-         console.log(action.payload);
       });
 
+      // delete word
       builder.addCase(deleteWord.fulfilled, (state, action) => {
-         state.vocabulary = state.vocabulary.filter(
-            (item) => item.name !== action.payload,
-         );
+         const { updatedVocabulary } = action.payload;
+         state.vocabulary = updatedVocabulary;
+      });
+
+      builder.addCase(deleteWord.rejected, (state, action) => {
+         console.log('error occurred - while deleting word');
       });
 
       // set to ahieved
@@ -50,23 +45,14 @@ const vocabularyReducer = createSlice({
          console.log('an error occurred - while changing element MarkStatus');
       });
 
-      builder.addCase(sortByName.fulfilled, (state) => {
-         state.vocabulary = [...state.vocabulary].sort((a, b) =>
-            a.name < b.name ? -1 : 0,
-         );
+      // sorting
+      builder.addCase(sortBy.fulfilled, (state, action) => {
+         const { vocabularySorted } = action.payload;
+         state.vocabulary = vocabularySorted;
       });
 
-      builder.addCase(sortByStatus.fulfilled, (state) => {
-         state.vocabulary = [...state.vocabulary].sort((a, b) =>
-            a.status < b.status ? -1 : 0,
-         );
-      });
-
-      builder.addCase(sortRandom.fulfilled, (state) => {
-         state.vocabulary = shuffleAndCut(
-            [...state.vocabulary],
-            state.vocabulary.length,
-         );
+      builder.addCase(sortBy.rejected, (state) => {
+         console.log('an error occurred - while sorting data');
       });
    },
 });

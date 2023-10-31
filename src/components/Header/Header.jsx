@@ -1,31 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
-import styles from './Header.module.scss';
+import { SortTypes } from '../../slices/vocabulary/common.js';
 
-// import { sortByName, sortByStatus, sortRandom } from '../../redux/reducers/vocabularyReducer';
+import styles from './Header.module.scss';
 
 export const Header = () => {
    const navigate = useNavigate(),
       location = useLocation();
    const dispatch = useDispatch();
 
-   const [sort, setSort] = useState('');
-
    const goToMainPage = () => navigate('/' + location.search);
    const goToTestPage = () => navigate('/test-page' + location.search);
-
-   // const { sortByName, sortByStatus, sortRandom } = vocabularyActionCreator;
-
-   const { sortByName, sortByStatus, sortRandom, sortDefault } = {
-      sortByName: 'sortByName',
-      sortByStatus: 'sortByStatus',
-      sortRandom: 'sortRandom',
-      sortDefault: '',
-   };
 
    const sortingMethodHandler = (value) => {
       handleVocabularySort(value);
@@ -33,9 +22,7 @@ export const Header = () => {
 
    const handleVocabularySort = useCallback(
       (sortOrder) => {
-         // console.log(sortOrder);
-         // dispatch(vocabularyActionCreator[sortOrder]());
-         dispatch(vocabularyActionCreator.sortRandom());
+         dispatch(vocabularyActionCreator.sortBy(sortOrder));
       },
       [dispatch],
    );
@@ -56,20 +43,17 @@ export const Header = () => {
             <select
                name="sort"
                onChange={(e) => sortingMethodHandler(e.target.value)}
-               // onChange={(e) => setSort(e.target.value)}
                className={`${
                   styles.sortingSelector
                } ${'material-symbols-outlined'}`}
-               // defaultValue={'default'}
             >
-               <option className={styles.badge} value={sortDefault}>
+               <option className={styles.badge} value={SortTypes.SORT_DEFAULT}>
                   sort
                </option>
-               <option value={sortByName}>sort_by_alpha</option>
-               <option value={sortByStatus}>category</option>
-               <option value={sortRandom}>shuffle</option>
+               <option value={SortTypes.SORT_BY_NAME}>sort_by_alpha</option>
+               <option value={SortTypes.SORT_BY_STATUS}>category</option>
+               <option value={SortTypes.SORT_RANDOM}>shuffle</option>
             </select>
-            {/* MAYBE SET STATE..... ???  */}
          </li>
          <span>|</span>
       </nav>

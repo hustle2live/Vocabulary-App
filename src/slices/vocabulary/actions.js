@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { shuffleAndCut } from '../../features/helpers';
+
 import { ActionTypes } from './common.js';
 
 const addWord = createAsyncThunk(
@@ -67,13 +69,25 @@ const updateWord = createAsyncThunk(
 
 const deleteWord = createAsyncThunk(
    ActionTypes.DELETE_WORD,
-   async (payload, { getState }) => {
-      const { vocabulary } = getState();
-      // console.log(vocabulary);
-      if (payload && vocabulary.find((word) => word === payload))
-         return payload;
+   async (payload, { getState, rejectWithValue }) => {
+      const {
+         vocabularyReducer: { vocabulary },
+      } = getState();
 
-      return;
+      try {
+         const deletedWord =
+            vocabulary.find((word) => word.name === payload) || null;
+
+         if (!deletedWord) throw new Error('deleted word is not defined');
+
+         const filtered = vocabulary.filter(
+            (item) => item.name !== deletedWord.name,
+         );
+
+         return { updatedVocabulary: filtered };
+      } catch (error) {
+         return rejectWithValue(error.message);
+      }
    },
 );
 
@@ -97,15 +111,15 @@ const changeStatusWord = createAsyncThunk(
          return copyElem;
       };
 
-      const getElementByindex = vocabulary.find(
-         (elem, index) => index === payload,
-      );
-
-      if (!getElementByindex) {
-         return rejectWithValue('Element is not defined');
-      }
-
       try {
+         const getElementByindex = vocabulary.find(
+            (_, index) => index === payload,
+         );
+
+         if (!getElementByindex) {
+            throw new Error('Element index is not defined in vocabulary');
+         }
+
          const updatedElement = updateElementStatus(getElementByindex);
 
          const updatedVocabulary = vocabulary.map((elem) =>
@@ -114,43 +128,40 @@ const changeStatusWord = createAsyncThunk(
 
          return { vocabulary: updatedVocabulary };
       } catch (error) {
-         console.log(error.message);
+         return rejectWithValue(error.message);
       }
    },
 );
 
-const sortByName = createAsyncThunk(
-   ActionTypes.SORT_BY_NAME,
-   async (payload, { getState }) => {
-      if (!payload) return;
-      console.log('createAsyncThunk.ActionTypes.SORT_BY_NAME');
-      console.log(payload);
+const sortBy = createAsyncThunk(
+   ActionTypes.SORT_BY,
+   async (payload, { getState, rejectWithValue }) => {
+      const {
+         vocabularyReducer: { vocabulary },
+      } = getState();
+
+      const sortingMethod = {
+         sortByName(elem) {
+            return elem.sort((a, b) => (a.name < b.name ? -1 : 0));
+         },
+         sortByStatus(elem) {
+            return elem.sort((a, b) => (a.status < b.status ? -1 : 0));
+         },
+         sortRandom(elem) {
+            return shuffleAndCut(elem, elem.length);
+         },
+      };
+
+      try {
+         const sorting = sortingMethod[`${payload}`]([...vocabulary]) || null;
+
+         if (!sorting) throw new Error('ERROR createAsyncThunk-SORT');
+
+         return { vocabularySorted: sorting };
+      } catch (error) {
+         return rejectWithValue(error.message);
+      }
    },
 );
 
-const sortByStatus = createAsyncThunk(
-   ActionTypes.SORT_BY_STATUS,
-   async (payload, { getState }) => {
-      if (!payload) return;
-
-      return payload;
-   },
-);
-
-const sortRandom = createAsyncThunk(
-   ActionTypes.SORT_RANDOM,
-   async (payload, { getState }) => {
-      if (!payload) return;
-      return payload;
-   },
-);
-
-export {
-   addWord,
-   changeStatusWord,
-   deleteWord,
-   sortByName,
-   sortByStatus,
-   sortRandom,
-   updateWord,
-};
+export { addWord, changeStatusWord, deleteWord, sortBy, updateWord };
