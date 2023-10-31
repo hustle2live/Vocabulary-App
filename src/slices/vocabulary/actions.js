@@ -67,13 +67,25 @@ const updateWord = createAsyncThunk(
 
 const deleteWord = createAsyncThunk(
    ActionTypes.DELETE_WORD,
-   async (payload, { getState }) => {
-      const { vocabulary } = getState();
-      // console.log(vocabulary);
-      if (payload && vocabulary.find((word) => word === payload))
-         return payload;
+   async (payload, { getState, rejectWithValue }) => {
+      const {
+         vocabularyReducer: { vocabulary },
+      } = getState();
 
-      return;
+      try {
+         const deletedWord =
+            vocabulary.find((word) => word.name === payload) || null;
+
+         if (!deletedWord) throw new Error('deleted word is not defined');
+
+         const filtered = vocabulary.filter(
+            (item) => item.name !== deletedWord.name,
+         );
+
+         return { updatedVocabulary: filtered };
+      } catch (error) {
+         return rejectWithValue(error.message);
+      }
    },
 );
 

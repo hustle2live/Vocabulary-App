@@ -32,13 +32,16 @@ const vocabularyReducer = createSlice({
       });
       builder.addCase(addWord.rejected, (state, action) => {
          console.log('error occurred - while adding new word');
-         console.log(action.payload);
       });
 
       builder.addCase(deleteWord.fulfilled, (state, action) => {
-         state.vocabulary = state.vocabulary.filter(
-            (item) => item.name !== action.payload,
-         );
+         const { updatedVocabulary } = action.payload;
+         state.vocabulary = updatedVocabulary;
+         console.log('delete-slice state Updated');
+      });
+
+      builder.addCase(deleteWord.rejected, (state, action) => {
+         console.log('error occurred - while deleting word');
       });
 
       // set to ahieved
