@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -12,8 +12,6 @@ export const Header = () => {
    const navigate = useNavigate(),
       location = useLocation();
    const dispatch = useDispatch();
-
-   const [sort, setSort] = useState('');
 
    const goToMainPage = () => navigate('/' + location.search);
    const goToTestPage = () => navigate('/test-page' + location.search);
@@ -56,7 +54,6 @@ export const Header = () => {
                <option value={SortTypes.SORT_BY_STATUS}>category</option>
                <option value={SortTypes.SORT_RANDOM}>shuffle</option>
             </select>
-            {/* MAYBE SET STATE..... ???  */}
          </li>
          <span>|</span>
       </nav>
