@@ -1,16 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { dictionary } from '../../mockdata/dictionary';
-import { shuffleAndCut } from '../../features/helpers';
 
-import {
-   addWord,
-   changeStatusWord,
-   deleteWord,
-   sortBy,
-   sortByStatus,
-   sortRandom,
-} from './actions.js';
+import { addWord, changeStatusWord, deleteWord, sortBy } from './actions.js';
 
 const isLocalVocabulary = localStorage.getItem('vocabulary') || null;
 
