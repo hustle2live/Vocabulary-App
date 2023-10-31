@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { shuffleAndCut } from '../../features/helpers';
+
 import { ActionTypes } from './common.js';
 
 const addWord = createAsyncThunk(
@@ -131,38 +133,35 @@ const changeStatusWord = createAsyncThunk(
    },
 );
 
-const sortByName = createAsyncThunk(
-   ActionTypes.SORT_BY_NAME,
-   async (payload, { getState }) => {
-      if (!payload) return;
-      console.log('createAsyncThunk.ActionTypes.SORT_BY_NAME');
-      console.log(payload);
+const sortBy = createAsyncThunk(
+   ActionTypes.SORT_BY,
+   async (payload, { getState, rejectWithValue }) => {
+      const {
+         vocabularyReducer: { vocabulary },
+      } = getState();
+
+      const sortingMethod = {
+         sortByName(elem) {
+            return elem.sort((a, b) => (a.name < b.name ? -1 : 0));
+         },
+         sortByStatus(elem) {
+            return elem.sort((a, b) => (a.status < b.status ? -1 : 0));
+         },
+         sortRandom(elem) {
+            return shuffleAndCut(elem, elem.length);
+         },
+      };
+
+      try {
+         const sorting = sortingMethod[`${payload}`]([...vocabulary]) || null;
+
+         if (!sorting) throw new Error('ERROR createAsyncThunk-SORT');
+
+         return { vocabularySorted: sorting };
+      } catch (error) {
+         return rejectWithValue(error.message);
+      }
    },
 );
 
-const sortByStatus = createAsyncThunk(
-   ActionTypes.SORT_BY_STATUS,
-   async (payload, { getState }) => {
-      if (!payload) return;
-
-      return payload;
-   },
-);
-
-const sortRandom = createAsyncThunk(
-   ActionTypes.SORT_RANDOM,
-   async (payload, { getState }) => {
-      if (!payload) return;
-      return payload;
-   },
-);
-
-export {
-   addWord,
-   changeStatusWord,
-   deleteWord,
-   sortByName,
-   sortByStatus,
-   sortRandom,
-   updateWord,
-};
+export { addWord, changeStatusWord, deleteWord, sortBy, updateWord };

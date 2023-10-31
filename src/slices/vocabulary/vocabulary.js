@@ -2,9 +2,7 @@ import {
    addWord,
    changeStatusWord,
    deleteWord,
-   sortByName,
-   sortByStatus,
-   sortRandom,
+   sortBy,
    updateWord,
 } from './actions.js';
 
@@ -16,9 +14,7 @@ const allActions = {
    updateWord,
    changeStatusWord,
    deleteWord,
-   sortByName,
-   sortByStatus,
-   sortRandom,
+   sortBy,
 };
 
 export { allActions as actions };

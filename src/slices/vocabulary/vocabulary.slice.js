@@ -7,7 +7,7 @@ import {
    addWord,
    changeStatusWord,
    deleteWord,
-   sortByName,
+   sortBy,
    sortByStatus,
    sortRandom,
 } from './actions.js';
@@ -34,10 +34,10 @@ const vocabularyReducer = createSlice({
          console.log('error occurred - while adding new word');
       });
 
+      // delete word
       builder.addCase(deleteWord.fulfilled, (state, action) => {
          const { updatedVocabulary } = action.payload;
          state.vocabulary = updatedVocabulary;
-         console.log('delete-slice state Updated');
       });
 
       builder.addCase(deleteWord.rejected, (state, action) => {
@@ -53,23 +53,14 @@ const vocabularyReducer = createSlice({
          console.log('an error occurred - while changing element MarkStatus');
       });
 
-      builder.addCase(sortByName.fulfilled, (state) => {
-         state.vocabulary = [...state.vocabulary].sort((a, b) =>
-            a.name < b.name ? -1 : 0,
-         );
+      // sorting
+      builder.addCase(sortBy.fulfilled, (state, action) => {
+         const { vocabularySorted } = action.payload;
+         state.vocabulary = vocabularySorted;
       });
 
-      builder.addCase(sortByStatus.fulfilled, (state) => {
-         state.vocabulary = [...state.vocabulary].sort((a, b) =>
-            a.status < b.status ? -1 : 0,
-         );
-      });
-
-      builder.addCase(sortRandom.fulfilled, (state) => {
-         state.vocabulary = shuffleAndCut(
-            [...state.vocabulary],
-            state.vocabulary.length,
-         );
+      builder.addCase(sortBy.rejected, (state) => {
+         console.log('an error occurred - while sorting data');
       });
    },
 });
