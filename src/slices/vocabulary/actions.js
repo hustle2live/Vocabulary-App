@@ -25,30 +25,30 @@ const addWord = createAsyncThunk(
          let isError = '';
 
          switch (true) {
-         case !name || !translate:
-            isError = 'Error. Type in input name and translation';
-            break;
-         case name.length < 3 || translate.length < 3:
-            isError =
-               'Error. Word name and translation must be at least 3 charackters long';
-            break;
-         case doesWordExist(name, 'name'):
-            isError = 'This Word has been already exits in a dictionary';
-            break;
-         case doesWordExist(translate, 'translate'):
-            isError =
-               'This Translate has been already defined to a dictionary';
-            break;
-         default:
-            return {
-               translation: {
-                  name,
-                  translate,
-                  status: 'new',
-                  createdAt: '',
-                  updatedAt: '',
-               },
-            };
+            case !name || !translate:
+               isError = 'Error. Type in input name and translation';
+               break;
+            case name.length < 3 || translate.length < 3:
+               isError =
+                  'Error. Word name and translation must be at least 3 charackters long';
+               break;
+            case doesWordExist(name, 'name'):
+               isError = 'This Word has been already exits in a dictionary';
+               break;
+            case doesWordExist(translate, 'translate'):
+               isError =
+                  'This Translate has been already defined to a dictionary';
+               break;
+            default:
+               return {
+                  translation: {
+                     name,
+                     translate,
+                     status: 'new',
+                     createdAt: '',
+                     updatedAt: '',
+                  },
+               };
          }
 
          if (isError) {
@@ -111,15 +111,15 @@ const changeStatusWord = createAsyncThunk(
          return copyElem;
       };
 
-      const getElementByindex = vocabulary.find(
-         (elem, index) => index === payload,
-      );
-
-      if (!getElementByindex) {
-         throw new Error('Element index is not defined in vocabulary');
-      }
-
       try {
+         const getElementByindex = vocabulary.find(
+            (_, index) => index === payload,
+         );
+
+         if (!getElementByindex) {
+            throw new Error('Element index is not defined in vocabulary');
+         }
+
          const updatedElement = updateElementStatus(getElementByindex);
 
          const updatedVocabulary = vocabulary.map((elem) =>
