@@ -114,7 +114,7 @@ const changeStatusWord = createAsyncThunk(
       );
 
       if (!getElementByindex) {
-         return rejectWithValue('Element is not defined');
+         throw new Error('Element index is not defined in vocabulary');
       }
 
       try {
@@ -126,7 +126,7 @@ const changeStatusWord = createAsyncThunk(
 
          return { vocabulary: updatedVocabulary };
       } catch (error) {
-         console.log(error.message);
+         return rejectWithValue(error.message);
       }
    },
 );
