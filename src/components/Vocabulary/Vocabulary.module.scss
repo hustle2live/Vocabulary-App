@@ -2,30 +2,32 @@
 // @use '../../my-styles.bulma' as colors;
 
 .wrapper {
+   position: relative;
    overflow-y: hidden;
    height: 97vh;
    border-radius: 6px;
 
    .instructions {
-      position: relative;
-      // position: absolute;
+      position: absolute;
+      // position: relative;
       // top: -100%;
       display: block;
       box-sizing: border-box;
+      height: fit-content;
 
-      // height: fit-content;
       // height: auto;
       // margin-top: -110%;
       padding: 10px;
       margin: 10px;
       transform: translateY(-100%);
-      transition: all 700ms;
+      // transition: all 700ms;
       z-index: 1;
       clear: both;
 
       &.expanded {
-         // margin-top: 0;
+         position: relative;
          clear: both;
+         // margin-top: 0;
 
          transform: translateY(0%);
          // transform: translateY(100%);
@@ -47,20 +49,20 @@
       &__btn_expand {
          display: block;
          box-sizing: border-box;
-         content: '';
          height: 60px;
          width: 60px;
-
          position: absolute;
-         bottom: 5px;
+         bottom: 0;
          left: 50%;
-         transform: translate(-50%, 60%) rotate(45deg);
+         transform: translate(-50%, 40%) rotate(45deg);
          background: global.$bg-primary-08;
          opacity: 1;
          border-radius: 1rem;
          z-index: 1;
          padding-left: 10px;
          padding-top: 10px;
+         padding-right: 4px;
+         padding-bottom: 4px;
       }
    }
 
