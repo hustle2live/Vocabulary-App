@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { mdiPlus } from '@mdi/js';
 
 import Icon from '@mdi/react';
@@ -21,7 +21,7 @@ export const AddWordButton = () => {
          className={`${styles.addWordButton} button is-link`}
          label="add new word"
       >
-         <span class="icon">
+         <span className="icon">
             <IconPlus />
          </span>
       </button>
