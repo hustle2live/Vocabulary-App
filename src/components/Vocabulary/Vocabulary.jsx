@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { mdiCircleMedium } from '@mdi/js';
+import Icon from '@mdi/react';
+
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
 import { AddWordButton } from './AddWordButton';
@@ -71,14 +74,52 @@ export const Vocabulary = () => {
 
    const Instructions = () => (
       <div className={styles.instructions}>
-         <h1 className="title">Hello, </h1>
+         <p className="title"> Wellcome, </p>
 
-         <p className="subtitle">
-            Wellcome to Modern React Vocabulary created by{' '}
+         <p className={`block subtitle`}>
+            to Modern React Vocabulary created by{' '}
             <a href="https://github.com/hustle2live" target="_blank">
                Volodymyr K.
             </a>
          </p>
+
+         <p>Description:</p>
+
+         <ul>
+            <li className={styles.block}>
+               This is a simple pocket application that helps to learn a foreign
+               language better and faster.
+            </li>
+            <li className={styles.block}>
+               All the words are saved to your{' '}
+               <strong>local current browser</strong>.
+            </li>
+            <li className={styles.block}>
+               You can <strong>add and practice</strong> new words with
+               translations and <strong>delete</strong> after you learn them.
+            </li>
+            <li className={styles.block}>
+               You can <strong>mark </strong>the word's status as:
+               <div className="icon-text">
+                  <span className="icon has-text-dark">
+                     <Icon path={mdiCircleMedium} size={1} />
+                  </span>
+                  <span>new</span>
+               </div>
+               <div className="icon-text">
+                  <span className="icon has-text-warning">
+                     <Icon path={mdiCircleMedium} size={1} />
+                  </span>
+                  <span>learned</span>
+               </div>
+               <div className="icon-text">
+                  <span className="icon has-text-success">
+                     <Icon path={mdiCircleMedium} size={1} />
+                  </span>
+                  <span>achieved</span>
+               </div>
+            </li>
+         </ul>
 
          <div className="field">
             <div className="control">
@@ -100,10 +141,10 @@ export const Vocabulary = () => {
 
          <div className="buttons">
             <div href="" className="button is-primary">
-               Primary
+               Ok, Got it!
             </div>
             <div href="" className="button is-link">
-               Link
+               Learn more
             </div>
          </div>
       </div>

@@ -18,11 +18,14 @@ export const AddWordButton = () => {
    return (
       <button
          onClick={goToAddWordPage}
-         className={`${styles.addWordButton} button is-link`}
+         className={`${styles.addWordButton} button is-link box`}
          label="add new word"
       >
-         <span className="icon">
-            <IconPlus />
+         <span className="icon-text">
+            <span className="icon">
+               <IconPlus />
+            </span>
+            <span> Нове</span>
          </span>
       </button>
    );
