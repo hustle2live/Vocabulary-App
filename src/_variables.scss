@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Roboto+Mono:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+// @use '../../my-styles.bulma' as colors;
+
+@import '../node_modules/bulma/sass/helpers/color.sass';
 
 $font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -15,6 +15,14 @@ $menu-text-secondary: #fff;
 $menu-primary: #fff;
 $menu-secondary: #000;
 
+$orange: orange;
+$green: rgb(140, 216, 26);
+
+$bg-tertiary: rgb(202, 73, 227);
+
+$bg-primary-08: rgb(203 176 255 / 88%);
+$bg-primary: rgba(55, 57, 214, 0.736);
+
 $bg-secondary: rgb(157, 159, 245);
 $bg-secondary-gradient: linear-gradient(
    27deg,
@@ -25,12 +33,20 @@ $bg-secondary-gradient: linear-gradient(
    rgba(255, 248, 215, 0.9136904761904762) 95%
 );
 
+// $bg-secondary-gradient-solid: linear-gradient(
+//    27deg,
+//    rgba(157, 159, 245, 1) 10%,
+//    rgba(176, 155, 240, 1) 41%,
+//    rgba(212, 155, 240, 1) 59%,
+//    rgba(255, 248, 215, 1) 90%,
+//    rgba(255, 248, 215, 1) 95%
+// );
+
 $scrollbarBG: #cfd8dc;
 $thumbBG: rgba(212, 155, 240);
 
 // there's must be a secondary color theme
 
-$bg-primary: rgba(55, 57, 214, 0.736);
 // $bg-primary-gradient: linear-gradient();
 
 .material-symbols-rounded {

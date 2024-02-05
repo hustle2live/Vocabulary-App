@@ -30,15 +30,17 @@ export const Header = () => {
    return (
       <nav className={styles.header}>
          <span>|</span>
-         <li onClick={goToMainPage}>DICT</li>
+         <li onClick={goToMainPage}>Vocabulary</li>
          <span>|</span>
-         <li onClick={goToTestPage}>TEST</li>
+         <li onClick={goToTestPage}>Testing</li>
          <span>|</span>
+         {/* 
          <li>NOTE</li>
          <span>|</span>
          <li>CALC</li>
          <span>|</span>
-         <li>LANG</li>
+         <li>LANG</li> */}
+         <span>Sorting</span>
          <li>
             <select
                name="sort"

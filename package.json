@@ -45,6 +45,9 @@
     ]
   },
   "devDependencies": {
+    "@mdi/js": "^7.4.47",
+    "@mdi/react": "^1.6.1",
+    "bulma": "^0.9.4",
     "react-router-dom": "^6.4.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",

@@ -20,6 +20,14 @@ ul {
    list-style-type: none;
 }
 
+.orange {
+   color: global.$orange;
+}
+
+.green {
+   color: global.$green;
+}
+
 .main_wrapper {
    background: global.$bg-secondary;
    background: global.$bg-secondary-gradient;
