@@ -1,5 +1,5 @@
 @use '../../variables' as global;
-// @use '../../styles.scss' as colors;
+@use '../../my-styles.bulma' as colors;
 
 .wrapper {
    overflow-y: hidden;
@@ -91,8 +91,8 @@
       .circle_practice,
       .circle_achieved {
          &::before {
-            background: orange;
-            // background: global.$warning;
+            // background: global.$orange;
+            background: colors.$warning;
             left: 15px;
             margin: 0;
             position: absolute;
@@ -101,8 +101,8 @@
       .circle_achieved {
          &::after {
             margin: 0;
-            background: rgb(140, 216, 26);
-            // background: global.$success;
+            // background: global.$green;
+            background: colors.$success;
             left: 30px;
             position: absolute;
          }
@@ -125,10 +125,7 @@
    color: global.$text-secondary;
 }
 
-// .addWordButton,
 .deleteButton {
-   // display: flex;
-   // background: global.$menu-primary;
    z-index: 1;
 }
 
@@ -137,14 +134,6 @@
    position: absolute !important;
    bottom: 10%;
    right: 10%;
-   // padding: 0;
-   // margin: 0;
-   // left: 80%;
-   // text-align: center;
-   // align-items: center;
-   // justify-content: center;
-   // border-radius: 50%;
-   // font-size: 48px;
 }
 
 .deleteButton {
@@ -152,21 +141,4 @@
    position: absolute !important;
    top: 10px;
    right: 10px;
-   // border: transparent;
-
-   // & span {
-   //    font-size: 24px;
-   //    font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-   // }
-
-   // &::after {
-   //    display: block;
-   //    font-size: 12px;
-   //    content: 'Delete';
-   //    color: #000;
-   //    text-align: center;
-   //    justify-content: center;
-   //    margin: auto 0;
-   //    padding: 5px 0;
-   // }
 }

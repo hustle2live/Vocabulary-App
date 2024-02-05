@@ -7,6 +7,7 @@ import Icon from '@mdi/react';
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
 import { AddWordButton } from './AddWordButton';
+
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
@@ -76,7 +77,7 @@ export const Vocabulary = () => {
       <div className={styles.instructions}>
          <p className="title"> Wellcome, </p>
 
-         <p className={`block subtitle`}>
+         <p className="block subtitle">
             to Modern React Vocabulary created by{' '}
             <a href="https://github.com/hustle2live" target="_blank">
                Volodymyr K.
@@ -98,6 +99,7 @@ export const Vocabulary = () => {
                You can <strong>add and practice</strong> new words with
                translations and <strong>delete</strong> after you learn them.
             </li>
+
             <li className={styles.block}>
                You can <strong>mark </strong>the word's status as:
                <div className="icon-text">
