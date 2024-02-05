@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { mdiCircleMedium } from '@mdi/js';
+import { mdiChevronDown, mdiCircleMedium } from '@mdi/js';
 import Icon from '@mdi/react';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
@@ -17,6 +17,10 @@ export const Vocabulary = () => {
    const dispatch = useDispatch();
 
    localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+
+   const showHideInstructions = (elem) => {
+      elem.classList.toggle('expanded');
+   };
 
    const RatingStatus = ({ status }) => {
       const elemStatusStyles = {
@@ -148,6 +152,19 @@ export const Vocabulary = () => {
             <div href="" className="button is-link">
                Learn more
             </div>
+         </div>
+
+         <div
+            className={styles.instructions__btn_expand}
+            onClick={(e) => {
+               e.currentTarget.parentNode.classList.toggle(styles.expanded);
+            }}
+         >
+            <span className="icon-text">
+               <span className="icon is-large">
+                  <Icon path={mdiChevronDown} rotate={-45} size={3} />
+               </span>
+            </span>
          </div>
       </div>
    );

@@ -1,5 +1,5 @@
 @use '../../variables' as global;
-@use '../../my-styles.bulma' as colors;
+// @use '../../my-styles.bulma' as colors;
 
 .wrapper {
    overflow-y: hidden;
@@ -7,7 +7,29 @@
    border-radius: 6px;
 
    .instructions {
+      position: relative;
+      // position: absolute;
+      // top: -100%;
+      display: block;
+      box-sizing: border-box;
+
+      // height: fit-content;
+      // height: auto;
+      // margin-top: -110%;
       padding: 10px;
+      margin: 10px;
+      transform: translateY(-100%);
+      transition: all 700ms;
+      z-index: 1;
+      clear: both;
+
+      &.expanded {
+         // margin-top: 0;
+         clear: both;
+
+         transform: translateY(0%);
+         // transform: translateY(100%);
+      }
 
       ul {
          margin-bottom: 2rem;
@@ -20,6 +42,25 @@
          .icon {
             margin: auto !important;
          }
+      }
+
+      &__btn_expand {
+         display: block;
+         box-sizing: border-box;
+         content: '';
+         height: 60px;
+         width: 60px;
+
+         position: absolute;
+         bottom: 5px;
+         left: 50%;
+         transform: translate(-50%, 60%) rotate(45deg);
+         background: global.$bg-primary-08;
+         opacity: 1;
+         border-radius: 1rem;
+         z-index: 1;
+         padding-left: 10px;
+         padding-top: 10px;
       }
    }
 
@@ -91,8 +132,8 @@
       .circle_practice,
       .circle_achieved {
          &::before {
-            // background: global.$orange;
-            background: colors.$warning;
+            background: global.$warning;
+            // background: colors.$warning;
             left: 15px;
             margin: 0;
             position: absolute;
@@ -101,8 +142,8 @@
       .circle_achieved {
          &::after {
             margin: 0;
-            // background: global.$green;
-            background: colors.$success;
+            background: global.$success;
+            // background: colors.$success;
             left: 30px;
             position: absolute;
          }
@@ -125,9 +166,9 @@
    color: global.$text-secondary;
 }
 
-.deleteButton {
-   z-index: 1;
-}
+// .deleteButton {
+//    z-index: 1;
+// }
 
 .addWordButton {
    z-index: 1;
