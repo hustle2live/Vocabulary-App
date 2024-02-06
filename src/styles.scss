@@ -39,10 +39,3 @@ ul {
    background: global.$bg-secondary-gradient;
    position: relative;
 }
-
-@media screen and (min-width: 560px) {
-   body {
-      margin: 0 auto;
-      max-width: 500px;
-   }
-}
