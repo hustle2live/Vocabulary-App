@@ -15,25 +15,55 @@ export const TestInteractivePage = (props) => {
 
    return (
       <div className={styles.wrapper}>
-         <h1 className={styles.header}>Word learning test</h1>
+         <h2 className={styles.header}>Word learning test</h2>
+
          <p className={styles.description}>
             choose the correct translation of the word
             <span>Tests left ( {testNumberCount} / 10 ) </span>
          </p>
 
          <p className={styles['tested-word']}>{testedElement.name}</p>
+
          <ul className={styles.testUlList}>
             {testedAnswers.map((item) => (
                <li
-                  className={styles.listElement}
+                  className={`${styles.listElement}`}
                   key={item}
-                  style={{ height: getRandomInt(100) + '%' }}
+                  style={{
+                     minHeight: getRandomInt(100) + '%',
+                  }}
                   onClick={(e) => {
-                     props.writeCurrentAnswerStat(e.currentTarget.textContent, testedElement);
-                     props.changeToNextWord();
+                     const ulList = e.currentTarget.parentNode.childNodes;
+                     ulList.forEach((node) => node.classList.add(styles.hide));
+
+                     const selectWordIteration = (
+                        { writeCurrentAnswerStat, changeToNextWord },
+                        text,
+                        element,
+                        ulList,
+                     ) => {
+                        writeCurrentAnswerStat(text, element);
+                        changeToNextWord();
+                        ulList.forEach((node) =>
+                           node.classList.remove(styles.hide),
+                        );
+                     };
+
+                     const targetText = e.currentTarget.textContent;
+
+                     setTimeout(
+                        () =>
+                           selectWordIteration(
+                              props,
+                              targetText,
+                              testedElement,
+                              ulList,
+                           ),
+                        1000,
+                     );
                   }}
                >
-                  <span>{item}</span>
+                  <span className="box">{item}</span>
                </li>
             ))}
          </ul>

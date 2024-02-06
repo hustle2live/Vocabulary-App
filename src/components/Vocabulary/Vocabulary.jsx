@@ -116,13 +116,13 @@ export const Vocabulary = () => {
                   <span className="icon has-text-warning">
                      <Icon path={mdiCircleMedium} size={1} />
                   </span>
-                  <span>learned</span>
+                  <span>to practice</span>
                </div>
                <div className="icon-text">
                   <span className="icon has-text-success">
                      <Icon path={mdiCircleMedium} size={1} />
                   </span>
-                  <span>achieved</span>
+                  <span>learned already</span>
                </div>
             </li>
          </ul>
@@ -136,12 +136,13 @@ export const Vocabulary = () => {
          <div className="field">
             <p className="control">
                <span className="select">
-                  <select>
-                     <option>Select dropdown</option>
-                     <option>Select dropdown</option>
-                     <option>Select dropdown</option>
+                  <select id="lng-select">
+                     <option>option</option>
+                     <option>option 1</option>
+                     <option>option 2</option>
                   </select>
                </span>
+               {/* <label htmlFor="lng-select"> - select language </label> */}
             </p>
          </div>
 
