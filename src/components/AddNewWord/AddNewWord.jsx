@@ -2,6 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import Icon from '@mdi/react';
+import { mdiClose } from '@mdi/js';
+
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
 import styles from './AddNewWord.module.scss';
@@ -51,10 +54,16 @@ export const AddNewWord = () => {
    return (
       <div className={styles.wrapper}>
          <button
-            className={styles['navigate-back']}
+            className={`${styles['navigate-back']} button is-light is-centered`}
             onClick={() => navigate('/' + location.search)}
          >
-            <span>CLOSE </span>[X]
+            <div className={`${styles.textIcon} icon-text`}>
+               <span className="ml-auto mr-0">Close</span>
+
+               <span className="icon has-text-dark mr-auto ml-0">
+                  <Icon path={mdiClose} size={1} />
+               </span>
+            </div>
          </button>
          <section className={styles['input-section']}>
             <input
@@ -74,11 +83,17 @@ export const AddNewWord = () => {
             />
             <label htmlFor="translate">type a translation</label>
          </section>
-         <div>
-            <button className={styles.button} onClick={clearForm}>
+         <div className="buttons is-centered">
+            <button
+               className={`${styles.button} button is-dark box mr-4 `}
+               onClick={clearForm}
+            >
                Clear
             </button>{' '}
-            <button className={styles.button} onClick={newWordAdditionHandler}>
+            <button
+               className={`${styles.button} button is-light box ml-4`}
+               onClick={newWordAdditionHandler}
+            >
                Add
             </button>
          </div>

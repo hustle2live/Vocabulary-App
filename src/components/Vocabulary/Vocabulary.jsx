@@ -22,7 +22,7 @@ export const Vocabulary = () => {
       elem.classList.toggle('expanded');
    };
 
-   const RatingStatus = ({ status }) => {
+   const WordStatusMark = ({ status }) => {
       const elemStatusStyles = {
          practice: styles.circle_practice,
          achieved: styles.circle_achieved,
@@ -55,11 +55,11 @@ export const Vocabulary = () => {
          <ul className={styles.wordList}>
             {vocabulary.map(({ name, translate, status }, index) => (
                <li
-                  className={styles.wordListElement}
+                  className={`block p-3 pl-4 pr-4 m-2 ${styles.wordListElement}`}
                   key={index}
                   onDoubleClick={() => markAsLearnedHandler(index)}
                >
-                  <RatingStatus status={status} />
+                  <WordStatusMark status={status} />
                   <p className={styles['word-name']}>{name}</p>
                   <p className={styles['word-translate']}>{translate}</p>
                   <button
@@ -116,13 +116,13 @@ export const Vocabulary = () => {
                   <span className="icon has-text-warning">
                      <Icon path={mdiCircleMedium} size={1} />
                   </span>
-                  <span>learned</span>
+                  <span>to practice</span>
                </div>
                <div className="icon-text">
                   <span className="icon has-text-success">
                      <Icon path={mdiCircleMedium} size={1} />
                   </span>
-                  <span>achieved</span>
+                  <span>learned already</span>
                </div>
             </li>
          </ul>
@@ -136,17 +136,25 @@ export const Vocabulary = () => {
          <div className="field">
             <p className="control">
                <span className="select">
-                  <select>
-                     <option>Select dropdown</option>
-                     <option>Select dropdown</option>
-                     <option>Select dropdown</option>
+                  <select id="lng-select">
+                     <option>option</option>
+                     <option>option 1</option>
+                     <option>option 2</option>
                   </select>
                </span>
+               {/* <label htmlFor="lng-select"> - select language </label> */}
             </p>
          </div>
 
          <div className="buttons">
-            <div href="" className="button is-primary">
+            <div
+               className="button is-primary"
+               onClick={(e) => {
+                  e.currentTarget.parentNode.parentNode.classList.remove(
+                     styles.expanded,
+                  );
+               }}
+            >
                Ok, Got it!
             </div>
             <div href="" className="button is-link">
@@ -159,13 +167,7 @@ export const Vocabulary = () => {
             onClick={(e) => {
                e.currentTarget.parentNode.classList.toggle(styles.expanded);
             }}
-         >
-            <span className="icon-text">
-               <span className="icon is-large">
-                  <Icon path={mdiChevronDown} rotate={-45} size={3} />
-               </span>
-            </span>
-         </div>
+         ></div>
       </div>
    );
 
