@@ -28,12 +28,22 @@
          position: relative;
          // clear: both;
          // margin-top: 0;
-
-         transform: translateY(0%);
          // transform: translateY(100%);
 
+         transform: translateY(0%);
+
          .instructions__btn_expand {
-            border-top: 20px solid global.$bg-primary-08;
+            border-bottom: 20px solid global.$bg-primary-08;
+            border-top: none;
+
+            &::before,
+            &::after {
+               transform: translate(-50%, 18px);
+               background: #565656;
+            }
+            &::before {
+               transform: translate(-50%, 14px);
+            }
          }
       }
 
@@ -79,7 +89,8 @@
             content: '';
             width: 20px;
             height: 1.4px;
-            background: #aaa;
+            height: 1px;
+            background: #d7d7d7;
             z-index: 4;
          }
          &::before {
