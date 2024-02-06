@@ -146,7 +146,14 @@ export const Vocabulary = () => {
          </div>
 
          <div className="buttons">
-            <div href="" className="button is-primary">
+            <div
+               className="button is-primary"
+               onClick={(e) => {
+                  e.currentTarget.parentNode.parentNode.classList.remove(
+                     styles.expanded,
+                  );
+               }}
+            >
                Ok, Got it!
             </div>
             <div href="" className="button is-link">
@@ -159,13 +166,7 @@ export const Vocabulary = () => {
             onClick={(e) => {
                e.currentTarget.parentNode.classList.toggle(styles.expanded);
             }}
-         >
-            <span className="icon-text">
-               <span className="icon is-large">
-                  <Icon path={mdiChevronDown} rotate={-45} size={3} />
-               </span>
-            </span>
-         </div>
+         ></div>
       </div>
    );
 
