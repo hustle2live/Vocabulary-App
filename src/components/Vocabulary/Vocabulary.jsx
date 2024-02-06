@@ -22,7 +22,7 @@ export const Vocabulary = () => {
       elem.classList.toggle('expanded');
    };
 
-   const RatingStatus = ({ status }) => {
+   const WordStatusMark = ({ status }) => {
       const elemStatusStyles = {
          practice: styles.circle_practice,
          achieved: styles.circle_achieved,
@@ -55,11 +55,11 @@ export const Vocabulary = () => {
          <ul className={styles.wordList}>
             {vocabulary.map(({ name, translate, status }, index) => (
                <li
-                  className={styles.wordListElement}
+                  className={`block p-3 pl-4 pr-4 m-2 ${styles.wordListElement}`}
                   key={index}
                   onDoubleClick={() => markAsLearnedHandler(index)}
                >
-                  <RatingStatus status={status} />
+                  <WordStatusMark status={status} />
                   <p className={styles['word-name']}>{name}</p>
                   <p className={styles['word-translate']}>{translate}</p>
                   <button

@@ -8,33 +8,20 @@
 
    .instructions {
       position: absolute;
-      background: global.$bg-secondary-gradient;
-
-      // margin-bottom: 20px !important;
-
-      // position: relative;
-      // top: -100%;
       display: block;
       box-sizing: border-box;
+      background: transparent;
       height: fit-content;
-
-      // height: auto;
-      // margin-top: -110%;
       padding: 10px;
       margin: 10px;
       transform: translateY(-100%);
       z-index: 1;
 
-      // clear: both;
-      // transition: all 700ms;
-
       &.expanded {
          position: relative;
-         // clear: both;
-         // margin-top: 0;
-         // transform: translateY(100%);
-
          transform: translateY(0%);
+         background: global.$bg-secondary-gradient;
+         z-index: 1;
 
          .instructions__btn_expand {
             border-bottom: 20px solid global.$bg-primary-08;
@@ -143,11 +130,12 @@
    position: relative;
    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
    box-sizing: border-box;
-   background: #fff;
-   margin: 6px 5px 6px;
-   border-radius: 15px;
-   min-height: 65px;
-   padding: 14px;
+   // background: #fff;
+   background: #ffffff70;
+   // margin: 6px 5px 6px;
+   // border-radius: 15px;
+   // min-height: 65px;
+   // padding: 14px;
 
    .word-description {
       display: inline-flex;
