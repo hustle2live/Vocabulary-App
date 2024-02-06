@@ -18,8 +18,10 @@ export const TestInteractivePage = (props) => {
          <h2 className={styles.header}>Word learning test</h2>
 
          <p className={styles.description}>
-            choose the correct translation of the word
-            <span>Tests left ( {testNumberCount} / 10 ) </span>
+            choose the correct translation of the word{' '}
+            <span className="nowrap">
+               Tests left ( {testNumberCount} / 10 ){' '}
+            </span>
          </p>
 
          <p className={styles['tested-word']}>{testedElement.name}</p>
