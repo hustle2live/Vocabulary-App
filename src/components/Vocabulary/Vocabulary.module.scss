@@ -1,5 +1,4 @@
 @use '../../variables' as global;
-// @use '../../my-styles.bulma' as colors;
 
 .wrapper {
    position: relative;
@@ -159,7 +158,6 @@
       .circle_achieved {
          &::before {
             background: global.$warning;
-            // background: colors.$warning;
             left: 15px;
             margin: 0;
             position: absolute;
@@ -169,7 +167,6 @@
          &::after {
             margin: 0;
             background: global.$success;
-            // background: colors.$success;
             left: 30px;
             position: absolute;
          }
@@ -192,15 +189,15 @@
    color: global.$text-secondary;
 }
 
-// .deleteButton {
-//    z-index: 1;
-// }
-
 .addWordButton {
    z-index: 1;
    position: absolute !important;
-   bottom: 10%;
-   right: 10%;
+   bottom: 20%;
+   right: 14%;
+
+   .textIcon {
+      line-height: inherit !important;
+   }
 }
 
 .deleteButton {

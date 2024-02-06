@@ -13,15 +13,15 @@ export const AddWordButton = () => {
 
    const goToAddWordPage = () => navigate('/add-new-word' + location.search);
 
-   const IconPlus = () => <Icon path={mdiPlus} title="Add new word" size={1} />;
+   const IconPlus = () => <Icon path={mdiPlus} title="Add new word" size={2} />;
 
    return (
       <button
          onClick={goToAddWordPage}
-         className={`${styles.addWordButton} button is-link box`}
+         className={`${styles.addWordButton} button is-medium is-link box`}
          label="add new word"
       >
-         <span className="icon-text">
+         <span className={`${styles.textIcon} icon-text`}>
             <span className="icon">
                <IconPlus />
             </span>
