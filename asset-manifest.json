@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Vocabulary-App/static/css/main.18cc3647.css",
-    "main.js": "/Vocabulary-App/static/js/main.10f52a24.js",
+    "main.js": "/Vocabulary-App/static/js/main.8c34e139.js",
     "index.html": "/Vocabulary-App/index.html",
     "main.18cc3647.css.map": "/Vocabulary-App/static/css/main.18cc3647.css.map",
-    "main.10f52a24.js.map": "/Vocabulary-App/static/js/main.10f52a24.js.map"
+    "main.8c34e139.js.map": "/Vocabulary-App/static/js/main.8c34e139.js.map"
   },
   "entrypoints": [
     "static/css/main.18cc3647.css",
-    "static/js/main.10f52a24.js"
+    "static/js/main.8c34e139.js"
   ]
 }
