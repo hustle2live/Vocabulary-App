@@ -19,7 +19,7 @@ export const ShowTestResults = () => {
 
    useEffect(() => {
       dispatch(writeStatsData(`${scorePercentage} % correct answers`));
-   }, []);
+   }, [dispatch]);
 
    const EmptyStatsMessage = () => (
       <p className={styles.message}>
@@ -68,7 +68,6 @@ export const ShowTestResults = () => {
          <button
             className={styles.button_back}
             onClick={() => {
-               // dispatch(writeStatsData(`${scorePercentage} % correct answers`));
                navigate('/' + location.search);
             }}
          >

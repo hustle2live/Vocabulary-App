@@ -66,7 +66,7 @@ export const TestLogic = () => {
 
    useEffect(() => {
       startingNewTest(); // Starting new test after mounting component
-   }, []);
+   }, [dispatch]);
 
    return (
       <div>
