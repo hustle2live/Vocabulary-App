@@ -19,12 +19,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "cross-env AUTOPREFIXER_GRID=autoplace react-scripts start",
+    "build": "cross-env AUTOPREFIXER_GRID=autoplace react-scripts build",
+    "test": "cross-env AUTOPREFIXER_GRID=autoplace react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "cross-env AUTOPREFIXER_GRID=autoplace react-scripts build",
+    "deploy": "gh-pages -d build",
+    "lint": "eslint -c .eslintrc --ext .js,.jsx .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -41,7 +43,8 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "last 1 ie version"
     ]
   },
   "devDependencies": {
@@ -51,6 +54,9 @@
     "react-router-dom": "^6.4.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "autoprefixer": "^10.4.18",
+    "cross-env": "^7.0.3",
+    "prettier": "^2.8.7"
   }
 }

@@ -1,11 +1,11 @@
-@use './variables' as global;
+@use 'variables' as global;
 
 body {
    font-family: global.$font-primary;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
    color: global.$text-secondary;
-   margin: 0 auto;
+   margin: 0 auto !important;
    max-width: 500px;
 }
 
