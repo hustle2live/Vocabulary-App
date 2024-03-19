@@ -1,0 +1,14 @@
+@font-face {
+   font-family: 'NunitoRegular';
+   src: url('./fonts/Nunito-Regular.ttf');
+   font-style: normal;
+   font-weight: 400;
+}
+
+$NunitoRegular: NunitoRegular;
+
+:root {
+   // --md-ref-typeface-brand: $fontPrimary;
+   // --md-ref-typeface-plain: $fontPrimary;
+   // --md-sys-typescale-body-large-font: $fontPrimary;
+}

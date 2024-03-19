@@ -1,4 +1,4 @@
-@use './variables' as global;
+@use 'variables' as global;
 
 body {
    font-family: global.$font-primary;

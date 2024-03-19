@@ -7,11 +7,11 @@ import { TestLogic as Test } from './components/TestLogic/TestLogic';
 
 import { Header } from './components/Header/Header';
 
-import './my-styles.bulma.scss';
-import './styles.scss';
+import styles from './styles/styles.module.scss';
+import './styles/my-styles.bulma.scss';
 
 const App = () => (
-   <div className="main_wrapper">
+   <div className={styles.main_wrapper}>
       <Header />
       <Routes>
          <Route path="/" element={<Vocabulary />} />

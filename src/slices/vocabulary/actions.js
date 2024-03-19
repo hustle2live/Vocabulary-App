@@ -1,18 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { shuffleAndCut } from '../../features/helpers';
+import { lowerFormatCase, shuffleAndCut } from '../../features/helpers';
 
 import { ActionTypes } from './common.js';
 
 const addWord = createAsyncThunk(
    ActionTypes.ADD_WORD,
-   async (payload, { getState, rejectWithValue }) => {
+   async (payload, { getState, rejectWithValue, extra: { services } }) => {
       const {
          vocabularyReducer: { vocabulary },
       } = getState();
 
-      const name = payload.name.trim().toLowerCase();
-      const translate = payload.translate.trim().toLowerCase();
+      const name = lowerFormatCase(payload.name);
+      const translate = lowerFormatCase(payload.translate);
 
       const doesWordExist = (newWordName, itemKeyName) =>
          !!vocabulary.find(
@@ -25,30 +25,30 @@ const addWord = createAsyncThunk(
          let isError = '';
 
          switch (true) {
-            case !name || !translate:
-               isError = 'Error. Type in input name and translation';
-               break;
-            case name.length < 3 || translate.length < 3:
-               isError =
+         case !name || !translate:
+            isError = 'Error. Type in input name and translation';
+            break;
+         case name.length < 3 || translate.length < 3:
+            isError =
                   'Error. Word name and translation must be at least 3 charackters long';
-               break;
-            case doesWordExist(name, 'name'):
-               isError = 'This Word has been already exits in a dictionary';
-               break;
-            case doesWordExist(translate, 'translate'):
-               isError =
+            break;
+         case doesWordExist(name, 'name'):
+            isError = 'This Word has been already exits in a dictionary';
+            break;
+         case doesWordExist(translate, 'translate'):
+            isError =
                   'This Translate has been already defined to a dictionary';
-               break;
-            default:
-               return {
-                  translation: {
-                     name,
-                     translate,
-                     status: 'new',
-                     createdAt: '',
-                     updatedAt: '',
-                  },
-               };
+            break;
+         default:
+            return {
+               translation: {
+                  name,
+                  translate,
+                  status: 'new',
+                  createdAt: '',
+                  updatedAt: '',
+               },
+            };
          }
 
          if (isError) {

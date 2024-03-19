@@ -1,6 +1,6 @@
 // @use '../../my-styles.bulma' as colors;
 
-@import '../node_modules/bulma/sass/helpers/color.sass';
+@import '../../node_modules/bulma/sass/helpers/color.sass';
 
 $font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -8,21 +8,15 @@ $font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen'
 
 $text-primary: #fff;
 $text-secondary: #000;
-
 $menu-text-primary: #000;
 $menu-text-secondary: #fff;
-
 $menu-primary: #fff;
 $menu-secondary: #000;
-
 $orange: orange;
 $green: rgb(140, 216, 26);
-
 $bg-tertiary: rgb(202, 73, 227);
-
 $bg-primary-08: rgb(203 176 255 / 88%);
 $bg-primary: rgba(55, 57, 214, 0.736);
-
 $bg-secondary: rgb(157, 159, 245);
 $bg-secondary-gradient: linear-gradient(
    27deg,
@@ -32,7 +26,6 @@ $bg-secondary-gradient: linear-gradient(
    rgba(255, 248, 215, 0.8940826330532213) 90%,
    rgba(255, 248, 215, 0.9136904761904762) 95%
 );
-
 $scrollbarBG: #cfd8dc;
 $thumbBG: rgba(212, 155, 240);
 
