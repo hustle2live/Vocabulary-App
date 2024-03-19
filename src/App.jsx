@@ -8,6 +8,7 @@ import { TestLogic as Test } from './components/TestLogic/TestLogic';
 import { Header } from './components/Header/Header';
 
 import styles from './styles/styles.module.scss';
+
 import './styles/my-styles.bulma.scss';
 
 const App = () => (
