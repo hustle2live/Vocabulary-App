@@ -13,6 +13,17 @@ export const TestInteractivePage = (props) => {
    const testNumberCount = store.testReducer.testingArray.length + 1;
    const testedAnswers = props.getRandomAnswers(vocabulary, testedElement);
 
+   const selectWordIteration = (
+      { writeCurrentAnswerStat, changeToNextWord },
+      text,
+      element,
+      ulList,
+   ) => {
+      writeCurrentAnswerStat(text, element);
+      changeToNextWord();
+      ulList.forEach((node) => node.classList.remove(styles.hide));
+   };
+
    return (
       <div className={styles.wrapper}>
          <h2 className={styles.header}>Word learning test</h2>
@@ -38,29 +49,11 @@ export const TestInteractivePage = (props) => {
                      const ulList = e.currentTarget.parentNode.childNodes;
                      ulList.forEach((node) => node.classList.add(styles.hide));
 
-                     const selectWordIteration = (
-                        { writeCurrentAnswerStat, changeToNextWord },
-                        text,
-                        element,
-                        ulList,
-                     ) => {
-                        writeCurrentAnswerStat(text, element);
-                        changeToNextWord();
-                        ulList.forEach((node) =>
-                           node.classList.remove(styles.hide),
-                        );
-                     };
-
                      const targetText = e.currentTarget.textContent;
 
-                     setTimeout(
+                     const timerWordTest = window.setTimeout(
                         () =>
-                           selectWordIteration(
-                              props,
-                              targetText,
-                              testedElement,
-                              ulList,
-                           ),
+                           selectWordIteration( props, targetText, testedElement, ulList),
                         1000,
                      );
                   }}

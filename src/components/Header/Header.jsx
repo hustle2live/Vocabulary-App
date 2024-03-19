@@ -34,12 +34,6 @@ export const Header = () => {
          <span>|</span>
          <li onClick={goToTestPage}>Testing</li>
          <span>|</span>
-         {/* 
-         <li>NOTE</li>
-         <span>|</span>
-         <li>CALC</li>
-         <span>|</span>
-         <li>LANG</li> */}
          <span>Sorting</span>
          <li>
             <select

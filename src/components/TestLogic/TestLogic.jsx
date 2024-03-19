@@ -5,8 +5,16 @@ import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
 import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
 
 import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
-import { saveCurrentStat, clearCurrentStat } from '../../slices/stats/statsReducer.js';
-import { createTestingArray, clearTestData, changeTest, countInc } from '../../slices/interactive/testReducer.js';
+import {
+   clearCurrentStat,
+   saveCurrentStat,
+} from '../../slices/stats/statsReducer.js';
+import {
+   changeTest,
+   clearTestData,
+   countInc,
+   createTestingArray,
+} from '../../slices/interactive/testReducer.js';
 
 export const TestLogic = () => {
    const dispatch = useDispatch();
@@ -18,17 +26,19 @@ export const TestLogic = () => {
       const newTestingArray = shuffleAndCut([...vocabulary]);
 
       dispatchMultiply(dispatch, [
-         clearCurrentStat(),
-         clearTestData(),
-         createTestingArray(newTestingArray),
-         changeTest()
+         clearCurrentStat(), // 1
+         clearTestData(), // 2
+         createTestingArray(newTestingArray), // 3
+         changeTest(), // 4
       ]);
    };
 
    const changeCurrentTest = () => dispatch(changeTest());
 
    const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
-      const wordName = testedElement.name;
+      const wordName = testedElement.name || null;
+      if (!wordName) return;
+
       const test = { [wordName]: 'wrong' };
 
       if (selectedTranslate === testedElement.translate) {
@@ -44,7 +54,11 @@ export const TestLogic = () => {
       while (randomAnswers.length < 4) {
          const randomIndex = Math.floor(Math.random() * arr.length);
          const randomObj = arr[randomIndex];
-         if (!randomAnswers.find((translate) => translate === randomObj.translate))
+         if (
+            !randomAnswers.find(
+               (translate) => translate === randomObj.translate,
+            )
+         )
             randomAnswers.push(randomObj.translate);
       }
       return shuffleAndCut(randomAnswers, 4);
