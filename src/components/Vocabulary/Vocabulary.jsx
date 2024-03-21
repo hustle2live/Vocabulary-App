@@ -82,7 +82,7 @@ export const Vocabulary = () => {
          <p className="title"> Wellcome, </p>
 
          <p className="block subtitle">
-            to Modern React Vocabulary created by{' '}
+            to React.js Vocabulary created by{' '}
             <a href="https://github.com/hustle2live" target="_blank">
                Volodymyr K.
             </a>

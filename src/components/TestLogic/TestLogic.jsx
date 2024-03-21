@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
 import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
 
-import { shuffleAndCut, dispatchMultiply } from '../../features/helpers';
-import {
-   clearCurrentStat,
-   saveCurrentStat,
-} from '../../slices/stats/statsReducer.js';
+import { dispatchMultiply, shuffleAndCut } from '../../features/helpers';
+
+import { actions as statsActionCreator } from '../../slices/stats/stats.js';
+
 import {
    changeTest,
    clearTestData,
@@ -26,7 +25,7 @@ export const TestLogic = () => {
       const newTestingArray = shuffleAndCut([...vocabulary]);
 
       dispatchMultiply(dispatch, [
-         clearCurrentStat(), // 1
+         statsActionCreator.clearCurrentStat(), // 1
          clearTestData(), // 2
          createTestingArray(newTestingArray), // 3
          changeTest(), // 4
@@ -35,18 +34,19 @@ export const TestLogic = () => {
 
    const changeCurrentTest = () => dispatch(changeTest());
 
-   const writeCurrentAnswerStat = (selectedTranslate, testedElement) => {
-      const wordName = testedElement.name || null;
-      if (!wordName) return;
+   const writeCurrentAnswerStat = (translate, element) => {
+      const wordName = element?.name ?? null;
+      let answer = 'wrong';
 
-      const test = { [wordName]: 'wrong' };
+      const isAnswerRight = translate === element.translate;
 
-      if (selectedTranslate === testedElement.translate) {
+      if (isAnswerRight) {
+         answer = 'right';
          dispatch(countInc());
-         test[wordName] = 'right';
       }
 
-      dispatch(saveCurrentStat(test));
+      const testCase = !wordName ? null : { [wordName]: answer };
+      dispatch(statsActionCreator.saveCurrentStat({ testData: testCase }));
    };
 
    const getRandomAnswers = (arr, testedElement) => {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { writeStatsData } from '../../slices/stats/statsReducer';
+import { actions as statsActionCreator } from '../../slices/stats/stats.js';
 
 import styles from './ShowTestResults.module.scss';
 
@@ -18,7 +18,11 @@ export const ShowTestResults = () => {
    const scorePercentage = ((count / 10) * 100).toFixed(2);
 
    useEffect(() => {
-      dispatch(writeStatsData(`${scorePercentage} % correct answers`));
+      dispatch(
+         statsActionCreator.writeStatsData(
+            `${scorePercentage} % correct answers`,
+         ),
+      );
    }, [dispatch]);
 
    const EmptyStatsMessage = () => (
