@@ -6,12 +6,11 @@ import { getRandomInt } from '../../features/helpers';
 import styles from './TestInteractivePage.module.scss';
 
 export const TestInteractivePage = (props) => {
-   const store = useSelector((state) => state);
+   const { testingArray, activeWordTest, activeWordAnswers } = useSelector(
+      (state) => state.testReducer,
+   );
 
-   const vocabulary = store.vocabularyReducer.vocabulary;
-   const testedElement = store.testReducer.activeWordTest;
-   const testNumberCount = store.testReducer.testingArray.length + 1;
-   const testedAnswers = props.getRandomAnswers(vocabulary, testedElement);
+   const testCounter = testingArray.length + 1;
 
    const selectWordIteration = (
       { writeCurrentAnswerStat, changeToNextWord },
@@ -30,15 +29,13 @@ export const TestInteractivePage = (props) => {
 
          <p className={styles.description}>
             choose the correct translation of the word{' '}
-            <span className="nowrap">
-               Tests left ( {testNumberCount} / 10 ){' '}
-            </span>
+            <span className="nowrap">Tests left ( {testCounter} / 10 ) </span>
          </p>
 
-         <p className={styles['tested-word']}>{testedElement.name}</p>
+         <p className={styles['tested-word']}>{activeWordTest.name}</p>
 
          <ul className={styles.testUlList}>
-            {testedAnswers.map((item) => (
+            {activeWordAnswers.map((item) => (
                <li
                   className={`${styles.listElement}`}
                   key={item}
@@ -53,7 +50,12 @@ export const TestInteractivePage = (props) => {
 
                      const timerWordTest = window.setTimeout(
                         () =>
-                           selectWordIteration( props, targetText, testedElement, ulList),
+                           selectWordIteration(
+                              props,
+                              targetText,
+                              activeWordTest,
+                              ulList,
+                           ),
                         1000,
                      );
                   }}

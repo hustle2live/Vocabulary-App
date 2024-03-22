@@ -1,38 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
-import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
-
 import { dispatchMultiply, shuffleAndCut } from '../../features/helpers';
+import { ShowTestResults } from '../ShowTestResults/ShowTestResults';
+import { TestInteractivePage } from '../TestInteractive/TestInteractivePage';
 
 import { actions as statsActionCreator } from '../../slices/stats/stats.js';
-
-import {
-   changeTest,
-   clearTestData,
-   countInc,
-   createTestingArray,
-} from '../../slices/interactive/testReducer.js';
+import { actions as testActionCreator } from '../../slices/interactive/test.js';
 
 export const TestLogic = () => {
    const dispatch = useDispatch();
    const store = useSelector((state) => state);
    const doesTestedElementExist = store.testReducer.activeWordTest;
-   const vocabulary = store.vocabularyReducer.vocabulary;
 
-   const startingNewTest = () => {
-      const newTestingArray = shuffleAndCut([...vocabulary]);
-
-      dispatchMultiply(dispatch, [
-         statsActionCreator.clearCurrentStat(), // 1
-         clearTestData(), // 2
-         createTestingArray(newTestingArray), // 3
-         changeTest(), // 4
-      ]);
-   };
-
-   const changeCurrentTest = () => dispatch(changeTest());
+   const changeCurrentTest = () => dispatch(testActionCreator.changeTest());
 
    const writeCurrentAnswerStat = (translate, element) => {
       const wordName = element?.name ?? null;
@@ -42,7 +23,7 @@ export const TestLogic = () => {
 
       if (isAnswerRight) {
          answer = 'right';
-         dispatch(countInc());
+         dispatch(testActionCreator.countInc());
       }
 
       const testCase = !wordName ? null : { [wordName]: answer };
@@ -65,7 +46,7 @@ export const TestLogic = () => {
    };
 
    useEffect(() => {
-      startingNewTest(); // Starting new test after mounting component
+      dispatch(testActionCreator.startNewTest()); // Starting new test after mounting component
    }, [dispatch]);
 
    return (

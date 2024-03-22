@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
-
 import { SortTypes } from '../../slices/vocabulary/common.js';
 
 import styles from './Header.module.scss';

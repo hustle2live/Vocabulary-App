@@ -22,7 +22,7 @@ const vocabularyReducer = createSlice({
          state.vocabulary = [...state.vocabulary, translation];
       });
       builder.addCase(addWord.rejected, (state, action) => {
-         // console.log('error occurred - while adding new word');
+         return;
       });
 
       builder.addCase(deleteWord.fulfilled, (state, action) => {
@@ -31,7 +31,7 @@ const vocabularyReducer = createSlice({
       });
 
       builder.addCase(deleteWord.rejected, (state, action) => {
-         // console.log('error occurred - while deleting word');
+         return;
       });
 
       builder.addCase(changeStatusWord.fulfilled, (state, action) => {
@@ -39,7 +39,7 @@ const vocabularyReducer = createSlice({
          state.vocabulary = [...vocabulary];
       });
       builder.addCase(changeStatusWord.rejected, (state, { vocabulary }) => {
-         // console.log('an error occurred - while changing element MarkStatus');
+         return;
       });
 
       builder.addCase(sortBy.fulfilled, (state, action) => {
@@ -48,7 +48,7 @@ const vocabularyReducer = createSlice({
       });
 
       builder.addCase(sortBy.rejected, (state) => {
-         // console.log('an error occurred - while sorting data');
+         return;
       });
    },
 });
