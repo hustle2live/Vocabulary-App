@@ -37,8 +37,8 @@ export const AddNewWord = () => {
    const newWordAddConfirmation = useCallback(
       ({ name, translate }) => {
          dispatch(vocabularyActionCreator.addWord({ name, translate }));
-         // alert(`word [${name} : ${translate}] - has added succesfully`);
-         // clearForm();
+         alert(`word [${name} : ${translate}] - has added succesfully`);
+         clearForm();
       },
       [dispatch],
    );

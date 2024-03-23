@@ -20,6 +20,8 @@ const vocabularyReducer = createSlice({
       builder.addCase(addWord.fulfilled, (state, action) => {
          const { translation } = action.payload;
          state.vocabulary = [...state.vocabulary, { ...translation }];
+         // state.dispatchSuccess = true;
+         // state.alertMessage = `word [${translation.name} : ${translation.translate}] - has added succesfully`;
       });
 
       builder.addCase(addWord.rejected, (state, action) => {
