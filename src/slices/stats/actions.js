@@ -22,10 +22,6 @@ const writeStatsData = createAsyncThunk(
          statsReducer: { statArrayCurrent },
       } = getState();
 
-      // console.log('ActionTypes.WRITE_STATS_DATA....');
-      // console.log(payload);
-      // console.log(statArrayCurrent);
-
       try {
          if (statArrayCurrent?.length && payload) {
             const newStatResult = {

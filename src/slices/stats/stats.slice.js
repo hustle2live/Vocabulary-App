@@ -9,30 +9,21 @@ export const statsReducer = createSlice({
    initialState: defaultState,
    reducers: {
       clearCurrentStat: (state) => {
-         console.log('- - - - - clearing.....');
          state.statArrayCurrent = [];
       },
    },
    extraReducers: (builder) => {
       builder.addCase(saveCurrentStat.fulfilled, (state, action) => {
          const { currentStat } = action.payload;
-
-         if (currentStat) {
-            state.statArrayCurrent.push(currentStat);
-         }
+         if (currentStat) state.statArrayCurrent.push(currentStat);
       });
 
       builder.addCase(writeStatsData.fulfilled, (state, action) => {
          const { statsData } = action.payload;
-         // console.log(action);
-         // console.log('______extraReducers builder');
-         // console.log('statsData: ' + statsData);
 
          if (statsData) {
             state.allStats = [...state.allStats, statsData];
             state.statArrayCurrent = [];
-
-            console.log('done ++ ');
          }
       });
 

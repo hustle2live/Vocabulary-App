@@ -11,15 +11,11 @@ export const TestInteractivePage = (props) => {
    );
 
    const testCounter = testingArray.length + 1;
+   const { changeWord, saveStat } = props;
 
-   const selectWordIteration = (
-      { writeCurrentAnswerStat, changeToNextWord },
-      text,
-      element,
-      ulList,
-   ) => {
-      writeCurrentAnswerStat(text, element);
-      changeToNextWord();
+   const selectWordIteration = (text, element, ulList) => {
+      saveStat(text, element);
+      changeWord();
       ulList.forEach((node) => node.classList.remove(styles.hide));
    };
 
@@ -51,7 +47,6 @@ export const TestInteractivePage = (props) => {
                      const timerWordTest = window.setTimeout(
                         () =>
                            selectWordIteration(
-                              props,
                               targetText,
                               activeWordTest,
                               ulList,

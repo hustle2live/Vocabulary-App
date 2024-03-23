@@ -11,6 +11,9 @@
 # production
 /build
 
+#trashcode
+/waste
+
 # misc
 .DS_Store
 .env.local

@@ -15,18 +15,15 @@ export const TestLogic = () => {
 
    const changeCurrentTest = () => dispatch(testActionCreator.changeTest());
 
-   const writeCurrentAnswerStat = (translate, element) => {
-      const wordName = element?.name ?? null;
+   const writeCurrentAnswerStat = (translate, el) => {
+      const wordName = el?.name;
       let answer = 'wrong';
 
-      const isAnswerRight = translate === element.translate;
-
-      if (isAnswerRight) {
+      if (translate === el.translate) {
          answer = 'right';
          dispatch(testActionCreator.countInc());
       }
-
-      const testCase = !wordName ? null : { [wordName]: answer };
+      const testCase = { [wordName]: answer };
       dispatch(statsActionCreator.saveCurrentStat({ testData: testCase }));
    };
 
@@ -47,15 +44,17 @@ export const TestLogic = () => {
 
    useEffect(() => {
       dispatch(testActionCreator.startNewTest()); // Starting new test after mounting component
-   }, [dispatch]);
+   }, [dispatch]); // перенести при переходе на страницу
+
+   
 
    return (
       <div>
          {doesTestedElementExist ? (
             <TestInteractivePage
-               changeToNextWord={changeCurrentTest}
-               writeCurrentAnswerStat={writeCurrentAnswerStat}
+               changeWord={changeCurrentTest}
                getRandomAnswers={getRandomAnswers}
+               saveStat={writeCurrentAnswerStat}
             />
          ) : (
             <ShowTestResults />
