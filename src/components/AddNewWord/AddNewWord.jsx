@@ -7,6 +7,8 @@ import { mdiClose } from '@mdi/js';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
+import global from '../../styles/styles.module.scss';
+
 import styles from './AddNewWord.module.scss';
 
 export const AddNewWord = () => {
@@ -52,7 +54,7 @@ export const AddNewWord = () => {
    };
 
    return (
-      <div className={styles.wrapper}>
+      <div className={`${global.wrapper} ${styles.wrapper}`}>
          <button
             className={`${styles['navigate-back']} button is-light is-centered`}
             onClick={() => navigate('/' + location.search)}

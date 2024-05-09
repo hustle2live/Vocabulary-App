@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { actions as statsActionCreator } from '../../slices/stats/stats.js';
 
+import global from '../../styles/styles.module.scss';
+
 import styles from './ShowTestResults.module.scss';
 
 export const ShowTestResults = () => {
@@ -64,7 +66,7 @@ export const ShowTestResults = () => {
       );
 
    return (
-      <div className={styles.wrapper}>
+      <div className={`${global.wrapper} ${styles.wrapper}`}>
          <p>
             There is {scorePercentage} % correct answers
             <span className={styles['add-text']}>in this current test</span>

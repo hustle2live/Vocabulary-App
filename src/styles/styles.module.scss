@@ -52,3 +52,10 @@ ul {
    background: global.$bg-secondary;
    background: global.$bg-secondary-gradient;
 }
+
+.wrapper {
+   box-sizing: border-box;
+   height: 97vh;
+   flex-grow: 1;
+   overflow: hidden;
+}

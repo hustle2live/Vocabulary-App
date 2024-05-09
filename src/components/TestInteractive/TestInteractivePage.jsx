@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { getRandomInt } from '../../features/helpers';
 
+import global from '../../styles/styles.module.scss';
+
 import styles from './TestInteractivePage.module.scss';
 
 export const TestInteractivePage = (props) => {
@@ -20,7 +22,7 @@ export const TestInteractivePage = (props) => {
    };
 
    return (
-      <div className={styles.wrapper}>
+      <div className={`${global.wrapper} ${styles.wrapper}`}>
          <h2 className={styles.header}>Word learning test</h2>
 
          <p className={styles.description}>

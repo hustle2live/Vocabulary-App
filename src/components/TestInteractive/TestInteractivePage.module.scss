@@ -2,19 +2,10 @@
 
 .wrapper {
    display: block;
-   box-sizing: border-box;
-   height: calc(100vh - 34px);
-   max-height: calc(100vh - 34px);
-   min-height: 90vh;
    border-radius: 6px;
    flex-direction: column;
    text-align: center;
    padding: 40px 10px 20px;
-   overflow: scroll;
-
-   &::-webkit-scrollbar {
-      display: none;
-   }
 }
 
 .wrapper,
