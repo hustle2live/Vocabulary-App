@@ -46,19 +46,13 @@ export const TestLogic = () => {
       dispatch(testActionCreator.startNewTest()); // Starting new test after mounting component
    }, [dispatch]); // перенести при переходе на страницу
 
-   
-
-   return (
-      <div>
-         {doesTestedElementExist ? (
-            <TestInteractivePage
-               changeWord={changeCurrentTest}
-               getRandomAnswers={getRandomAnswers}
-               saveStat={writeCurrentAnswerStat}
-            />
-         ) : (
-            <ShowTestResults />
-         )}
-      </div>
+   return doesTestedElementExist ? (
+      <TestInteractivePage
+         changeWord={changeCurrentTest}
+         getRandomAnswers={getRandomAnswers}
+         saveStat={writeCurrentAnswerStat}
+      />
+   ) : (
+      <ShowTestResults />
    );
 };

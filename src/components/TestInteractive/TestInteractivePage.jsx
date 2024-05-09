@@ -55,7 +55,7 @@ export const TestInteractivePage = (props) => {
                      );
                   }}
                >
-                  <span className="box">{item}</span>
+                  <p className="box">{item}</p>
                </li>
             ))}
          </ul>

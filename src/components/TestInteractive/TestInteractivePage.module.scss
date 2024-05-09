@@ -10,8 +10,11 @@
    flex-direction: column;
    text-align: center;
    padding: 40px 10px 20px;
-   // transition: all 1s;
    overflow: scroll;
+
+   &::-webkit-scrollbar {
+      display: none;
+   }
 }
 
 .wrapper,
@@ -50,7 +53,7 @@
 .testUlList {
    justify-content: center;
    flex-wrap: wrap;
-   // transition: 2s all ease;
+   gap: 20px;
 }
 
 .listElement.hide {
@@ -77,18 +80,28 @@
 }
 
 .listElement {
-   margin: 15px;
-   // background-color: aqua;
    animation: appear 1s linear;
    max-height: 50px;
+   min-width: 100px;
+   flex-shrink: 1;
 
+   p,
    span {
       display: block;
       box-sizing: border-box;
       cursor: pointer;
-      width: fit-content;
+      width: auto;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow-x: scroll;
       min-width: 40px;
       border-radius: 14px;
+      border: 16px solid #ffffff;
+      padding: 0;
+
+      &::-webkit-scrollbar {
+         display: none;
+      }
 
       &:active,
       &:hover {
