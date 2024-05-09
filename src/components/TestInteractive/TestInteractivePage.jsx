@@ -35,9 +35,6 @@ export const TestInteractivePage = (props) => {
                <li
                   className={`${styles.listElement}`}
                   key={item}
-                  style={{
-                     minHeight: getRandomInt(100) + '%',
-                  }}
                   onClick={(e) => {
                      const ulList = e.currentTarget.parentNode.childNodes;
                      ulList.forEach((node) => node.classList.add(styles.hide));
@@ -55,7 +52,14 @@ export const TestInteractivePage = (props) => {
                      );
                   }}
                >
-                  <p className="box">{item}</p>
+                  <p
+                     className="box"
+                     style={{
+                        marginTop: getRandomInt(40) + '%',
+                     }}
+                  >
+                     {item}
+                  </p>
                </li>
             ))}
          </ul>

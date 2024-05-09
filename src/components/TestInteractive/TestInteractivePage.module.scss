@@ -80,13 +80,18 @@
 }
 
 .listElement {
+   display: flex;
    animation: appear 1s linear;
-   max-height: 50px;
-   min-width: 100px;
+   // height: 100px;
+   // min-height: 100px;
+   // max-height: 100px;
+   // min-width: 100px;
+   flex-basis: 100px;
    flex-shrink: 1;
 
-   p,
-   span {
+   // border: 2px solid pink;
+
+   p {
       display: block;
       box-sizing: border-box;
       cursor: pointer;
@@ -98,6 +103,7 @@
       border-radius: 14px;
       border: 16px solid #ffffff;
       padding: 0;
+      margin: auto;
 
       &::-webkit-scrollbar {
          display: none;
