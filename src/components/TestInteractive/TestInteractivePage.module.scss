@@ -82,21 +82,15 @@
 .listElement {
    display: flex;
    animation: appear 1s linear;
-   // height: 100px;
-   // min-height: 100px;
-   // max-height: 100px;
-   // min-width: 100px;
    flex-basis: 100px;
    flex-shrink: 1;
-
-   // border: 2px solid pink;
 
    p {
       display: block;
       box-sizing: border-box;
-      cursor: pointer;
       width: auto;
       max-width: 200px;
+      cursor: pointer;
       white-space: nowrap;
       overflow-x: scroll;
       min-width: 40px;

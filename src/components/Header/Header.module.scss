@@ -1,19 +1,20 @@
 @use '../../styles/variables' as global;
 
 .header {
+   flex-grow: 0;
+   flex-shrink: 0;
    display: flex;
-   height: 34px;
    justify-content: space-between;
    align-items: center;
-   background: global.$menu-secondary;
-   padding: 0 5px;
+   height: 34px;
    color: global.$menu-text-secondary;
+   padding: 0 5px;
+   background: global.$menu-secondary;
 
    li {
       padding: 0 4px;
       padding: 4px 1.1em;
       margin: auto 4px;
-      // font-size: 0.7em;
       font-size: 1rem;
 
       cursor: pointer;
@@ -51,14 +52,6 @@
 
    .badge {
       display: none;
-
-      svg {
-         // First layer (behind)
-         path {
-            fill: blue;
-            color: yellow;
-         }
-      }
    }
 }
 
