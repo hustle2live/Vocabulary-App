@@ -67,24 +67,26 @@ export const AddNewWord = () => {
                </span>
             </div>
          </button>
-         <section className={styles['input-section']}>
-            <input
-               id="word"
-               type="text"
-               value={inputValue}
-               onChange={(e) => inputHandler(e)}
-            />
-            <label htmlFor="word">type a word</label>
-         </section>
-         <section className={styles['input-section']}>
-            <input
-               id="translate"
-               type="text"
-               value={translateValue}
-               onChange={(e) => translateHandler(e)}
-            />
-            <label htmlFor="translate">type a translation</label>
-         </section>
+         <div>
+            <section className={styles['input-section']}>
+               <input
+                  id="word"
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => inputHandler(e)}
+               />
+               <label htmlFor="word">type a word</label>
+            </section>
+            <section className={styles['input-section']}>
+               <input
+                  id="translate"
+                  type="text"
+                  value={translateValue}
+                  onChange={(e) => translateHandler(e)}
+               />
+               <label htmlFor="translate">type a translation</label>
+            </section>
+         </div>
          <div className="buttons is-centered">
             <button
                className={`${styles.button} button is-dark box mr-4 `}
