@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { mdiChevronDown, mdiCircleMedium } from '@mdi/js';
 import Icon from '@mdi/react';
 
+import GitHubIcon from '../../styles/icons/github_white.png';
+
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 
 import { AddWordButton } from './AddWordButton';
@@ -20,10 +22,6 @@ export const Vocabulary = () => {
    const dispatch = useDispatch();
 
    localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
-
-   const showHideInstructions = (elem) => {
-      elem.classList.toggle('expanded');
-   };
 
    const WordStatusMark = ({ status }) => {
       const elemStatusStyles = {
@@ -171,8 +169,8 @@ export const Vocabulary = () => {
                   rel="noreferrer"
                   className="button is-link"
                >
-                  Learn more {` `}
-                  <img src="../../styles/icons/github_white.png" alt="github" />
+                  Learn more{' '}
+                  <img className={styles.ico} src={GitHubIcon} alt="github" />
                </a>
             </div>
 
