@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { mdiChevronDown, mdiCircleMedium } from '@mdi/js';
@@ -14,6 +14,9 @@ export const Vocabulary = () => {
    const vocabulary = useSelector(
       (state) => state.vocabularyReducer.vocabulary,
    );
+
+   const instructionsRef = useRef(null);
+
    const dispatch = useDispatch();
 
    localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
@@ -77,103 +80,109 @@ export const Vocabulary = () => {
       </div>
    );
 
-   const Instructions = () => (
-      <div className={styles.instructions}>
-         <p className="title"> Wellcome, </p>
+   const Instructions = () => {
+      const hideShowDescriptionHandler = () => {
+         instructionsRef.current.classList.toggle(styles.expanded);
+      };
 
-         <p className="block subtitle">
-            to React.js Vocabulary, made by{' '}
-            <a
-               href="https://github.com/hustle2live"
-               target="_blank"
-               rel="noreferrer"
-            >
-               Volodymyr K.
-            </a>
-         </p>
+      return (
+         <div className={styles.instructions} ref={instructionsRef}>
+            <p className="title"> Wellcome, </p>
 
-         <p>Description:</p>
-
-         <ul>
-            <li className={styles.block}>
-               This is a simple pocket application that helps to learn a foreign
-               language better and faster.
-            </li>
-            <li className={styles.block}>
-               All the words are saved to your{' '}
-               <strong>local current browser</strong>.
-            </li>
-            <li className={styles.block}>
-               You can <strong>add and practice</strong> new words with
-               translations and <strong>delete</strong> after you learn them.
-            </li>
-
-            <li className={styles.block}>
-               You can <strong>mark </strong>the word's status as:
-               <div className="icon-text">
-                  <span className="icon has-text-dark">
-                     <Icon path={mdiCircleMedium} size={1} />
-                  </span>
-                  <span>new</span>
-               </div>
-               <div className="icon-text">
-                  <span className="icon has-text-warning">
-                     <Icon path={mdiCircleMedium} size={1} />
-                  </span>
-                  <span>to practice</span>
-               </div>
-               <div className="icon-text">
-                  <span className="icon has-text-success">
-                     <Icon path={mdiCircleMedium} size={1} />
-                  </span>
-                  <span>learned already</span>
-               </div>
-            </li>
-         </ul>
-
-         <div className="field">
-            <div className="control">
-               <input className="input" type="text" placeholder="Input" />
-            </div>
-         </div>
-
-         <div className="field">
-            <p className="control">
-               <span className="select">
-                  <select id="lng-select">
-                     <option>option</option>
-                     <option>option 1</option>
-                     <option>option 2</option>
-                  </select>
-               </span>
-               {/* <label htmlFor="lng-select"> - select language </label> */}
+            <p className="block subtitle">
+               to React.js Vocabulary, made by{' '}
+               <a
+                  href="https://github.com/hustle2live"
+                  target="_blank"
+                  rel="noreferrer"
+               >
+                  Volodymyr K.
+               </a>
             </p>
-         </div>
 
-         <div className="buttons">
-            <div
-               className="button is-primary"
-               onClick={(e) => {
-                  e.currentTarget.parentNode.parentNode.classList.remove(
-                     styles.expanded,
-                  );
-               }}
-            >
-               Ok, Got it!
-            </div>
-            <div href="" className="button is-link">
-               Learn more
-            </div>
-         </div>
+            <p>Description:</p>
 
-         <div
-            className={styles.instructions__btn_expand}
-            onClick={(e) => {
-               e.currentTarget.parentNode.classList.toggle(styles.expanded);
-            }}
-         ></div>
-      </div>
-   );
+            <ul>
+               <li className={styles.block}>
+                  This is a simple pocket application that helps to learn a
+                  foreign language better and faster.
+               </li>
+               <li className={styles.block}>
+                  All the words are saved to your{' '}
+                  <strong>local current browser</strong>.
+               </li>
+               <li className={styles.block}>
+                  You can <strong>add and practice</strong> new words with
+                  translations and <strong>delete</strong> after you learn them.
+               </li>
+
+               <li className={styles.block}>
+                  You can <strong>mark </strong>the word's status as:
+                  <div className="icon-text">
+                     <span className="icon has-text-dark">
+                        <Icon path={mdiCircleMedium} size={1} />
+                     </span>
+                     <span>new</span>
+                  </div>
+                  <div className="icon-text">
+                     <span className="icon has-text-warning">
+                        <Icon path={mdiCircleMedium} size={1} />
+                     </span>
+                     <span>to practice</span>
+                  </div>
+                  <div className="icon-text">
+                     <span className="icon has-text-success">
+                        <Icon path={mdiCircleMedium} size={1} />
+                     </span>
+                     <span>learned already</span>
+                  </div>
+               </li>
+            </ul>
+
+            <div className="field">
+               <div className="control">
+                  <input className="input" type="text" placeholder="Input" />
+               </div>
+            </div>
+
+            <div className="field">
+               <p className="control">
+                  <span className="select">
+                     <select id="lng-select">
+                        <option>option</option>
+                        <option>option 1</option>
+                        <option>option 2</option>
+                     </select>
+                  </span>
+                  {/* <label htmlFor="lng-select"> - select language </label> */}
+               </p>
+            </div>
+
+            <div className="buttons">
+               <button
+                  className="button is-primary"
+                  onClick={hideShowDescriptionHandler}
+               >
+                  Ok, Got it!
+               </button>
+               <a
+                  href="https://github.com/hustle2live/Vocabulary-App"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="button is-link"
+               >
+                  Learn more {` `}
+                  <img src="../../styles/icons/github_white.png" alt="github" />
+               </a>
+            </div>
+
+            <button
+               className={styles.instructions__btn_expand}
+               onClick={hideShowDescriptionHandler}
+            ></button>
+         </div>
+      );
+   };
 
    return (
       <div className={styles.wrapper}>
