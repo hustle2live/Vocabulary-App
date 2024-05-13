@@ -1,15 +1,12 @@
 import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { mdiChevronDown, mdiCircleMedium } from '@mdi/js';
+import { mdiCircleMedium } from '@mdi/js';
 import Icon from '@mdi/react';
 
+import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
 import GitHubIcon from '../../styles/icons/github_white.png';
 
-import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
-
 import { AddWordButton } from './AddWordButton';
-
 import styles from './Vocabulary.module.scss';
 
 export const Vocabulary = () => {
