@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { mdiMenu, mdiPlus } from '@mdi/js';
+import { mdiMenu } from '@mdi/js';
 import Icon from '@mdi/react';
 
 import '../../styles/styles.module.scss';
@@ -13,6 +13,9 @@ export const ContextMenu = (props) => {
    };
 
    const IconMenu = () => <Icon path={mdiMenu} title="Add new word" />;
+
+   const exportFunction = () => {};
+   const importFunction = () => {};
 
    return (
       <div className="dropdown is-right" ref={menuRef}>
@@ -37,10 +40,10 @@ export const ContextMenu = (props) => {
                   </p>
                </div>
                <div className="dropdown-item">
-                  <button>Export data.</button>
+                  <button onClick={exportFunction}>Export data.</button>
                </div>
                <div className="dropdown-item">
-                  <button>Import data.</button>
+                  <button onClick={importFunction}>Import data.</button>
                </div>
             </div>
          </div>
