@@ -8,7 +8,10 @@ import {
    mdiSortAlphabeticalAscending,
    mdiSortDescending,
    mdiSortVariant,
+   mdiMenu,
+   mdiPlus,
 } from '@mdi/js';
+
 import Icon from '@mdi/react';
 
 import { actions as vocabularyActionCreator } from '../../slices/vocabulary/vocabulary.js';
@@ -37,41 +40,79 @@ export const Header = () => {
       [dispatch],
    );
 
+   const IconMenu = ({ ico, text = 'alt ico' }) => (
+      <Icon path={ico} title={text} size={2} />
+   );
+
    return (
       <nav className={styles.header}>
          <span>|</span>
-         <li onClick={goToMainPage}>Vocabulary</li>
+         <li className="tag has-background-black">
+            <button
+               className="tag has-text-white is-primary has-background-black is-responsive is-outlined"
+               onClick={goToMainPage}
+            >
+               Vocabulary
+            </button>
+         </li>
          <span>|</span>
-         <li onClick={goToTestPage}>Testing</li>
+         <li className="tag has-background-black">
+            <button
+               className="tag has-text-white has-background-black is-responsive is-outlined"
+               onClick={goToTestPage}
+            >
+               Testing
+            </button>
+         </li>
          <span>|</span>
-         <li className="is-inline-flex">
-            <span className="mr-2">Sort</span>
+         <li className="m-0 p-0">
             <select
                name="sort"
                onChange={(e) => sortingMethodHandler(e.target.value)}
-               className={`${
-                  styles.sortingSelector
-               } ${'material-symbols-outlined'}`}
+               className="tag has-text-white has-background-black is-outlined"
             >
-               <option className={styles.badge} value={SortTypes.SORT_DEFAULT}>
-                  sort
+               <option
+                  className={`${styles.badge}`}
+                  value={SortTypes.SORT_DEFAULT}
+               >
+                  Sort
                </option>
-               <option value={SortTypes.SORT_BY_NAME}>sort_by_alpha</option>
-               <option value={SortTypes.SORT_BY_STATUS}>category</option>
-               <option value={SortTypes.SORT_RANDOM}>shuffle</option>
-               {/* <option className="icon-text" value={SortTypes.SORT_RANDOM}>
-                  <span className="icon has-text-dark">
-                     <Icon path={mdiCircleMedium} size={1} />
-                  </span>
-               </option> */}
+               <option
+                  className="has-text-white"
+                  value={SortTypes.SORT_BY_NAME}
+               >
+                  by name
+               </option>
+               <option
+                  className="has-text-white"
+                  value={SortTypes.SORT_BY_STATUS}
+               >
+                  by status
+               </option>
+               <option
+                  className="has-text-white p-2"
+                  value={SortTypes.SORT_RANDOM}
+               >
+                  shuffle
+               </option>
             </select>
          </li>
          <span>|</span>
-         <li className="mr-0 p-1">Settings</li>
-         <li className="navbar-item ml-0 has-dropdown">
+         <li className="">
+            <span className="tag has-text-white is-primary has-background-black is-responsive is-outlined is-small">
+               Settings
+            </span>
             <ContextMenu />
          </li>
          <span>|</span>
       </nav>
    );
 };
+
+{
+   /* <IconMenu
+                     className="span is-small"
+                     ico={mdiCircleMedium}
+                     text="by name A-Z"
+                  /> */
+}

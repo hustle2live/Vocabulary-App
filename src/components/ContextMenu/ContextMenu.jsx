@@ -12,16 +12,13 @@ export const ContextMenu = (props) => {
       menuRef.current.classList.toggle('is-active');
    };
 
-   const IconMenu = () => <Icon path={mdiMenu} title="Add new word" size={2} />;
+   const IconMenu = () => <Icon path={mdiMenu} title="Add new word" />;
 
    return (
       <div className="dropdown is-right" ref={menuRef}>
          <div className="dropdown-trigger">
             <button
-               className="button has-text-white is-small is-primary
-               has-background-black
-               is-responsive
-               is-outlined"
+               className="tag is-responsive has-text-white has-background-black is-outlined m-0"
                aria-haspopup="true"
                aria-controls="dropdown-menu6"
                onClick={menuOpenCloseHandler}
@@ -35,7 +32,7 @@ export const ContextMenu = (props) => {
             <div className="dropdown-content">
                <div className="dropdown-item">
                   <p>
-                     Use the <code>Export/Import</code> buttons for {' '}
+                     Use the <code>Export/Import</code> buttons for{' '}
                      <strong>saving words</strong> to your device.
                   </p>
                </div>
