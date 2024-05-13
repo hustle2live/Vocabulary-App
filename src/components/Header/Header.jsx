@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -39,6 +39,17 @@ export const Header = () => {
       },
       [dispatch],
    );
+
+   // const importFunction = useCallback(() => {
+   //    dispatch(vocabularyActionCreator.importData());
+   // });
+   const importFunction = useCallback(() => {
+      return dispatch(vocabularyActionCreator.importData());
+   });
+
+   const exportFunction = useCallback(() => {
+      dispatch(vocabularyActionCreator.exportData());
+   });
 
    const IconMenu = ({ ico, text = 'alt ico' }) => (
       <Icon path={ico} title={text} size={2} />
@@ -102,7 +113,10 @@ export const Header = () => {
             <span className="tag has-text-white is-primary has-background-black is-responsive is-outlined is-small">
                Settings
             </span>
-            <ContextMenu />
+            <ContextMenu
+               exportFunc={exportFunction}
+               importFunc={importFunction}
+            />
          </li>
          <span>|</span>
       </nav>
