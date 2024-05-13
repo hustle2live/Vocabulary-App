@@ -35,8 +35,8 @@ export const ContextMenu = (props) => {
             <div className="dropdown-content">
                <div className="dropdown-item">
                   <p>
-                     Add the <code>is-right</code> modifier for a{' '}
-                     <strong>right-aligned</strong> dropdown.
+                     Use the <code>Export/Import</code> buttons for {' '}
+                     <strong>saving words</strong> to your device.
                   </p>
                </div>
                <div className="dropdown-item">
