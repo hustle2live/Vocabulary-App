@@ -67,7 +67,7 @@ export const AddNewWord = () => {
                </span>
             </div>
          </button>
-         <div>
+         <div className={styles.inputsWrapper}>
             <section className={styles['input-section']}>
                <input
                   id="word"
@@ -87,7 +87,7 @@ export const AddNewWord = () => {
                <label htmlFor="translate">type a translation</label>
             </section>
          </div>
-         <div className="buttons is-centered">
+         <div className={`${styles.buttonsContainer} buttons is-centered`}>
             <button
                className={`${styles.button} button is-dark box mr-4 `}
                onClick={clearForm}
