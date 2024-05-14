@@ -5,57 +5,19 @@ import Icon from '@mdi/react';
 
 import styles from './ContextMenu.module.scss';
 
+import { fileMaxSize, handleFileUpload } from './handleFileUpload.js';
+
 import '../../styles/styles.module.scss';
 
 export const ContextMenu = (props) => {
-   const { exportFunc, importFunc } = props;
+   const { exportCallbackFunc, importCallbackFunc } = props;
 
    const menuRef = useRef(null);
 
    const menuOpenCloseHandler = () =>
       menuRef.current.classList.toggle('is-active');
 
-   const fileMaxSize = 2000000;
-   const fileExtName = /^.+(\.json)+$/gi;
-
    const IconMenu = () => <Icon path={mdiMenu} title="Add new word" />;
-
-   const isFileNameSizeCorrect = (file) => {
-      try {
-         if (!file) {
-            throw Error('File does not selected');
-         }
-         if (file.size > fileMaxSize) {
-            throw Error('invalid size');
-         }
-         if (!fileExtName.test(file.name)) {
-            throw Error('invalid format');
-         }
-         return true;
-      } catch (error) {
-         console.log(error);
-      }
-      return false;
-   };
-
-   const handleFileUpload = (e) => {
-      const dataFile = e.target.files[0];
-      const fileReader = new FileReader();
-
-      const fileIsOk = isFileNameSizeCorrect(dataFile);
-
-      if (fileIsOk) {
-         fileReader.readAsText(dataFile, 'UTF-8');
-         fileReader.onload = (e) => {
-            const result = e.target.result;
-            importFunc(result);
-         };
-      } else {
-         console.log('File does not meet the requirements');
-      }
-   };
-
-   const importFunction = () => {};
 
    return (
       <div className="dropdown is-right" ref={menuRef}>
@@ -80,7 +42,7 @@ export const ContextMenu = (props) => {
                   </p>
                </div>
                <div className="dropdown-item">
-                  <button onClick={() => exportFunc()}>Export data</button>
+                  <button onClick={exportCallbackFunc}>Export data</button>
                </div>
                <div className={`${styles.fileUpload} dropdown-item`}>
                   <button className={`${styles.fileUpload__button}`}>
@@ -88,7 +50,9 @@ export const ContextMenu = (props) => {
                      <input
                         className={`${styles.fileUpload__input} is-hidden`}
                         type="file"
-                        onChange={handleFileUpload}
+                        onChange={(e) =>
+                           handleFileUpload(e, importCallbackFunc)
+                        }
                         id="userDataFile"
                         name="userDataFile"
                         accept=".json"
@@ -101,4 +65,3 @@ export const ContextMenu = (props) => {
       </div>
    );
 };
-

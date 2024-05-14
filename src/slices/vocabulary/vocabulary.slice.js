@@ -29,7 +29,7 @@ const vocabularyReducer = createSlice({
 
             const link = document.createElement('a');
             link.href = jsonString;
-            link.download = 'data.json';
+            link.download = 'vocabulary.json';
             link.click();
          } catch (error) {
             console.log(error);
@@ -37,6 +37,7 @@ const vocabularyReducer = createSlice({
       },
       importData: (state, action) => {
          console.log('import');
+         console.log(action.payload);
       },
    },
    extraReducers: (builder) => {

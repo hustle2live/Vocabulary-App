@@ -40,24 +40,13 @@ export const Header = () => {
       [dispatch],
    );
 
-   // const importFunction = useCallback(() => {
-   //    dispatch(vocabularyActionCreator.importData());
-   // });
-
    const importFunction = useCallback((data) => {
-      console.log('hello import');
-      console.log(data);
-
-      // dispatch(vocabularyActionCreator.importData(data));
+      dispatch(vocabularyActionCreator.importData(data));
    });
 
    const exportFunction = useCallback(() => {
       dispatch(vocabularyActionCreator.exportData());
    });
-
-   const IconMenu = ({ ico, text = 'alt ico' }) => (
-      <Icon path={ico} title={text} size={2} />
-   );
 
    return (
       <nav className={styles.header}>
@@ -118,8 +107,8 @@ export const Header = () => {
                Settings
             </span>
             <ContextMenu
-               exportFunc={exportFunction}
-               importFunc={importFunction}
+               exportCallbackFunc={exportFunction}
+               importCallbackFunc={importFunction}
             />
          </li>
          <span>|</span>
@@ -127,10 +116,12 @@ export const Header = () => {
    );
 };
 
-{
-   /* <IconMenu
+// const IconMenu = ({ ico, text = 'alt ico' }) => (
+//    <Icon path={ico} title={text} size={2} />
+// );
+
+/* <IconMenu
                      className="span is-small"
                      ico={mdiCircleMedium}
                      text="by name A-Z"
                   /> */
-}
