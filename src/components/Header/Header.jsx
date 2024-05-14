@@ -103,7 +103,7 @@ export const Header = () => {
          </li>
          <span>|</span>
          <li className="">
-            <span className="tag has-text-white is-primary has-background-black is-responsive is-outlined is-small">
+            <span className="tag is-inline has-text-white is-primary has-background-black is-responsive is-outlined">
                Settings
             </span>
             <ContextMenu
@@ -115,13 +115,3 @@ export const Header = () => {
       </nav>
    );
 };
-
-// const IconMenu = ({ ico, text = 'alt ico' }) => (
-//    <Icon path={ico} title={text} size={2} />
-// );
-
-/* <IconMenu
-                     className="span is-small"
-                     ico={mdiCircleMedium}
-                     text="by name A-Z"
-                  /> */
