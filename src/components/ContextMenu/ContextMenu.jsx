@@ -3,40 +3,56 @@ import React, { useRef, useState } from 'react';
 import { mdiMenu } from '@mdi/js';
 import Icon from '@mdi/react';
 
+import styles from './ContextMenu.module.scss';
+
 import '../../styles/styles.module.scss';
 
 export const ContextMenu = (props) => {
-   const menuRef = useRef(null);
-
    const { exportFunc, importFunc } = props;
 
-   const menuOpenCloseHandler = () => {
+   const menuRef = useRef(null);
+
+   const menuOpenCloseHandler = () =>
       menuRef.current.classList.toggle('is-active');
-   };
+
+   const fileMaxSize = 2000000;
+   const fileExtName = /^.+(\.json)+$/gi;
 
    const IconMenu = () => <Icon path={mdiMenu} title="Add new word" />;
 
-   //    const [data] = useState();
-
-   const exportFunction = () => {
-      //   const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      //      JSON.stringify(data),
-      //   )}`;
-      //   const link = document.createElement('a');
-      //   link.href = jsonString;
-      //   link.download = 'data.json';
-      //   link.click();
+   const isFileNameSizeCorrect = (file) => {
+      try {
+         if (!file) {
+            throw Error('File does not selected');
+         }
+         if (file.size > fileMaxSize) {
+            throw Error('invalid size');
+         }
+         if (!fileExtName.test(file.name)) {
+            throw Error('invalid format');
+         }
+         return true;
+      } catch (error) {
+         console.log(error);
+      }
+      return false;
    };
 
-   const [files, setFiles] = useState('');
-
-   const handleChange = (e) => {
+   const handleFileUpload = (e) => {
+      const dataFile = e.target.files[0];
       const fileReader = new FileReader();
-      fileReader.readAsText(e.target.files[0], 'UTF-8');
-      fileReader.onload = (e) => {
-         console.log('e.target.result', e.target.result);
-         setFiles(e.target.result);
-      };
+
+      const fileIsOk = isFileNameSizeCorrect(dataFile);
+
+      if (fileIsOk) {
+         fileReader.readAsText(dataFile, 'UTF-8');
+         fileReader.onload = (e) => {
+            const result = e.target.result;
+            importFunc(result);
+         };
+      } else {
+         console.log('File does not meet the requirements');
+      }
    };
 
    const importFunction = () => {};
@@ -64,19 +80,20 @@ export const ContextMenu = (props) => {
                   </p>
                </div>
                <div className="dropdown-item">
-                  <button onClick={() => exportFunc()}>Export data.</button>
+                  <button onClick={() => exportFunc()}>Export data</button>
                </div>
-               <div className="dropdown-item">
-                  <button onClick={(e) => {}}>
+               <div className={`${styles.fileUpload} dropdown-item`}>
+                  <button className={`${styles.fileUpload__button}`}>
+                     <label htmlFor="userDataFile">Import data</label>
                      <input
-                        className="tag is-hidden"
+                        className={`${styles.fileUpload__input} is-hidden`}
                         type="file"
-                        onChange={handleChange}
-                        onClick={(e) => importFunc()}
-
-                        //  value={'Import data.'}
+                        onChange={handleFileUpload}
+                        id="userDataFile"
+                        name="userDataFile"
+                        accept=".json"
+                        max={fileMaxSize}
                      />
-                     Import data.
                   </button>
                </div>
             </div>
@@ -84,3 +101,4 @@ export const ContextMenu = (props) => {
       </div>
    );
 };
+

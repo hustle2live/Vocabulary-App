@@ -43,8 +43,12 @@ export const Header = () => {
    // const importFunction = useCallback(() => {
    //    dispatch(vocabularyActionCreator.importData());
    // });
-   const importFunction = useCallback(() => {
-      return dispatch(vocabularyActionCreator.importData());
+
+   const importFunction = useCallback((data) => {
+      console.log('hello import');
+      console.log(data);
+
+      // dispatch(vocabularyActionCreator.importData(data));
    });
 
    const exportFunction = useCallback(() => {
