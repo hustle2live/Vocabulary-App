@@ -13,7 +13,7 @@ const createTestArray = createAsyncThunk(
          const {
             vocabularyReducer: { vocabulary },
          } = getState();
-
+// const practicePreferWords = vocabulary.filter((word) => )
          const newTestingArray = shuffleAndCut([...vocabulary]);
 
          return { testArray: newTestingArray };

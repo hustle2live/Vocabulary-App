@@ -14,9 +14,5 @@ export const dictionary = [
    { name: 'appropriate', translate: 'відповідний', status: 'new' },
    { name: 'emphasized', translate: 'наголошений, виділений', status: 'new' },
    { name: 'emphasis', translate: 'акцент, виділення', status: 'new' },
-   {
-      name: 'to conform',
-      translate: 'пристосовуватись, відповідати, узгоджуватись',
-      status: 'new',
-   },
+   { name: 'to conform', translate: 'пристосовуватись, відповідати чомусь', status: 'new'},
 ];
