@@ -1,6 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { shuffleAndCut } from '../../features/helpers.js';
+import {
+   WordStatus,
+   fillTestArray,
+   newStatusWord,
+   numTestWords,
+   shuffleAndCut,
+} from '../../features/helpers.js';
 
 import { actions as statsActionCreator } from '../stats/stats.slice.js';
 
@@ -13,8 +19,32 @@ const createTestArray = createAsyncThunk(
          const {
             vocabularyReducer: { vocabulary },
          } = getState();
-// const practicePreferWords = vocabulary.filter((word) => )
-         const newTestingArray = shuffleAndCut([...vocabulary]);
+
+         if (vocabulary.length < numTestWords) {
+            return rejectWithValue('There must be 10 words at least');
+         }
+
+         let newTestingArray;
+         const practArr = vocabulary.filter(
+            (word) => word.status === WordStatus.PRACTICE,
+         );
+
+         if (practArr.length >= numTestWords) {
+            newTestingArray = shuffleAndCut([...practArr], numTestWords);
+         } else {
+            const { newArr, achArr } = shuffleAndCut([...vocabulary]).reduce(
+               (acc, word, idx, arr) => {
+                  if (word.status === WordStatus.NEW)
+                     acc.newArr = [...acc.newArr, word];
+                  if (word.status === WordStatus.ACHIEVED)
+                     acc.achArr = [...acc.achArr, word];
+                  return acc;
+               },
+               { newArr: [], achArr: [] },
+            );
+
+            newTestingArray = fillTestArray(practArr, newArr, achArr);
+         }
 
          return { testArray: newTestingArray };
       } catch (error) {

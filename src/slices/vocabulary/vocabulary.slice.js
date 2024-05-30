@@ -5,7 +5,7 @@ import { dictionary } from '../../mockdata/dictionary';
 import { addWord, changeStatusWord, deleteWord, sortBy } from './actions.js';
 
 const isLocalVocabulary = () => {
-   console.log('check for local-storage wookabulary');
+   console.log('check for local-storage vocabulary');
    return localStorage.getItem('vocabulary');
 };
 

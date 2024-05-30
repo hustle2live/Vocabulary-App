@@ -1,7 +1,9 @@
-export const shuffleAndCut = (arr, num = 10) => {
+import { WordStatus, firstIndex, numTestWords } from '../slices/constants.js';
+
+const shuffleAndCut = (arr, numLength = arr.length) => {
    let currentIndex = arr.length,
       randomIndex;
-   while (currentIndex !== 0) {
+   while (currentIndex !== firstIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       [arr[currentIndex], arr[randomIndex]] = [
@@ -9,12 +11,42 @@ export const shuffleAndCut = (arr, num = 10) => {
          arr[currentIndex],
       ];
    }
-   return arr.slice(0, num);
+   return arr.slice(firstIndex, numLength);
 };
 
-export const lowerFormatCase = (element) => element.trim().toLowerCase();
+const lowerFormatCase = (element) => element.trim().toLowerCase();
 
-export const getRandomInt = (max) => Math.floor(Math.random() * max);
+const getRandomInt = (max) => Math.floor(Math.random() * max);
 
-export const dispatchMultiply = (dispatcher, arrayActions) =>
+const dispatchMultiply = (dispatcher, arrayActions) =>
    arrayActions.forEach((action) => dispatcher(action));
+
+const newStatusWord = (status) => {
+   return status === WordStatus.PRACTICE
+      ? WordStatus.ACHIEVED
+      : WordStatus.PRACTICE;
+};
+
+const fillTestArray = (firstArrr, secondArr, thirdArr, testArr = []) => {
+   if (testArr.length === numTestWords) return testArr;
+   if (firstArrr.length && firstArrr.length > firstIndex) {
+      testArr.push(firstArrr.pop());
+   } else if (secondArr.length && secondArr.length > firstIndex) {
+      testArr.push(secondArr.pop());
+   } else {
+      testArr.push(thirdArr.pop());
+   }
+
+   return fillTestArray(firstArrr, secondArr, thirdArr, testArr);
+};
+
+export {
+   shuffleAndCut,
+   lowerFormatCase,
+   getRandomInt,
+   dispatchMultiply,
+   newStatusWord,
+   WordStatus,
+   numTestWords,
+   fillTestArray,
+};
