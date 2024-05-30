@@ -1,6 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { lowerFormatCase, shuffleAndCut } from '../../features/helpers';
+import {
+   WordStatus,
+   changewStatusWord,
+   lowerFormatCase,
+   shuffleAndCut,
+} from '../../features/helpers';
 
 import { ActionTypes } from './common.js';
 
@@ -28,7 +33,7 @@ const addWord = createAsyncThunk(
             translation: {
                name: wordName,
                translate: wordTranslate,
-               status: 'new',
+               status: WordStatus.NEW,
                createdAt: '',
                updatedAt: '',
             },
@@ -78,16 +83,8 @@ const changeStatusWord = createAsyncThunk(
       } = getState();
 
       const updateElementStatus = (elem) => {
-         const copyElem = Object.assign({}, elem);
-         const statusCnanger = {
-            new: 'practice',
-            practice: 'achieved',
-            achieved: 'practice',
-         };
-         if (copyElem) {
-            copyElem.status = statusCnanger[copyElem.status];
-         }
-         return copyElem;
+         const copyElem = { ...elem };
+         return { ...copyElem, status: changewStatusWord(copyElem.status) };
       };
 
       try {

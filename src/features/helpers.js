@@ -21,7 +21,7 @@ const getRandomInt = (max) => Math.floor(Math.random() * max);
 const dispatchMultiply = (dispatcher, arrayActions) =>
    arrayActions.forEach((action) => dispatcher(action));
 
-const newStatusWord = (status) => {
+const changewStatusWord = (status) => {
    return status === WordStatus.PRACTICE
       ? WordStatus.ACHIEVED
       : WordStatus.PRACTICE;
@@ -45,7 +45,7 @@ export {
    lowerFormatCase,
    getRandomInt,
    dispatchMultiply,
-   newStatusWord,
+   changewStatusWord,
    WordStatus,
    numTestWords,
    fillTestArray,
