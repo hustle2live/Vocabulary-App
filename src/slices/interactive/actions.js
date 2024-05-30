@@ -25,6 +25,7 @@ const createTestArray = createAsyncThunk(
          }
 
          let newTestingArray;
+
          const practArr = vocabulary.filter(
             (word) => word.status === WordStatus.PRACTICE,
          );

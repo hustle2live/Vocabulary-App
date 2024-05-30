@@ -121,7 +121,7 @@ const sortBy = createAsyncThunk(
             return elem.sort((a, b) => (a.name < b.name ? -1 : 0));
          },
          sortByStatus(elem) {
-            return elem.sort((a, b) => (a.status < b.status ? -1 : 0));
+            return elem.sort((a, b) => (a.status > b.status ? -1 : 0));
          },
          sortRandom(elem) {
             return shuffleAndCut(elem, elem.length);
